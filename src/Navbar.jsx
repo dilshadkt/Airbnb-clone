@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "./asset/logo/logo.png";
 import { Link } from "react-router-dom";
+import MyContext from "./components/contex/Mycontex";
 
 const Navbar = () => {
+  const { setsearch } = useContext(MyContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <>
@@ -19,6 +21,7 @@ const Navbar = () => {
         >
           <input
             type="text"
+            onChange={(e) => setsearch(e.target.value)}
             placeholder="Serach"
             className="shadow-md w-96 h-10 rounded-2xl border flex items-center px-3 relative text-gray-500"
           />

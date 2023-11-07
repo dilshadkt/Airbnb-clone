@@ -16,10 +16,14 @@ import PaymentCard from "../../../components/PaymentCard";
 import Amenties from "../../../components/Amenties";
 import MyContext from "../../../components/contex/Mycontex";
 import left from "../../../asset/svg/leftArrow.svg";
+import { useSearchParams } from "react-router-dom";
 
 const Rooms = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { isOpenAmenities } = useContext(MyContext);
+  const [serchParams] = useSearchParams();
+  const type = serchParams.get("id");
+  console.log(type);
 
   return (
     <>

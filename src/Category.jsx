@@ -1,125 +1,69 @@
 import React, { useState } from "react";
-import cardIcon from "./asset/svg/cardIcon.svg";
-
+import roundeArrow from "./asset/svg/roundeArrow.svg";
+import { data } from "./asset/categoryNav/data/data";
+import cancel from "./asset/svg/cancel.svg";
+import Buttons from "./components/Buttons";
 const Category = () => {
-  const [slide, setSlide] = useState(0);
+  const [isFilteOpen, setFilterOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const goToNext = () => {
+    if (currentIndex < Math.round(data.length / 9)) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
   return (
-    <div className="h-20  mx-20 flex">
+    <div className="h-20  mx-20 flex  ">
       <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative">
-        <div className="absolute  right-0  bg-white h-full flex items-center w-8 justify-center z-10 opacity-80">
-          <svg
-            onClick={() => setSlide(slide + 1)}
-            className="backdrop-blur-sm"
-            width="25"
-            height="25"
-            viewBox="0 0 25 25"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g clipPath="url(#clip0_13_246)">
-              <path
-                d="M12.5 0C5.60547 0 0 5.60547 0 12.5C0 19.3945 5.60547 25 12.5 25C19.3945 25 25 19.3945 25 12.5C25 5.60547 19.3945 0 12.5 0ZM12.5 23.75C6.28906 23.75 1.25 18.7109 1.25 12.5C1.25 6.28906 6.28906 1.25 12.5 1.25C18.7109 1.25 23.75 6.28906 23.75 12.5C23.75 18.7109 18.7109 23.75 12.5 23.75ZM9.60938 7.5L14.375 12.5L9.60938 17.5H12.2461L16.875 12.5L12.2461 7.5H9.60938Z"
-                fill="#0A0A0A"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_13_246">
-                <rect width="25" height="25" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+        <div
+          className={`absolute  right-0  ${
+            currentIndex === Math.round((data.length - 1) / 9)
+              ? `invisible`
+              : `visible`
+          } bg-white h-full flex items-center w-8 justify-center z-10 opacity-80`}
+        >
+          <img src={roundeArrow} onClick={goToNext} alt="arrow" />
+        </div>
+        <div
+          className={`absolute  left-0  ${
+            currentIndex === 0 ? `invisible` : `visible`
+          }  bg-white h-full flex items-center w-8 justify-center z-10 opacity-80`}
+        >
+          <img
+            src={roundeArrow}
+            onClick={goToPrevious}
+            className="rotate-180"
+            alt="arrow"
+          />
         </div>
         {/* categorized icons */}
 
-        <div className={`flex -translate-x-[]`}>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
+        <div
+          style={{ transform: `translateX(-${currentIndex * 15}%)` }}
+          className={`flex transition-transform duration-300`}
+        >
+          {data.map((item) => (
+            <div className="px-6  h-full  flex items-center justify-center cursor-pointer">
+              <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
+                <img src={item.image} alt="icons" />
 
-              <span>Beach</span>
+                <span>{item.desc}</span>
+              </div>
             </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
-          <div className="px-6  h-full  flex items-center justify-center">
-            <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
-              <img src={cardIcon} alt="icons" />
-
-              <span>Beach</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className="flex-initial w-1/4  flex items-center justify-end">
-        <div className="w-28 h-12  border flex items-center justify-center rounded-xl">
+        <div
+          onClick={() => setFilterOpen(true)}
+          className="w-28 h-12  border flex items-center justify-center rounded-xl cursor-pointer"
+        >
           <svg
             width="21"
             height="21"
@@ -147,11 +91,74 @@ const Category = () => {
 
           <span className="text-sm ml-2 ">Filter </span>
         </div>
-        <div className=""></div>
-        <div className="w-48 ml-3 h-12  border flex items-center justify-center rounded-xl">
+
+        <div className="w-48 ml-3 h-12  border flex items-center justify-center rounded-xl cursor-pointer ">
           <span>Display before taxes</span>
         </div>
       </div>
+      {isFilteOpen ? (
+        <>
+          {(document.body.style.overflow = "hidden")}
+          <div
+            className={`w-[50%]  absolute h-[85%] rounded-xl flex flex-col   left-0 right-0 m-auto  top-0 bottom-0 overflow-hidden bg-white shadow-xl border z-40 `}
+          >
+            <div className="flex-initial h-[10%] items-center px-5  flex">
+              <div className="flex-1">
+                <div
+                  onClick={() => setFilterOpen(false)}
+                  className="w-8 h-8 hover:bg-gray-300 rounded-full flex items-center justify-center"
+                >
+                  <img src={cancel} className="w-[70%]" alt="cancel icon" />
+                </div>
+              </div>
+              <div className="flex-1 flex justify-center font-semibold">
+                Filters
+              </div>
+              <div className="flex-1"></div>
+            </div>
+            <hr />
+            <div className="flex-1 overflow-y-scroll p-5">
+              <h3 className="text-xl font-semibold">Type of place</h3>
+              <h5 className="text-sm font-light mt-1">
+                Search rooms, entire homes or any type of place.
+              </h5>
+              <div className="flex items-center justify-center py-6 mx-[10%]">
+                <div className=" my-3 flex w-full rounded-2xl ">
+                  <div className="hover:border-red-500 flex items-center justify-center rounded-tl-2xl rounded-bl-2xl text-xl font-semibold flex-1 p-6  border">
+                    Any type
+                  </div>
+
+                  <div className="hover:border-red-500  flex items-center justify-center text-xl font-semibold flex-1  p-6  border">
+                    Any type
+                  </div>
+                  <div className=" hover:border-red-500 flex items-center justify-center text-xl font-semibold flex-1 border p-6 rounded-tr-2xl rounded-br-2xl">
+                    Any type
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div className="py-5">
+                <h3 className="text-xl font-semibold">Price range</h3>
+                <h5 className="text-sm font-light mt-1">
+                  Nightly prices before fees and taxes
+                </h5>
+                <input type="number " placeholder="minimum price" />
+              </div>
+            </div>
+            <div className="flex-initial h-[13%] px-5 flex items-center ">
+              <div className="flex items-center justify-between  w-full">
+                <span className="font-medium underline">clear all</span>
+                <Buttons color="bg-black" title="show all" />
+              </div>
+            </div>
+          </div>
+          <div
+            className={`bg-black opacity-50   absolute top-0 bottom-0 left-0 right-0 z-30`}
+          ></div>
+        </>
+      ) : (
+        <>{(document.body.style.overflow = "")}</>
+      )}
     </div>
   );
 };

@@ -1,16 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../../../components/Card";
 import Category from "../../../Category";
 import MyContext from "../../../components/contex/Mycontex";
 
 const Home = () => {
-  const { datas } = useContext(MyContext);
+  const { datas, search } = useContext(MyContext);
+  const [filtered, setFiltered] = useState(datas);
+  useEffect(() => {
+    const resulr = datas.filter((item) =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setFiltered(resulr);
+  }, [search, datas]);
   return (
     <>
       <Category />
-      <div className="mx-20 flex justify-around flex-wrap h-full">
-        {datas.map((item) => (
-          <Card data={item} />
+      <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full">
+        {filtered.map((item, index) => (
+          <Card data={item} key={index} />
         ))}
       </div>
     </>

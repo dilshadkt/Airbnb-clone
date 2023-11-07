@@ -7,9 +7,9 @@ import Payment from "./pages/users/payment/Payment";
 import Hoisting from "./pages/users/Hoisting/Hoisting";
 import Account from "./pages/Account/Account";
 import MyContext from "./components/contex/Mycontex";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WishList from "./pages/users/whishList/WishList";
-import { data } from "./asset/card/data";
+// import { data } from "./asset/card/data";
 import Personal from "./pages/Account/personal-info/Personal";
 import Login from "./pages/Account/Login/Login";
 import AccountPayment from "./pages/Account/payment/Payment";
@@ -20,10 +20,21 @@ import Structure from "./pages/host/structure/Structure";
 import PrivacyType from "./pages/host/privacy-type/PrivacyType";
 import Location from "./pages/host/location/Location";
 import FloorPlan from "./pages/host/floor-plan/FloorPlan";
+import axios from "axios";
 
 function App() {
+  /////////// fetching data //////////////
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/listings")
+      .then((data) => setDatas(data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [search, setsearch] = useState("");
   const [progress, setProgress] = useState(0);
-  const [datas, setDatas] = useState(data);
+  const [datas, setDatas] = useState([]);
   const [whilList, setWhishList] = useState("");
   const [isOpenAmenities, setIsOpenAmenities] = useState(false);
   const Pssdata = {
@@ -35,6 +46,8 @@ function App() {
     setWhishList,
     progress,
     setProgress,
+    search,
+    setsearch,
   };
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import logo from "../asset/logo/logo.png";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import MyContext from "../components/contex/Mycontex";
 
 const HostLayout = () => {
@@ -19,9 +19,12 @@ const HostLayout = () => {
     <>
       <div>
         <nav className="w-full h-20  flex items-center px-6 justify-between">
-          <div>
-            <img src={logo} alt="log" className="w-[120px]" />
-          </div>
+          <Link to={"/hoisting"}>
+            <div>
+              <img src={logo} alt="log" className="w-[120px]" />
+            </div>
+          </Link>
+
           <div className="flex">
             <div className="px-3 py-2 rounded-full border mr-3">
               Questions ?

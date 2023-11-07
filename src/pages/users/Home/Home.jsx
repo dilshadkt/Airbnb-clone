@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Card from "../../components/Card";
-import Category from "../../Category";
-import MyContext from "../../components/contex/Mycontex";
+import Card from "../../../components/Card";
+import Category from "../../../Category";
+import MyContext from "../../../components/contex/Mycontex";
 
 const Home = () => {
   const { datas } = useContext(MyContext);

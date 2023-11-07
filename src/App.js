@@ -1,21 +1,28 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomeLayout from "./layouts/Home";
-import Home from "./pages/Home/Home";
-import Rooms from "./pages/Rooms/Rooms";
-import Payment from "./pages/payment/Payment";
-import Hoisting from "./pages/Hoisting/Hoisting";
+import Home from "./pages/users/Home/Home";
+import Rooms from "./pages/users/Rooms/Rooms";
+import Payment from "./pages/users/payment/Payment";
+import Hoisting from "./pages/users/Hoisting/Hoisting";
 import Account from "./pages/Account/Account";
 import MyContext from "./components/contex/Mycontex";
 import { useState } from "react";
-import WishList from "./pages/whishList/WishList";
+import WishList from "./pages/users/whishList/WishList";
 import { data } from "./asset/card/data";
 import Personal from "./pages/Account/personal-info/Personal";
 import Login from "./pages/Account/Login/Login";
 import AccountPayment from "./pages/Account/payment/Payment";
-import Profile from "./pages/profile/Profile";
+import Profile from "./pages/users/profile/Profile";
+import BecomeHost from "./pages/host/BecomeHost";
+import HostLayout from "./layouts/HostLayout";
+import Structure from "./pages/host/structure/Structure";
+import PrivacyType from "./pages/host/privacy-type/PrivacyType";
+import Location from "./pages/host/location/Location";
+import FloorPlan from "./pages/host/floor-plan/FloorPlan";
 
 function App() {
+  const [progress, setProgress] = useState(0);
   const [datas, setDatas] = useState(data);
   const [whilList, setWhishList] = useState("");
   const [isOpenAmenities, setIsOpenAmenities] = useState(false);
@@ -26,6 +33,8 @@ function App() {
     setIsOpenAmenities,
     whilList,
     setWhishList,
+    progress,
+    setProgress,
   };
   return (
     <>
@@ -44,8 +53,15 @@ function App() {
               path="/account-settings/Payment"
               element={<AccountPayment />}
             />
+            <Route path="/book/stay" element={<Payment />} />
           </Route>
-          <Route path="/book/stay" element={<Payment />} />
+          <Route path="/become-a-host" element={<HostLayout />}>
+            <Route index element={<BecomeHost />} />
+            <Route path="structure" element={<Structure />} />
+            <Route path="privacy-type" element={<PrivacyType />} />
+            <Route path="location" element={<Location />} />
+            <Route path="floor-plan" element={<FloorPlan />} />
+          </Route>
         </Routes>
       </MyContext.Provider>
     </>

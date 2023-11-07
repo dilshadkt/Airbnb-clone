@@ -1,21 +1,21 @@
 import React, { useContext, useState } from "react";
-import save from "../../asset/svg/save.svg";
-import { data } from "../../asset/card/data";
-import share from "../../asset/svg/share.svg";
-import room1 from "../../asset/rooms/room1.jpg";
-import room2 from "../../asset/rooms/room2.jpg";
-import room3 from "../../asset/rooms/room3.png";
-import room4 from "../../asset/rooms/room4.png";
-import room5 from "../../asset/rooms/room5.png";
-import bed from "../../asset/svg/bed.svg";
-import heritage from "../../asset/svg/heritage.svg";
-import Host from "../../components/Host";
-import Offers from "../../components/Offers";
-import Buttons from "../../components/Buttons";
-import PaymentCard from "../../components/PaymentCard";
-import Amenties from "../../components/Amenties";
-import MyContext from "../../components/contex/Mycontex";
-import left from "../../asset/svg/leftArrow.svg";
+import save from "../../../asset/svg/save.svg";
+import { data } from "../../../asset/card/data";
+import share from "../../../asset/svg/share.svg";
+import room1 from "../../../asset/rooms/room1.jpg";
+import room2 from "../../../asset/rooms/room2.jpg";
+import room3 from "../../../asset/rooms/room3.png";
+import room4 from "../../../asset/rooms/room4.png";
+import room5 from "../../../asset/rooms/room5.png";
+import bed from "../../../asset/svg/bed.svg";
+import heritage from "../../../asset/svg/heritage.svg";
+import Host from "../../../components/Host";
+import Offers from "../../../components/Offers";
+import Buttons from "../../../components/Buttons";
+import PaymentCard from "../../../components/PaymentCard";
+import Amenties from "../../../components/Amenties";
+import MyContext from "../../../components/contex/Mycontex";
+import left from "../../../asset/svg/leftArrow.svg";
 
 const Rooms = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);

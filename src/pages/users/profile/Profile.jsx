@@ -1,6 +1,6 @@
 import React from "react";
-import tick from "../../asset/svg/tick.svg";
-import Buttons from "../../components/Buttons";
+import tick from "../../../asset/svg/tick.svg";
+import Buttons from "../../../components/Buttons";
 
 const Profile = () => {
   return (

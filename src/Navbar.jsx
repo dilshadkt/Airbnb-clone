@@ -8,7 +8,10 @@ const Navbar = () => {
     <>
       <nav className=" h-20 flex mx-20 ">
         <div className=" flex-1 flex items-center ">
-          <img alt="logo" src={logo} className="w-32 bg-white " />
+          <Link to={"/"}>
+            {" "}
+            <img alt="logo" src={logo} className="w-32 bg-white " />
+          </Link>
         </div>
         <div
           className=" flex-1 flex items-center

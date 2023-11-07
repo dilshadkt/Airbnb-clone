@@ -1,18 +1,23 @@
 import React from "react";
-import Buttons from "../../components/Buttons";
-import listpad from "../../asset/svg/listpad.svg";
-import help1 from "../../asset/svg/help1.svg";
-import help2 from "../../asset/stuff/Rectangle 43.png";
-import help3 from "../../asset/stuff/Rectangle 42.png";
-import help4 from "../../asset/stuff/Rectangle 44.png";
-import help5 from "../../asset/stuff/Rectangle 45.png";
+import Buttons from "../../../components/Buttons";
+import listpad from "../../../asset/svg/listpad.svg";
+import help1 from "../../../asset/svg/help1.svg";
+import help2 from "../../../asset/stuff/Rectangle 43.png";
+import help3 from "../../../asset/stuff/Rectangle 42.png";
+import help4 from "../../../asset/stuff/Rectangle 44.png";
+import help5 from "../../../asset/stuff/Rectangle 45.png";
+import { useNavigate } from "react-router-dom";
 
 const Hoisting = () => {
+  const navigate = useNavigate();
   return (
     <div className="m-20 ">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold ">Welcome, Dilshad!</h1>
-        <Buttons width="w-[246px]" title="Complete your listing" />
+
+        <div onClick={() => navigate("/become-a-host")}>
+          <Buttons width="w-[246px]" title="Complete your listing" />
+        </div>
       </div>
       <div className="flex justify-between my-6 mt-8">
         <h4 className="  text-xl font-medium">Your reservations</h4>

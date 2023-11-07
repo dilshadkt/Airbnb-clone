@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import MyContext from "../../components/contex/Mycontex";
-import WishListCard from "../../components/WishListCard";
+import MyContext from "../../../components/contex/Mycontex";
+import WishListCard from "../../../components/WishListCard";
 
 const WishList = () => {
   const { datas, setDatas } = useContext(MyContext);

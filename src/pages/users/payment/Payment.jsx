@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import left from "../../asset/svg/leftArrow.svg";
-import Buttons from "../../components/Buttons";
-import FooterLabel from "../../components/FooterLabel";
-import PriceSlip from "../../components/PriceSlip";
+import Navbar from "../../../components/Navbar";
+import left from "../../../asset/svg/leftArrow.svg";
+import Buttons from "../../../components/Buttons";
+import FooterLabel from "../../../components/FooterLabel";
+import PriceSlip from "../../../components/PriceSlip";
 
 const Payment = () => {
   return (

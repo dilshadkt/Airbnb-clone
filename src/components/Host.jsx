@@ -1,5 +1,5 @@
 import React from "react";
-import person from "../asset/rooms/Ellipse 13.png";
+import person from "../asset/svg/cardIcon.svg";
 import star from "../asset/svg/rating.svg";
 import global from "../asset/svg/global.svg";
 import Buttons from "./Buttons";

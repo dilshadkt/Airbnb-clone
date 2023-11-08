@@ -1,12 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import logo from "./asset/logo/logo.png";
 import { Link } from "react-router-dom";
 import MyContext from "./components/contex/Mycontex";
 import SideMenu from "./components/sideMenu/SideMenu";
 import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
+import userIcon from "./asset/svg/user.svg";
 
 const Navbar = () => {
-  const { setsearch, isMenuOpen, setIsMenuOpen } = useContext(MyContext);
+  const {
+    setsearch,
+    isMenuOpen,
+    setIsMenuOpen,
+    isLoginOpen,
+    isSignOpen,
+    isLogin,
+  } = useContext(MyContext);
+  const user = localStorage.getItem("user");
 
   return (
     <>
@@ -71,7 +81,16 @@ const Navbar = () => {
                 />
               </svg>
               <div className="rounded-full w-7 h-7  bg-black flex items-center justify-center ml-2 relative cursor-pointer">
-                <span className="text-white">D</span>
+                {isLogin ? (
+                  <>
+                    <span className="text-white ">
+                      {user[0]?.toUpperCase()}
+                    </span>
+                  </>
+                ) : (
+                  <img src={userIcon} alt="icon" className="rounded-full" />
+                )}
+
                 <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
                   2
                 </div>
@@ -80,7 +99,21 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <Login />
+        {isLoginOpen ? (
+          <>
+            {(document.body.style.overflow = "hidden")}
+            <Login />
+          </>
+        ) : (
+          <>{(document.body.style.overflowY = "")}</>
+        )}
+        {isSignOpen ? (
+          <>
+            <SignUp />
+          </>
+        ) : (
+          ""
+        )}
       </nav>
       <hr />
     </>

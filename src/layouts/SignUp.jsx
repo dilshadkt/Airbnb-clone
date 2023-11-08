@@ -1,25 +1,22 @@
 import React, { useContext, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
-import Buttons from "../../components/Buttons";
 import MyContext from "../../components/contex/Mycontex";
 import axios from "axios";
 
-const Login = () => {
-  const [userName, setUseName] = useState("");
+const SignUp = () => {
+  const { setSignOpen } = useContext(MyContext);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoginOpen, setIsLogin } = useContext(MyContext);
-  const SignUp = (e) => {
+  const [confrimPass, setConfirmPass] = useState("");
+  const RegisterUser = (e) => {
     e.preventDefault();
     axios
-      .post("/user/signin", { userName, password })
-      .then((res) => {
-        setIsLoginOpen(false);
-        setIsLogin(true);
-        localStorage.setItem("user", res.data.firstName);
-      })
+      .post("/user/login", { firstName, lastName, email, password })
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
-
   return (
     <>
       <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-30 flex items-center justify-center"></div>
@@ -28,7 +25,7 @@ const Login = () => {
           <div className="px-5 flex justify-between w-full">
             <div className="flex-1">
               <div
-                onClick={() => setIsLoginOpen(false)}
+                onClick={() => setSignOpen(false)}
                 className=" w-9 h-9 hover:bg-gray-300 rounded-full flex items-center justify-center"
               >
                 <img src={cancel} alt="cancel icon" className="w-[50%]" />
@@ -42,20 +39,37 @@ const Login = () => {
           </div>
         </div>
         <div className="p-5">
-          <form onSubmit={(e) => SignUp(e)}>
+          <form onSubmit={(e) => RegisterUser(e)}>
             <input
-              onChange={(e) => setUseName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
               type="text"
-              placeholder="username"
-              className="w-full p-3 border rounded-lg"
+              placeholder="first name"
+              className="w-full p-3 border rounded-lg  my-2"
+            />
+            <input
+              onChange={(e) => setLastName(e.target.value)}
+              type="text"
+              placeholder="last name"
+              className="w-full p-3 border rounded-lg  my-2"
+            />
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="email"
+              className="w-full p-3 border rounded-lg my-2   "
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="password"
-              className="w-full p-3 border rounded-lg my-3    "
+              className="w-full p-3 border rounded-lg my-2   "
             />
-
+            <input
+              onChange={(e) => setConfirmPass(e.target.value)}
+              type="password"
+              placeholder="confirm password"
+              className="w-full p-3 border rounded-lg my-2   "
+            />
             <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
               Login
             </button>
@@ -66,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

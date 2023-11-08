@@ -32,7 +32,7 @@ const Rooms = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/listings?id=${type}`)
+      .get(`/listings?id=${type}`)
       .then((res) => setRooms(res.data))
       .catch((err) => console.log(err));
   }, [type]);

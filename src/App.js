@@ -22,12 +22,14 @@ import Location from "./pages/host/location/Location";
 import FloorPlan from "./pages/host/floor-plan/FloorPlan";
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:8080";
+
 function App() {
   /////////// fetching data //////////////
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/listings")
+      .get("/listings")
       .then((data) => setDatas(data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -38,7 +40,12 @@ function App() {
   const [whilList, setWhishList] = useState("");
   const [isOpenAmenities, setIsOpenAmenities] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignOpen, setSignOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const Pssdata = {
+    isSignOpen,
+    setSignOpen,
     datas,
     setDatas,
     isOpenAmenities,
@@ -51,6 +58,10 @@ function App() {
     setsearch,
     isMenuOpen,
     setIsMenuOpen,
+    isLoginOpen,
+    setIsLoginOpen,
+    isLogin,
+    setIsLogin,
   };
   return (
     <>

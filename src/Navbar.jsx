@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import logo from "./asset/logo/logo.png";
 import { Link } from "react-router-dom";
 import MyContext from "./components/contex/Mycontex";
+import SideMenu from "./components/sideMenu/SideMenu";
+import Login from "./pages/login/Login";
 
 const Navbar = () => {
-  const { setsearch } = useContext(MyContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setsearch, isMenuOpen, setIsMenuOpen } = useContext(MyContext);
+
   return (
     <>
       <nav className=" h-20 flex mx-20 ">
@@ -73,52 +75,12 @@ const Navbar = () => {
                 <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
                   2
                 </div>
-                {isMenuOpen ? (
-                  <div
-                    onMouseLeave={() => setIsMenuOpen(false)}
-                    className="bg-white shadow-md border w-64 rounded-xl py-3 absolute top-11 right-0 z-30"
-                  >
-                    <div>
-                      <ul className="font-medium">
-                        <li className="py-3 px-4 hover:bg-gray-200">Message</li>
-                        <li className="py-3 px-4 hover:bg-gray-200">Trips</li>
-                        <Link to={"/whishlist"}>
-                          <li className="py-3 px-4 hover:bg-gray-200">
-                            Whishlist
-                          </li>
-                        </Link>
-                      </ul>
-                    </div>
-                    <hr className="my-2" />
-                    <div>
-                      <ul className="text-gray-500">
-                        <li className="py-3 px-4 hover:bg-gray-200">
-                          Manage listing
-                        </li>
-                        <Link to={"/account-settings"}>
-                          <li className="py-3 px-4 hover:bg-gray-200">
-                            Account
-                          </li>
-                        </Link>
-                      </ul>
-                    </div>
-                    <hr className="my-2" />
-                    <div>
-                      <ul className="text-gray-500">
-                        <li className="py-3 px-4 hover:bg-gray-200">
-                          Help Centre
-                        </li>
-                        <li className="py-3 px-4 hover:bg-gray-200">Logout</li>
-                      </ul>
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
+                {isMenuOpen ? <SideMenu /> : ""}
               </div>
             </div>
           </div>
         </div>
+        <Login />
       </nav>
       <hr />
     </>

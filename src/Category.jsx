@@ -46,15 +46,16 @@ const Category = () => {
 
         <div
           style={{ transform: `translateX(-${currentIndex * 15}%)` }}
-          className={`flex transition-transform duration-300`}
+          className={`flex transition-transform duration-700`}
         >
           {data.map((item) => (
-            <div className="px-6  h-full  flex items-center justify-center cursor-pointer">
-              <div className="flex flex-col items-center opacity-70 hover:opacity-100 ">
+            <div className="px-6  h-full group  flex items-center justify-center cursor-pointer relative">
+              <div className="flex flex-col items-center opacity-70  group-hover:opacity-100 ">
                 <img src={item.image} alt="icons" />
 
                 <span>{item.desc}</span>
               </div>
+              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-gray-400 h-[3px]"></div>
             </div>
           ))}
         </div>

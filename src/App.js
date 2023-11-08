@@ -37,6 +37,7 @@ function App() {
   const [datas, setDatas] = useState([]);
   const [whilList, setWhishList] = useState("");
   const [isOpenAmenities, setIsOpenAmenities] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const Pssdata = {
     datas,
     setDatas,
@@ -48,6 +49,8 @@ function App() {
     setProgress,
     search,
     setsearch,
+    isMenuOpen,
+    setIsMenuOpen,
   };
   return (
     <>

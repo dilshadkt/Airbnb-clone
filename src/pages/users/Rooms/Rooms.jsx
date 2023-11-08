@@ -1,12 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import save from "../../../asset/svg/save.svg";
-import { data } from "../../../asset/card/data";
 import share from "../../../asset/svg/share.svg";
-import room1 from "../../../asset/rooms/room1.jpg";
-import room2 from "../../../asset/rooms/room2.jpg";
-import room3 from "../../../asset/rooms/room3.png";
-import room4 from "../../../asset/rooms/room4.png";
-import room5 from "../../../asset/rooms/room5.png";
 import bed from "../../../asset/svg/bed.svg";
 import heritage from "../../../asset/svg/heritage.svg";
 import Host from "../../../components/Host";
@@ -17,24 +11,42 @@ import Amenties from "../../../components/Amenties";
 import MyContext from "../../../components/contex/Mycontex";
 import left from "../../../asset/svg/leftArrow.svg";
 import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const Rooms = () => {
+  const [rooms, setRooms] = useState("");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { isOpenAmenities } = useContext(MyContext);
   const [serchParams] = useSearchParams();
   const type = serchParams.get("id");
-  console.log(type);
+  const {
+    bedrooms,
+    maxGuest,
+    bathrooms,
+    pricePeNight,
+    address,
+    title,
+    images,
+    availability,
+  } = rooms;
 
-  return (
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/listings?id=${type}`)
+      .then((res) => setRooms(res.data))
+      .catch((err) => console.log(err));
+  }, [type]);
+
+  return rooms === "" ? (
+    <h1>loading</h1>
+  ) : (
     <>
       <div className="mx-20 pb-8 ">
-        <h1 className="text-2xl font-semibold my-5">
-          Seaside Luxury: Sea View Room in Fort Tiracol
-        </h1>
+        <h1 className="text-2xl font-semibold my-5">{title}</h1>
         <div className="flex justify-between">
           <div className="flex">
             <span className="underline mr-3">1 reviews</span>
-            <span className="underline">Tricol,goa,india</span>
+            <span className="underline">{address}</span>
           </div>
           <div className=" flex">
             <div className="flex items-center">
@@ -48,43 +60,43 @@ const Rooms = () => {
           </div>
         </div>
         <div className="w-full h-[400px] flex mt-7 rounded-2xl overflow-hidden  relative">
-          <div className=" flex-1  mr-2">
+          <div className=" flex-1  bg-gray-400 mr-2">
             <img
-              src={room1}
+              src={images[0]}
               alt="room1"
               className="object-cover w-full h-full"
             />
           </div>
           <div className="flex-1  h-full flex flex-col">
-            <div className="flex-1  mb-2 flex">
-              <div className="flex-1 mr-2">
+            <div className="flex-1  mb-2 flex overflow-hidden">
+              <div className="flex-1 mr-2 bg-gray-400">
                 <img
-                  src={room2}
+                  src={images[1]}
                   alt="room2 "
                   className="object-cover w-full h-full"
                 />
               </div>
-              <div className="flex-1  ">
+              <div className="flex-1  bg-gray-400 ">
                 <img
-                  src={room3}
+                  src={images[2]}
                   alt="room2 "
                   className="object-cover w-full h-full"
                 />
               </div>
             </div>
-            <div className="flex-1  flex">
-              <div className="flex-1 mr-2">
+            <div className="flex-1  flex overflow-hidden">
+              <div className="flex-1 mr-2 bg-gray-400">
                 {" "}
                 <img
-                  src={room4}
+                  src={images[3]}
                   alt="room2 "
                   className="object-cover w-full h-full"
                 />
               </div>
-              <div className="flex-1 ">
+              <div className="flex-1 bg-gray-400 ">
                 {" "}
                 <img
-                  src={room5}
+                  src={images[4]}
                   alt="room2 "
                   className="object-cover w-full h-full"
                 />
@@ -106,25 +118,21 @@ const Rooms = () => {
               </h1>
               <div className="w-11 h-11 rounded-full bg-black"></div>
             </div>
+            <div className="text-lg font-light">
+              <span>{maxGuest} guests</span>.
+              <span className="mx-2">{bedrooms} bedrooms</span>.
+              <span className="mx-2">7 beds</span>
+              {bathrooms} bathrooms
+            </div>
             <div className="flex justify-between my-6">
-              <div className="border px-[8%] py-[2%] items-center justify-center rounded-lg">
-                <div className="flex items-center ">
-                  <img src={bed} alt="bed" />
-                  <span>1 double bed</span>
+              {availability.map((item) => (
+                <div className="border px-[8%] py-[2%] items-center justify-center rounded-lg">
+                  <div className="flex items-center ">
+                    <img src={bed} alt="bed" />
+                    <span>{item}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="border px-[8%] py-[2%] items-center justify-center rounded-lg">
-                <div className="flex items-center ">
-                  <img src={bed} alt="bed" />
-                  <span>1 double bed</span>
-                </div>
-              </div>
-              <div className="border px-[8%] py-[2%] items-center justify-center rounded-lg">
-                <div className="flex items-center ">
-                  <img src={bed} alt="bed" />
-                  <span>1 double bed</span>
-                </div>
-              </div>
+              ))}
             </div>
             <hr />
             <div className="my-5">
@@ -191,7 +199,7 @@ const Rooms = () => {
             <Offers />
           </div>
           <div className="flex-initial w-[40%] flex justify-center ">
-            <PaymentCard />
+            <PaymentCard night={pricePeNight} maxGuest={maxGuest} />
           </div>
         </div>
         <hr />
@@ -237,7 +245,7 @@ const Rooms = () => {
           </div>
           <div className="my-9 flex justify-center">
             <div className="w-2/4 bg-red-500 h-fit">
-              {data[0].images.map((item) => (
+              {rooms.images.map((item) => (
                 <div className="w-full">
                   <img src={item} alt="gallery" className="w-full" />
                 </div>

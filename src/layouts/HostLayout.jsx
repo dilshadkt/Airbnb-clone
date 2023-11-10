@@ -14,7 +14,7 @@ const HostLayout = () => {
     "floor-plan",
   ];
   const navigate = useNavigate();
-  console.log(count);
+
   return (
     <>
       <div>

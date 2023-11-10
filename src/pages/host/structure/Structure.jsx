@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { data } from "../../../asset/amenities/data";
-import bed from "../../../asset/svg/bed.svg";
+import MyContext from "../../../components/contex/Mycontex";
 
 const Structure = () => {
-  const [structure, setStructure] = useState("");
+  const { setFormData, formData } = useContext(MyContext);
+  const [selectedItem, setSelectedITem] = useState(formData.propertyType);
+  const handlechange = (data) => {
+    setFormData((prev) => ({
+      ...prev,
+      propertyType: data,
+    }));
+    setSelectedITem(data);
+    console.log(formData);
+  };
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
       <div className="w-[40%] ">
@@ -11,13 +20,16 @@ const Structure = () => {
           Which of these best describes your place?
         </h1>
         <div className="flex flex-wrap justify-between mt-9">
-          {data.map((item) =>
-            item.items.map((item) => (
+          {data.map((item, index) =>
+            item.items.map((item, groupIndex) => (
               <div
-                onClick={() => setStructure()}
-                className="p-5 border rounded-lg w-[31%] mb-3  hover:border-red-500"
+                key={`${index}-${groupIndex}`}
+                onClick={() => handlechange(item.desc)}
+                className={`p-5 border rounded-lg w-[31%] mb-3  hover:border-red-500 ${
+                  selectedItem === item.desc ? `bg-red-400 text-white ` : ``
+                }`}
               >
-                <img src={bed} alt="icons" className="w-11" />
+                <img src={item.img} alt="icons" className="w-11" />
                 <h1 className="font-medium">{item.desc}</h1>
               </div>
             ))

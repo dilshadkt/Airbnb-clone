@@ -43,6 +43,32 @@ function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignOpen, setSignOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [formData, setFormData] = useState({
+    propertyType: "",
+    houseType: "",
+    place: {
+      house: "",
+      Area: "",
+      Street: "",
+      landmark: "",
+      city: "",
+      pincode: "",
+      Province: "",
+    },
+    aboutPlace: {
+      guests: "",
+      bedrooms: "",
+      beds: "",
+      bathrooms: "",
+    },
+    propertyOffer: [],
+    image: [],
+    title: "",
+    description: "",
+    price: "",
+    discount: "",
+    security: [],
+  });
   const Pssdata = {
     isSignOpen,
     setSignOpen,
@@ -62,6 +88,8 @@ function App() {
     setIsLoginOpen,
     isLogin,
     setIsLogin,
+    formData,
+    setFormData,
   };
   return (
     <>

@@ -49,7 +49,7 @@ const Card = ({ data }) => {
             <img
               src={arrow}
               alt="arrow icons"
-              className="rotate-90 opacity-50 w-4"
+              className="rotate-90 opacity-50 w-4 object-cover"
             />
           </div>
           <div

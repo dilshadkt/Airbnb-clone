@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
-import Buttons from "../../components/Buttons";
 import MyContext from "../../components/contex/Mycontex";
 import axios from "axios";
 

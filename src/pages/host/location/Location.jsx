@@ -1,25 +1,36 @@
 import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../../components/contex/Mycontex";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Navigater from "../../../components/host-navigater/Navigater";
 
 const Location = () => {
+  const [iscomplete, setIscomplete] = useState(false);
   const { setFormData, formData } = useContext(MyContext);
   const [country, setCountry] = useState([]);
-  const [house, setHouse] = useState("");
-  const [Area, setArea] = useState("");
-  const [Street, setStreet] = useState("");
-  const [landmark, setLandmark] = useState("");
-  const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [Province, setProvince] = useState("");
-
+  const [house, setHouse] = useState(formData.place.house);
+  const [Area, setArea] = useState(formData.place.Area);
+  const [Street, setStreet] = useState(formData.place.Street);
+  const [landmark, setLandmark] = useState(formData.place.landmark);
+  const [city, setCity] = useState(formData.place.city);
+  const [pincode, setPincode] = useState(formData.place.pincode);
+  const [Province, setProvince] = useState(formData.place.Province);
+  const notify = () =>
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   useEffect(() => {
     axios
       .get("https://api.first.org/data/v1/countries")
       .then((res) => setCountry(Object.values(res.data.data)))
       .catch((err) => console.log(err));
   }, []);
+
   const handleChanges = (e) => {
+    setIscomplete(true);
+    e.preventDefault();
+    notify();
     setFormData((prev) => ({
       ...prev,
       place: {
@@ -43,56 +54,84 @@ const Location = () => {
           Your address is only shared with guests after they’ve made a
           reservation.
         </span>
-        <div className=" justify-center my-[5%]  ">
-          <select
-            className="w-full border p-4 rounded-xl "
-            onChange={(e) => handleChanges(e)}
-          >
-            {country.map((items, index) => (
-              <option
-                key={`${index}-${items.country}`}
-                className="text-gray-500"
-              >
-                {items.country} - {items.region}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            placeholder="House ,flate etc"
-            className="border w-full p-4 mt-5"
-          />
-          <input
-            type="text"
-            placeholder="Area village"
-            className="border w-full p-4 "
-          />
-          <input
-            type="text"
-            placeholder="Street address"
-            className="border w-full p-4 "
-          />
-          <input
-            type="text"
-            placeholder="Near by landmark"
-            className="border w-full p-4 "
-          />
-          <input
-            type="text"
-            placeholder="city"
-            className="border w-full p-4 "
-          />
-          <input
-            type="text"
-            placeholder="Pincode"
-            className="border w-full p-4 "
-          />
-          <input
-            type="text"
-            placeholder="Province"
-            className="border w-full p-4 "
-          />
-        </div>
+        <form onSubmit={(e) => handleChanges(e)}>
+          <div className=" justify-center my-[5%]  ">
+            <select className="w-full border p-4 rounded-xl ">
+              {country.map((items, index) => (
+                <option
+                  key={`${index}-${items.country}`}
+                  className="text-gray-500"
+                >
+                  {items.country} - {items.region}
+                </option>
+              ))}
+            </select>
+
+            <input
+              type="text"
+              value={house}
+              placeholder="House ,flate etc"
+              className="border w-full p-4 mt-5"
+              required
+              onChange={(e) => setHouse(e.target.value)}
+            />
+            <input
+              type="text"
+              value={Area}
+              placeholder="Area village"
+              className="border w-full p-4 "
+              required
+              onChange={(e) => setArea(e.target.value)}
+            />
+            <input
+              type="text"
+              value={Street}
+              placeholder="Street address"
+              className="border w-full p-4 "
+              required
+              onChange={(e) => setStreet(e.target.value)}
+            />
+            <input
+              type="text"
+              value={landmark}
+              placeholder="Near by landmark"
+              className="border w-full p-4 "
+              required
+              onChange={(e) => setLandmark(e.target.value)}
+            />
+            <input
+              type="text"
+              value={city}
+              placeholder="city"
+              required
+              className="border w-full p-4 "
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Pincode"
+              value={pincode}
+              className="border w-full p-4 "
+              required
+              onChange={(e) => setPincode(e.target.value)}
+            />
+            <input
+              type="text"
+              value={Province}
+              placeholder="Province"
+              className="border w-full p-4 "
+              required
+              onChange={(e) => setProvince(e.target.value)}
+            />
+          </div>
+          <ToastContainer />
+          {!iscomplete && (
+            <button className="p-3 bg-rose-500 rounded-xl text-white">
+              Confirm
+            </button>
+          )}
+        </form>
+        {iscomplete && <Navigater next={"floor-plan"} />}
       </div>
     </div>
   );

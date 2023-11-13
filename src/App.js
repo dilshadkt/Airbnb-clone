@@ -9,7 +9,6 @@ import Account from "./pages/Account/Account";
 import MyContext from "./components/contex/Mycontex";
 import { useEffect, useState } from "react";
 import WishList from "./pages/users/whishList/WishList";
-// import { data } from "./asset/card/data";
 import Personal from "./pages/Account/personal-info/Personal";
 import Login from "./pages/Account/Login/Login";
 import AccountPayment from "./pages/Account/payment/Payment";
@@ -21,6 +20,12 @@ import PrivacyType from "./pages/host/privacy-type/PrivacyType";
 import Location from "./pages/host/location/Location";
 import FloorPlan from "./pages/host/floor-plan/FloorPlan";
 import axios from "axios";
+import StandOut from "./pages/host/stand-out/StandOut";
+import Amenities from "./pages/host/amenities/Amenities";
+import Photos from "./pages/host/photos/Photos";
+import Title from "./pages/host/title/Title";
+import Description from "./pages/host/description/Description";
+import FinishUp from "./pages/host/finish-setup/FinishUp";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -44,6 +49,7 @@ function App() {
   const [isSignOpen, setSignOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
+    hostid: "",
     propertyType: "",
     houseType: "",
     place: {
@@ -65,7 +71,7 @@ function App() {
     image: [],
     title: "",
     description: "",
-    price: "",
+    pricePeNight: "",
     discount: "",
     security: [],
   });
@@ -116,6 +122,12 @@ function App() {
             <Route path="privacy-type" element={<PrivacyType />} />
             <Route path="location" element={<Location />} />
             <Route path="floor-plan" element={<FloorPlan />} />
+            <Route path="stand-out" element={<StandOut />} />
+            <Route path="amenities" element={<Amenities />} />
+            <Route path="photos" element={<Photos />} />
+            <Route path="title" element={<Title />} />
+            <Route path="description" element={<Description />} />
+            <Route path="finish-setup" element={<FinishUp />} />
           </Route>
         </Routes>
       </MyContext.Provider>

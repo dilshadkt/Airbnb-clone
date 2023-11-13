@@ -20,7 +20,7 @@ const Card = ({ data }) => {
   };
   return (
     <div
-      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[30%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
+      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
       onClick={() => navigate(`/rooms?id=${data._id}`)}
     >
       <div className="w-full h-80  items-center justify-center relative ">
@@ -76,7 +76,9 @@ const Card = ({ data }) => {
       </div>
       <div className="px-2">
         <div className="flex justify-between ">
-          <span className="font-medium mt-5">{data.title.slice(0, 16)}...</span>
+          <span className="font-medium mt-5">
+            {data?.title?.slice(0, 16)}...
+          </span>
           <span className="flex items-center">
             <img src={rating} alt="raitng icon" />
             {data.rating}

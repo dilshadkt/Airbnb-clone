@@ -8,7 +8,7 @@ const Home = () => {
   const [filtered, setFiltered] = useState(datas);
   useEffect(() => {
     const resulr = datas.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
+      item?.title?.toLowerCase().includes(search?.toLowerCase())
     );
     setFiltered(resulr);
   }, [search, datas]);

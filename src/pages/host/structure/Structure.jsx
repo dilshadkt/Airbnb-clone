@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { data } from "../../../asset/amenities/data";
 import MyContext from "../../../components/contex/Mycontex";
+import Navigater from "../../../components/host-navigater/Navigater";
 
 const Structure = () => {
   const { setFormData, formData } = useContext(MyContext);
@@ -11,7 +12,6 @@ const Structure = () => {
       propertyType: data,
     }));
     setSelectedITem(data);
-    console.log(formData);
   };
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
@@ -36,6 +36,7 @@ const Structure = () => {
           )}
         </div>
       </div>
+      {selectedItem && <Navigater next={"privacy-type"} />}
     </div>
   );
 };

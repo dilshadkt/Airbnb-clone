@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import MyContext from "../../components/contex/Mycontex";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const SignUp = () => {
@@ -10,6 +12,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confrimPass, setConfirmPass] = useState("");
+
   const RegisterUser = (e) => {
     e.preventDefault();
     axios
@@ -18,9 +21,14 @@ const SignUp = () => {
         setSignOpen(false);
         setIsLogin(true);
         localStorage.setItem("user", res.data.firstName);
+        localStorage.setItem("token", res.data.token);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => notify(err.response.data));
   };
+  const notify = (err) =>
+    toast.warning(err, {
+      position: toast.POSITION.TOP_CENTER,
+    });
   return (
     <>
       <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-30 flex items-center justify-center"></div>
@@ -47,33 +55,39 @@ const SignUp = () => {
             <input
               onChange={(e) => setFirstName(e.target.value)}
               type="text"
+              required
               placeholder="first name"
               className="w-full p-3 border rounded-lg  my-2"
             />
             <input
               onChange={(e) => setLastName(e.target.value)}
               type="text"
+              required
               placeholder="last name"
               className="w-full p-3 border rounded-lg  my-2"
             />
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="email"
+              required
               placeholder="email"
               className="w-full p-3 border rounded-lg my-2   "
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
+              required
               placeholder="password"
               className="w-full p-3 border rounded-lg my-2   "
             />
             <input
               onChange={(e) => setConfirmPass(e.target.value)}
               type="password"
+              required
               placeholder="confirm password"
               className="w-full p-3 border rounded-lg my-2   "
             />
+            <ToastContainer />
             <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
               Login
             </button>

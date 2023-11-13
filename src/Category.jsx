@@ -48,8 +48,11 @@ const Category = () => {
           style={{ transform: `translateX(-${currentIndex * 15}%)` }}
           className={`flex transition-transform duration-700`}
         >
-          {data.map((item) => (
-            <div className="px-6  h-full group  flex items-center justify-center cursor-pointer relative">
+          {data.map((item, index) => (
+            <div
+              key={`${index}-${item}`}
+              className="px-6  h-full group  flex items-center justify-center cursor-pointer relative"
+            >
               <div className="flex flex-col items-center opacity-70  group-hover:opacity-100 ">
                 <img src={item.image} alt="icons" />
 

@@ -1,5 +1,7 @@
 import React from "react";
 
+import Navigater from "../../components/host-navigater/Navigater";
+
 const BecomeHost = () => {
   return (
     <>
@@ -24,6 +26,7 @@ const BecomeHost = () => {
             Your browser does not support the video tag.
           </video>
         </div>
+        <Navigater next={"structure"} />
       </div>
     </>
   );

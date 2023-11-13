@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-const FloorSlip = ({ title }) => {
-  const [count, setCount] = useState(0);
+const FloorSlip = ({ title, count, setCount }) => {
   return (
     <div>
       <div className="py-6 flex items-center justify-between ">
         <h3>{title}</h3>
         <div className="flex  items-center">
           <div
-            onClick={() => setCount(count - 1)}
+            onClick={() => count > 1 && setCount(count - 1)}
             className="w-8 h-8 rounded-full border flex items-center justify-center cursor-pointer"
           >
             -

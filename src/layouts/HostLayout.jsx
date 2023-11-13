@@ -1,24 +1,15 @@
 import React, { useContext, useState } from "react";
 import logo from "../asset/logo/logo.png";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import MyContext from "../components/contex/Mycontex";
 
 const HostLayout = () => {
-  const [count, setcount] = useState(0);
-  const { progress } = useContext(MyContext);
-  const paths = [
-    "/become-a-host",
-    "structure",
-    "privacy-type",
-    "location",
-    "floor-plan",
-  ];
-  const navigate = useNavigate();
+  const { formData } = useContext(MyContext);
 
   return (
     <>
       <div>
-        <nav className="w-full h-20  flex items-center px-6 justify-between">
+        <nav className="w-full h-20  flex items-center px-6 justify-between sticky top-0">
           <Link to={"/hoisting"}>
             <div>
               <img src={logo} alt="log" className="w-[120px]" />
@@ -35,14 +26,7 @@ const HostLayout = () => {
         <div>
           <Outlet />
         </div>
-        <div className=" h-20">
-          <div className="w-full h-[5px] bg-gray-500 transition-all duration-75">
-            <div
-              className={`w-[${
-                progress * 10
-              }%] h-full bg-red-600 transition-all duration-75`}
-            ></div>
-          </div>
+        {/* <div className=" h-20 fixed bottom-0 right-0 left-0">
           <div className="flex justify-between px-8 mt-3">
             <div
               onClick={
@@ -62,17 +46,26 @@ const HostLayout = () => {
               onClick={
                 count < paths.length - 1
                   ? () => {
-                      setcount((pre) => pre + 1);
-                      navigate(paths[count + 1]);
+                      gotoNext();
                     }
                   : null
               }
-              className=" font-medium text-white px-4 py-2 bg-black rounded-xl cursor-pointer"
+              className={`font-medium text-white px-4 py-2 bg-black rounded-xl cursor-pointer ${
+                count === paths.length - 1 && `hidden`
+              }`}
             >
               next
             </div>
+            {count === paths.length - 1 && (
+              <div
+                onClick={() => PostData()}
+                className="font-medium text-white px-4 py-2 bg-rose-500 rounded-xl cursor-pointer"
+              >
+                Finish
+              </div>
+            )}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

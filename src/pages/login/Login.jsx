@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import MyContext from "../../components/contex/Mycontex";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Login = () => {
@@ -14,10 +16,17 @@ const Login = () => {
       .then((res) => {
         setIsLoginOpen(false);
         setIsLogin(true);
-        localStorage.setItem("user", res.data.firstName);
+
+        localStorage.setItem("user", res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notify(err.response.data);
+      });
   };
+  const notify = (err) =>
+    toast.warning(err, {
+      position: toast.POSITION.TOP_CENTER,
+    });
 
   return (
     <>
@@ -45,15 +54,18 @@ const Login = () => {
             <input
               onChange={(e) => setUseName(e.target.value)}
               type="text"
+              required
               placeholder="username"
               className="w-full p-3 border rounded-lg"
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
+              required
               placeholder="password"
               className="w-full p-3 border rounded-lg my-3    "
             />
+            <ToastContainer />
 
             <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
               Login

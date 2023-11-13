@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import bed from "../../../asset/svg/bed.svg";
 import MyContext from "../../../components/contex/Mycontex";
+import Navigater from "../../../components/host-navigater/Navigater";
 
 const PrivacyType = () => {
   const { setFormData, formData } = useContext(MyContext);
@@ -53,6 +54,7 @@ const PrivacyType = () => {
           ))}
         </div>
       </div>
+      {selectd && <Navigater next={"location"} />}
     </div>
   );
 };

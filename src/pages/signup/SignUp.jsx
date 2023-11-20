@@ -14,13 +14,16 @@ const SignUp = () => {
   const [confrimPass, setConfirmPass] = useState("");
 
   const RegisterUser = (e) => {
+    if (confrimPass !== password) return notify("password is not match");
     e.preventDefault();
     axios
       .post("/user/login", { firstName, lastName, email, password })
       .then((res) => {
         setSignOpen(false);
         setIsLogin(true);
-        localStorage.setItem("user", res.data.firstName);
+        console.log(res.data.firstName);
+        // console.log(res.headers.authorization);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("token", res.data.token);
       })
       .catch((err) => notify(err.response.data));

@@ -6,17 +6,25 @@ import SideMenu from "./components/sideMenu/SideMenu";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import userIcon from "./asset/svg/user.svg";
+import global from "./asset/svg/global.svg";
+import threedot from "./asset/svg/threedot.svg";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const {
     setsearch,
+    setIsLoginOpen,
     isMenuOpen,
     setIsMenuOpen,
     isLoginOpen,
     isSignOpen,
     isLogin,
   } = useContext(MyContext);
-  const user = localStorage.getItem("user");
+  const user =
+    isLogin &&
+    localStorage.getItem("user") &&
+    JSON.parse(localStorage?.getItem("user"));
 
   return (
     <>
@@ -40,51 +48,26 @@ const Navbar = () => {
         </div>
         <div className=" flex-1 flex items-center justify-end">
           <div className="flex items-center">
-            <Link to={"/hoisting"}>
-              {" "}
-              <span className="text-sm font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full">
-                Switch to hoisting
-              </span>
-            </Link>
-
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <span
+              onClick={() =>
+                isLogin ? navigate("/hoisting") : setIsLoginOpen(true)
+              }
+              className="text-sm font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full"
             >
-              <path
-                d="M21 12C21 16.9706 16.9706 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12C21 12 15.5147 12 12 12C8.48528 12 3 12 3 12M12 21C7.02944 21 3 16.9706 3 12M12 21C9.14508 18.4226 8 15.8462 8 12C8 8.15378 9.14508 5.57736 12 3M12 21C14.8549 18.4226 16 15.8462 16 12C16 8.15378 14.8549 5.57736 12 3M3 12C3 7.02944 7.02944 3 12 3"
-                stroke="#09090B"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+              Switch to hoisting
+            </span>
+
+            <img src={global} alt="icon" />
             <div
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="border px-3 py-2 flex items-center justify-center rounded-3xl ml-2 hover:shadow-md"
             >
-              <svg
-                width="14"
-                height="12"
-                viewBox="0 0 14 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 6.14286H13M1 1H13M1 11.2857H13"
-                  stroke="#09090B"
-                  strokeWidth="0.857143"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <img src={threedot} alt="icons" />
               <div className="rounded-full w-7 h-7  bg-black flex items-center justify-center ml-2 relative cursor-pointer">
                 {isLogin ? (
                   <>
                     <span className="text-white ">
-                      {user[0]?.toUpperCase()}
+                      {user?.firstName[0]?.toUpperCase()}
                     </span>
                   </>
                 ) : (

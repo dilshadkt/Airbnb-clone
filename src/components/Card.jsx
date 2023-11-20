@@ -5,18 +5,19 @@ import rating from "../asset/svg/rating.svg";
 import arrow from "../asset/svg/Arrow.svg";
 import LikeHeart from "../asset/card/LikeHeart";
 import MyContext from "./contex/Mycontex";
+import axios from "axios";
 
 const Card = ({ data }) => {
-  const { datas, setDatas } = useContext(MyContext);
-  const [isLiked, setIsLliked] = useState(data.whishlist);
+  const { user, isLogin, setIsLoginOpen, isLiked, setIsLliked } =
+    useContext(MyContext);
+
   const [currentImg, setCurrentImage] = useState(0);
   const navigate = useNavigate();
-
   const addTowhishList = (id) => {
-    const filterd = datas.map((item) =>
-      item.id === id ? { ...item, whishlist: true } : item
-    );
-    setDatas(filterd);
+    axios
+      .post(`/addWishList/${user._id}?propertyId=${id}`)
+      .then((res) => setIsLliked(res.data))
+      .catch((err) => console.log(err));
   };
   return (
     <div
@@ -25,16 +26,23 @@ const Card = ({ data }) => {
     >
       <div className="w-full h-80  items-center justify-center relative ">
         <div
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsLliked(true);
-            addTowhishList(data.id);
-          }}
+          onClick={
+            isLogin
+              ? (e) => {
+                  e.stopPropagation();
+
+                  addTowhishList(data._id);
+                }
+              : (e) => {
+                  e.stopPropagation();
+                  setIsLoginOpen(true);
+                }
+          }
           className={`absolute right-3 top-3 w-8 h-8 ${
-            isLiked ? "bg-rose-400" : "bg-white"
+            isLiked.includes(data._id) ? "bg-rose-400" : "bg-white"
           }  rounded-full flex items-center justify-center `}
         >
-          <LikeHeart fill={isLiked ? "white" : "black"} />
+          <LikeHeart fill={isLiked.includes(data._id) ? "white" : "black"} />
         </div>
         <div className="absolute w-full  opacity-0 group-hover:opacity-100    px-4 top-2/4 flex justify-between">
           <div
@@ -71,7 +79,7 @@ const Card = ({ data }) => {
         <img
           alt="img"
           src={data.images[currentImg]}
-          className="w-full h-full  rounded-xl "
+          className="w-full h-full object-cover  rounded-xl "
         />
       </div>
       <div className="px-2">

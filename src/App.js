@@ -26,6 +26,7 @@ import Photos from "./pages/host/photos/Photos";
 import Title from "./pages/host/title/Title";
 import Description from "./pages/host/description/Description";
 import FinishUp from "./pages/host/finish-setup/FinishUp";
+import PricePerNight from "./pages/host/price/PricePerNight";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -33,6 +34,11 @@ function App() {
   /////////// fetching data //////////////
 
   useEffect(() => {
+    const userdata = JSON.parse(localStorage.getItem("user"));
+    const liked = JSON.parse(localStorage.getItem("like"));
+    liked && setIsLliked(liked);
+    userdata && setUser(userdata);
+
     axios
       .get("/listings")
       .then((data) => setDatas(data.data))
@@ -47,7 +53,16 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignOpen, setSignOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [totalDays, setTotalDays] = useState(1);
+  const [guest, setGuest] = useState("");
+  const [isLiked, setIsLliked] = useState([]);
+  const [currentImage, setCurrentImage] = useState("");
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const [user, setUser] = useState("");
   const [formData, setFormData] = useState({
     hostid: "",
     propertyType: "",
@@ -96,6 +111,20 @@ function App() {
     setIsLogin,
     formData,
     setFormData,
+    user,
+    setUser,
+    checkIn,
+    setCheckIn,
+    checkOut,
+    setCheckOut,
+    totalDays,
+    setTotalDays,
+    guest,
+    setGuest,
+    currentImage,
+    setCurrentImage,
+    isLiked,
+    setIsLliked,
   };
   return (
     <>
@@ -127,6 +156,7 @@ function App() {
             <Route path="photos" element={<Photos />} />
             <Route path="title" element={<Title />} />
             <Route path="description" element={<Description />} />
+            <Route path="price" element={<PricePerNight />} />
             <Route path="finish-setup" element={<FinishUp />} />
           </Route>
         </Routes>

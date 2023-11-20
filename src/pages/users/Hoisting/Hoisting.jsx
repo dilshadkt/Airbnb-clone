@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Buttons from "../../../components/Buttons";
 import listpad from "../../../asset/svg/listpad.svg";
 import help1 from "../../../asset/svg/help1.svg";
@@ -8,12 +8,22 @@ import help4 from "../../../asset/stuff/Rectangle 44.png";
 import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
 const Hoisting = () => {
+  const [resrvation, setReservation] = useState([]);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    axios
+      .get(`/book/stay/${user._id}`)
+      .then((res) => setReservation(res.data))
+      .catch((err) => console.log(err));
+  }, [user._id]);
+
   return (
     <div className="m-20 ">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold ">Welcome, Dilshad!</h1>
+        <h1 className="text-3xl font-semibold ">Welcome, Dilshad! {}</h1>
 
         <div onClick={() => navigate("/become-a-host")}>
           <Buttons width="w-[246px]" title="Complete your listing" />
@@ -40,14 +50,56 @@ const Hoisting = () => {
           Pending reviews(0)
         </div>
       </div>
-      <div className="w-full bg-gray-100 flex items-center justify-center min-h-[239px] rounded-xl my-7">
-        <div className=" flex flex-col items-center">
-          <img src={listpad} alt="list pad" />
-          <h4 className="text-center w-[172px] text-sm mt-2">
-            You dont have any guest checking out today or tommorow
-          </h4>
+      {resrvation.length === 0 ? (
+        <div className="w-full bg-gray-100 flex items-center justify-center min-h-[239px] rounded-xl my-7">
+          <div className=" flex flex-col items-center">
+            <img src={listpad} alt="list pad" />
+            <h4 className="text-center w-[172px] text-sm mt-2">
+              You dont have any guest checking out today or tommorow
+            </h4>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="my-[30px]">
+          <div className="flex w-full p-3 bg-red-400 rounded-xl text-white">
+            <ul className="flex justify-around w-full mr-[4%]">
+              <li>Peoperty</li>
+              <li>checkIn date</li>
+              <li>checkOut date</li>
+              <li>booking date</li>
+              <li>total</li>
+            </ul>
+          </div>
+          {resrvation.map((item) => (
+            <div className="my-7">
+              <div className="p-3 border rounded-lg flex">
+                <div
+                  className="flex-initial w-[15%] h-[100px] bg-green-400 overflow-hidden rounded-lg
+       "
+                >
+                  <img
+                    src={item.listingId.images[0]}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  className="flex-1  px-3 flex items-center
+       "
+                >
+                  <ul className="flex w-full justify-around font-medium text-gray-400">
+                    <li>{item.checkInDate}</li>
+                    <li>{item.checkoutDate}</li>
+                    <li>{item.bookingDate}</li>
+                    <li>{item.totalPrice}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <h4 className="text-xl font-medium"> We’re here to help</h4>
       <div className="flex my-6">
         <div className="border rounded-xl p-5 flex mr-6">

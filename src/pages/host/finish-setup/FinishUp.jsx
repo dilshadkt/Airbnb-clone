@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import MyContext from "../../../components/contex/Mycontex";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FinishUp = () => {
   const navigate = useNavigate();
-  const { formData } = useContext(MyContext);
+  const { formData, user } = useContext(MyContext);
 
+  const [isFinishDisable, setIsFinishDisable] = useState(false);
   const PostData = () => {
+    setIsFinishDisable(true);
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
@@ -18,7 +20,7 @@ const FinishUp = () => {
     }
 
     axios
-      .post("/listings/become-a-host", data, {
+      .post(`/listings/become-a-host?userId=${user._id}`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -27,7 +29,10 @@ const FinishUp = () => {
         navigate("/");
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsFinishDisable(false);
+      });
   };
 
   return (
@@ -56,7 +61,10 @@ const FinishUp = () => {
         </div>
         <div
           onClick={() => PostData()}
-          className="bg-rose-600 p-3 rounded-lg font-medium text-white"
+          className={`bg-rose-600 p-3 rounded-lg font-medium text-white cursor-pointer  ${
+            isFinishDisable &&
+            `opacity-50 pointer-events-none cursor-not-allowed`
+          }`}
         >
           Finish
         </div>

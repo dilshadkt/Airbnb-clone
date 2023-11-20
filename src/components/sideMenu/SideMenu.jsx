@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../contex/Mycontex";
-
+import { useNavigate } from "react-router-dom";
 const SideMenu = () => {
+  const naviagate = useNavigate();
   const { setIsMenuOpen, setIsLoginOpen, isLogin, setIsLogin, setSignOpen } =
     useContext(MyContext);
+
   return (
     <>
       {isLogin ? (
@@ -39,6 +41,7 @@ const SideMenu = () => {
                   onClick={() => {
                     setIsLogin(false);
                     localStorage.clear();
+                    naviagate("/");
                   }}
                   className="py-3 px-4 hover:bg-gray-200"
                 >

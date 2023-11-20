@@ -32,7 +32,7 @@ const Description = () => {
           Confirm
         </button>
       </form>
-      {isNext && <Navigater next={"finish-setup"} />}
+      {isNext && <Navigater next={"price"} />}
     </div>
   );
 };

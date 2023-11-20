@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import cancel from "../asset/svg/cancel.svg";
-import MyContext from "./contex/Mycontex";
 
-const WishListCard = ({ remove }) => {
-  const { datas } = useContext(MyContext);
-  const filteredData = datas.filter((item) => item.whishlist === true);
+import { useNavigate } from "react-router-dom";
+
+const WishListCard = ({ data, remove }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex ">
-      {filteredData.map((item) => (
-        <div className="group w-[24%]  overflow-hidden flex flex-col items-center  mr-4 ">
+    <div className="flex flex-wrap ">
+      {data?.map((item, index) => (
+        <div
+          key={`${item}-${index}`}
+          onClick={() => navigate(`/rooms?id=${item.propertyId}`)}
+          className="group w-[20%]  overflow-hidden flex flex-col items-center  mr-4 "
+        >
           <div className="w-[95%] border-[7px] border-white   rounded-xl  shadow-md relative ">
             <img
               src={item.images[0]}
@@ -19,7 +24,7 @@ const WishListCard = ({ remove }) => {
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  remove(item.id);
+                  remove(item.propertyId);
                 }}
                 className="w-9 h-9 bg-white flex items-center invisible group-hover:visible justify-center rounded-full hover:scale-105"
               >

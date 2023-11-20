@@ -1,11 +1,8 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import logo from "../asset/logo/logo.png";
 import { Link, Outlet } from "react-router-dom";
-import MyContext from "../components/contex/Mycontex";
 
 const HostLayout = () => {
-  const { formData } = useContext(MyContext);
-
   return (
     <>
       <div>

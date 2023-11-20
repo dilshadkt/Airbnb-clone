@@ -14,9 +14,10 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const Rooms = () => {
+  const [queryParams] = useSearchParams();
   const [rooms, setRooms] = useState("");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const { isOpenAmenities } = useContext(MyContext);
+  const { isOpenAmenities, setCurrentImage } = useContext(MyContext);
   const [serchParams] = useSearchParams();
   const type = serchParams.get("id");
   const {
@@ -28,14 +29,18 @@ const Rooms = () => {
     title,
     images,
     availability,
+    hostid,
   } = rooms;
 
   useEffect(() => {
     axios
       .get(`/listings?id=${type}`)
-      .then((res) => setRooms(res.data))
+      .then((res) => {
+        setRooms(res.data);
+        setCurrentImage(res.data.images[0]);
+      })
       .catch((err) => console.log(err));
-  }, [type]);
+  }, [type, setCurrentImage]);
 
   return rooms === "" ? (
     <h1>loading</h1>
@@ -114,9 +119,15 @@ const Rooms = () => {
           <div className="flex-1">
             <div className=" items-center justify-between flex">
               <h1 className="text-2xl">
-                Room in a heritage hotel hosted by Sanchit
+                Room in a heritage hotel hosted by {hostid}
               </h1>
-              <div className="w-11 h-11 rounded-full bg-black"></div>
+              <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
+                <img
+                  src={images[0]}
+                  alt="icon"
+                  className="w-full h-full object-fill"
+                />
+              </div>
             </div>
             <div className="text-lg font-light">
               <span>{maxGuest} guests</span>.
@@ -124,9 +135,9 @@ const Rooms = () => {
               <span className="mx-2">7 beds</span>
               {bathrooms} bathrooms
             </div>
-            <div className="flex justify-between my-6">
+            <div className="flex justify-start my-6">
               {availability.map((item) => (
-                <div className="border px-[8%] py-[2%] items-center justify-center rounded-lg">
+                <div className="border px-[8%] py-[2%] items-center mr-2 justify-center rounded-lg">
                   <div className="flex items-center ">
                     <img src={bed} alt="bed" />
                     <span>{item}</span>
@@ -181,7 +192,7 @@ const Rooms = () => {
             </div>
             <hr />
             {/* host details */}
-            <Host />
+            <Host userIcon={images[0]} />
             <h3 className="font-semibold text-2xl">About this place</h3>
             <div className="text-base font-light my-3">
               Fort Tiracol is one of North Goa's most iconic forts turned into
@@ -199,7 +210,11 @@ const Rooms = () => {
             <Offers />
           </div>
           <div className="flex-initial w-[40%] flex justify-center ">
-            <PaymentCard night={pricePeNight} maxGuest={maxGuest} />
+            <PaymentCard
+              night={pricePeNight}
+              maxGuest={maxGuest}
+              propertyId={queryParams.get("id")}
+            />
           </div>
         </div>
         <hr />

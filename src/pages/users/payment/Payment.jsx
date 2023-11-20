@@ -1,14 +1,34 @@
-import React from "react";
-import Navbar from "../../../components/Navbar";
+import React, { useContext } from "react";
+// import Navbar from "../../../components/Navbar";
 import left from "../../../asset/svg/leftArrow.svg";
-import Buttons from "../../../components/Buttons";
-import FooterLabel from "../../../components/FooterLabel";
+// import FooterLabel from "../../../components/FooterLabel";
 import PriceSlip from "../../../components/PriceSlip";
+import MyContext from "../../../components/contex/Mycontex";
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 const Payment = () => {
+  const [queryParam] = useSearchParams();
+  const { checkIn, guest, user } = useContext(MyContext);
+
+  const reservation = () => {
+    const data = {
+      guestId: user._id,
+      listingId: queryParam.get("propertyId"),
+      checkInDate: queryParam.get("checkin"),
+      checkoutDate: queryParam.get("chekout"),
+      totalPrice: queryParam.get("totalPrice"),
+      bookingDate: new Date().toJSON().slice(0, 10),
+    };
+    console.log(data);
+    axios
+      .post(`/book/stay/${user._id}`, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <hr />
       <div className="mx-48 my-8 flex">
         <div className="flex-1  flex flex-col ">
@@ -21,7 +41,7 @@ const Payment = () => {
             <div className="flex  justify-between  my-5 items-start">
               <div className="flex flex-col  ">
                 <h4 className="font-medium">Dates</h4>
-                <span className="text-sm">13-8 Nov</span>
+                <span className="text-sm">{checkIn ? checkIn : "date"}</span>
               </div>
               <div className="flex items-start    ">
                 <span className="font-medium underline cursor-pointer">
@@ -32,7 +52,7 @@ const Payment = () => {
             <div className="flex  justify-between  my-5 items-start">
               <div className="flex flex-col  ">
                 <h4 className="font-medium">Guests</h4>
-                <span className="text-sm">1 guest</span>
+                <span className="text-sm">{guest} guest</span>
               </div>
               <div className="flex items-start    ">
                 <span className="font-medium underline cursor-pointer">
@@ -116,7 +136,12 @@ const Payment = () => {
                 Policy and that Airbnb can charge my payment method if I’m
                 responsible for damage.
               </p>
-              <Buttons title="Confirm and pay" color="bg-rose-500" />
+              <div
+                onClick={reservation}
+                className="bg-rose-500 py-3 cursor-pointer px-5 w-fit rounded-xl  font-medium text-white"
+              >
+                Confirm and pay
+              </div>
             </div>
           </div>
         </div>
@@ -124,7 +149,7 @@ const Payment = () => {
           <PriceSlip />
         </div>
       </div>
-      <FooterLabel />
+      {/* <FooterLabel /> */}
     </>
   );
 };

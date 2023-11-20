@@ -1,25 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../../components/contex/Mycontex";
 import WishListCard from "../../../components/WishListCard";
+import axios from "axios";
 
 const WishList = () => {
-  const { datas, setDatas } = useContext(MyContext);
-  const result = datas.filter((item) => item.whishlist === true && true);
+  const { user, setIsLliked } = useContext(MyContext);
 
-  const removeWhichList = (id) => {
-    const filtered = datas.map((item) =>
-      item.id === id ? { ...item, whishlist: null } : item
-    );
-    setDatas(filtered);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/addWishList/${user._id}`)
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  }, [user._id]);
+  const remove = (id) => {
+    axios
+      .delete(`/addWishList/${user._id}?propertyId=${id}`)
+      .then((res) => {
+        setData(res.data);
+        setIsLliked(res.data.map((item) => item.propertyId));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="mx-20 my-10">
       <h1 className="text-3xl font-semibold">Wishlists</h1>
 
-      <div className="my-10">
-        {result.length ? (
-          <WishListCard remove={removeWhichList} />
+      <div className="my-10 ">
+        {data.length ? (
+          <WishListCard data={data} remove={remove} />
         ) : (
           <div>
             <h3 className="text-xl font-medium">Create your first wishlist</h3>

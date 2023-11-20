@@ -22,8 +22,8 @@ const Location = () => {
     });
   useEffect(() => {
     axios
-      .get("https://api.first.org/data/v1/countries")
-      .then((res) => setCountry(Object.values(res.data.data)))
+      .get("https://restcountries.com/v3.1/all?fields=name,flags")
+      .then((res) => setCountry(res.data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -62,7 +62,7 @@ const Location = () => {
                   key={`${index}-${items.country}`}
                   className="text-gray-500"
                 >
-                  {items.country} - {items.region}
+                  {items.name.common}
                 </option>
               ))}
             </select>

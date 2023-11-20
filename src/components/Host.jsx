@@ -1,10 +1,9 @@
 import React from "react";
-import person from "../asset/svg/cardIcon.svg";
 import star from "../asset/svg/rating.svg";
 import global from "../asset/svg/global.svg";
 import Buttons from "./Buttons";
 
-const Host = () => {
+const Host = ({ userIcon }) => {
   return (
     <>
       <div className="my-5">
@@ -14,8 +13,12 @@ const Host = () => {
             <div className="w-96  h-60 flex bg-white  mt-11 mb-6 rounded-2xl">
               <div className="flex-1  flex items-center justify-end">
                 <div className=" flex flex-col items-center">
-                  <div className="w-28 h-128 rounded-full overflow-hidden flex items-center justify-center">
-                    <img src={person} alt="person logo" />
+                  <div className="w-28 h-28 rounded-full overflow-hidden flex items-center justify-center">
+                    <img
+                      src={userIcon}
+                      alt="person logo"
+                      className="w-fll h-full object-fill"
+                    />
                   </div>
                   <h4 className="font-semibold">Dilshad</h4>
                   <span>host</span>

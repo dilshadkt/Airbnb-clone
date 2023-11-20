@@ -1,13 +1,20 @@
-import React from "react";
-import room from "../asset/stuff/Rectangle 53.jpg";
+import React, { useContext } from "react";
 import rating from "../asset/svg/rating.svg";
+import { useSearchParams } from "react-router-dom";
+import MyContext from "./contex/Mycontex";
 
 const PriceSlip = () => {
+  const { currentImage } = useContext(MyContext);
+  const [searchParams] = useSearchParams();
   return (
     <div className="border rounded-lg p-5 h-fit w-[440px] sticky top-32 shadow-xl">
       <div className="pb-5 flex">
         <div className="flex-initial w-[30%] bg-red-400 h-28">
-          <img src={room} alt="room " className="w-full object-cover" />
+          <img
+            src={currentImage}
+            alt="room "
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="flex-1  pl-4 flex flex-col justify-between">
           <div>
@@ -28,18 +35,21 @@ const PriceSlip = () => {
       <div className="pt-5">
         <h3 className="text-xl font-medium mb-5 ">Price details</h3>
         <div className="flex justify-between my-3 text-gray-400">
-          <h5>₹11,085 x 5 nights</h5>
-          <span>₹55,425</span>
+          <h5>
+            ₹{searchParams.get("pricePernight")} x{" "}
+            {searchParams.get("totalDays")} nights
+          </h5>
+          <span>₹{searchParams.get("totalPrice")}</span>
         </div>
         <div className="flex justify-between my-3 text-gray-400">
-          <h5>₹11,085 x 5 nights</h5>
-          <span>₹55,425</span>
+          <h5>airbnb tax</h5>
+          <span>₹{searchParams.get("airbnbTax")}</span>
         </div>
         <hr className="mt-5" />
         <div className="font-medium pt-5">
           <div className="flex justify-between">
             <h5>Total (INR)</h5>
-            <span>₹65,401.5</span>
+            <span>₹{searchParams.get("grandTotal")}</span>
           </div>
         </div>
       </div>

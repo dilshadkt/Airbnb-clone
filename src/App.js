@@ -27,6 +27,11 @@ import Title from "./pages/host/title/Title";
 import Description from "./pages/host/description/Description";
 import FinishUp from "./pages/host/finish-setup/FinishUp";
 import PricePerNight from "./pages/host/price/PricePerNight";
+import AdminLayout from "./layouts/Admin";
+import AdminHome from "./pages/admin/home/Home";
+import Users from "./pages/admin/users/Users";
+import Properties from "./pages/admin/properties/Properties";
+import WhishList from "./pages/admin/Whishlist/WhishList";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -58,6 +63,7 @@ function App() {
   const [totalDays, setTotalDays] = useState(1);
   const [guest, setGuest] = useState("");
   const [isLiked, setIsLliked] = useState([]);
+  const [notification, setNotification] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("token") ? true : false
@@ -125,6 +131,8 @@ function App() {
     setCurrentImage,
     isLiked,
     setIsLliked,
+    notification,
+    setNotification,
   };
   return (
     <>
@@ -159,6 +167,12 @@ function App() {
             <Route path="price" element={<PricePerNight />} />
             <Route path="finish-setup" element={<FinishUp />} />
           </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminHome />} />
+            <Route path="users" element={<Users />} />
+            <Route path="properties" element={<Properties />} />
+            <Route path="whishlist" element={<WhishList />} />
+          </Route>
         </Routes>
       </MyContext.Provider>
     </>
@@ -166,3 +180,5 @@ function App() {
 }
 
 export default App;
+
+//TODO: impliment redux store for localstorage

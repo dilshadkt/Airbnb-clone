@@ -20,6 +20,7 @@ const Navbar = () => {
     isLoginOpen,
     isSignOpen,
     isLogin,
+    notification,
   } = useContext(MyContext);
   const user =
     isLogin &&
@@ -73,10 +74,12 @@ const Navbar = () => {
                 ) : (
                   <img src={userIcon} alt="icon" className="rounded-full" />
                 )}
+                {notification && (
+                  <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
+                    {notification}
+                  </div>
+                )}
 
-                <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
-                  2
-                </div>
                 {isMenuOpen ? <SideMenu /> : ""}
               </div>
             </div>
@@ -84,7 +87,6 @@ const Navbar = () => {
         </div>
         {isLoginOpen ? (
           <>
-            {(document.body.style.overflow = "hidden")}
             <Login />
           </>
         ) : (

@@ -1,52 +1,12 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import rating from "../asset/svg/rating.svg";
-import arrow from "../asset/svg/Arrow.svg";
-import LikeHeart from "../asset/card/LikeHeart";
-import MyContext from "./contex/Mycontex";
-import axios from "axios";
-
+import React, { useState } from "react";
+import rating from "../../../../asset/svg/rating.svg";
+import arrow from "../../../../asset/svg/Arrow.svg";
 const Card = ({ data }) => {
-  const { user, isLogin, setIsLoginOpen, isLiked, setIsLliked } =
-    useContext(MyContext);
-
   const [currentImg, setCurrentImage] = useState(0);
-  const navigate = useNavigate();
-  const addTowhishList = (id) => {
-    axios
-      .post(`/addWishList/${user._id}?propertyId=${id}`)
-      .then((res) => {
-        setIsLliked(res.data);
-        localStorage.setItem("like", JSON.stringify(res.data));
-      })
-      .catch((err) => console.log(err));
-  };
-  return (
-    <div
-      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
-      onClick={() => navigate(`/rooms?id=${data._id}`)}
-    >
-      <div className="w-full h-80  items-center justify-center relative ">
-        <div
-          onClick={
-            isLogin
-              ? (e) => {
-                  e.stopPropagation();
 
-                  addTowhishList(data._id);
-                }
-              : (e) => {
-                  e.stopPropagation();
-                  setIsLoginOpen(true);
-                }
-          }
-          className={`absolute right-3 top-3 w-8 h-8 ${
-            isLiked.includes(data._id) ? "bg-rose-400" : "bg-white"
-          }  rounded-full flex items-center justify-center `}
-        >
-          <LikeHeart fill={isLiked.includes(data._id) ? "white" : "black"} />
-        </div>
+  return (
+    <div className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3">
+      <div className="w-full h-80  items-center justify-center relative ">
         <div className="absolute w-full  opacity-0 group-hover:opacity-100    px-4 top-2/4 flex justify-between">
           <div
             onClick={(e) => {

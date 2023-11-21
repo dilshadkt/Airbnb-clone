@@ -21,6 +21,7 @@ const Login = () => {
         localStorage.setItem("like", JSON.stringify(res.data.propertyId));
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.reload();
       })
       .catch((err) => {
         notify(err.response.data);

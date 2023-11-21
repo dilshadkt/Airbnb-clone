@@ -12,6 +12,7 @@ import MyContext from "../../../components/contex/Mycontex";
 import left from "../../../asset/svg/leftArrow.svg";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
 
 const Rooms = () => {
   const [queryParams] = useSearchParams();
@@ -43,7 +44,7 @@ const Rooms = () => {
   }, [type, setCurrentImage]);
 
   return rooms === "" ? (
-    <h1>loading</h1>
+    <RoomsShimmer />
   ) : (
     <>
       <div className="mx-20 pb-8 ">

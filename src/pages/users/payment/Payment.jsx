@@ -20,7 +20,6 @@ const Payment = () => {
       totalPrice: queryParam.get("totalPrice"),
       bookingDate: new Date().toJSON().slice(0, 10),
     };
-    console.log(data);
     axios
       .post(`/book/stay/${user._id}`, data)
       .then((res) => console.log(res))

@@ -42,6 +42,7 @@ const SideMenu = () => {
                     setIsLogin(false);
                     localStorage.clear();
                     naviagate("/");
+                    window.location.reload();
                   }}
                   className="py-3 px-4 hover:bg-gray-200"
                 >

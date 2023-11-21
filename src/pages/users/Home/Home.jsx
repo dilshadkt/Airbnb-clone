@@ -4,6 +4,7 @@ import Category from "../../../Category";
 import MyContext from "../../../components/contex/Mycontex";
 import { AuthToken } from "../../../axios/AuthToken";
 import { jwtDecode } from "jwt-decode";
+import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 
 const Home = () => {
   const { datas, search, setUser, isLogin } = useContext(MyContext);
@@ -17,19 +18,26 @@ const Home = () => {
     token && AuthToken(token);
   }, [setUser, isLogin]);
   useEffect(() => {
-    const resulr = datas.filter((item) =>
+    const filtered = datas.filter((item) =>
       item?.title?.toLowerCase().includes(search?.toLowerCase())
     );
-    setFiltered(resulr);
+    setFiltered(filtered);
   }, [search, datas]);
   return (
     <>
       <Category />
 
       <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full">
-        {filtered.map((item, index) => (
-          <Card data={item} key={index} />
-        ))}
+        {datas.length === 0 ? (
+          <ShimmerUi />
+        ) : (
+          <>
+            {" "}
+            {filtered.map((item, index) => (
+              <Card data={item} key={index} />
+            ))}
+          </>
+        )}
       </div>
     </>
   );

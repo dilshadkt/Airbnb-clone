@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Buttons from "../../../components/Buttons";
 import listpad from "../../../asset/svg/listpad.svg";
 import help1 from "../../../asset/svg/help1.svg";
@@ -9,16 +9,22 @@ import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import Reservation from "./reservation/Reservation";
+import MyContext from "../../../components/contex/Mycontex";
 const Hoisting = () => {
+  const { setNotification } = useContext(MyContext);
   const [resrvation, setReservation] = useState([]);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     axios
       .get(`/book/stay/${user._id}`)
-      .then((res) => setReservation(res.data))
+      .then((res) => {
+        setReservation(res.data);
+        setNotification(resrvation.length);
+      })
       .catch((err) => console.log(err));
-  }, [user._id]);
+  }, [user._id, setNotification, resrvation.length]);
 
   return (
     <div className="m-20 ">
@@ -32,7 +38,7 @@ const Hoisting = () => {
       <div className="flex justify-between my-6 mt-8">
         <h4 className="  text-xl font-medium">Your reservations</h4>
         <span className="underline font-medium cursor-pointer">
-          All reservation (0)
+          All reservation ({resrvation.length})
         </span>
       </div>
 
@@ -60,7 +66,7 @@ const Hoisting = () => {
           </div>
         </div>
       ) : (
-        <div className="my-[30px]">
+        <div className="my-[5%]">
           <div className="flex w-full p-3 bg-red-400 rounded-xl text-white">
             <ul className="flex justify-around w-full mr-[4%]">
               <li>Peoperty</li>
@@ -71,31 +77,7 @@ const Hoisting = () => {
             </ul>
           </div>
           {resrvation.map((item) => (
-            <div className="my-7">
-              <div className="p-3 border rounded-lg flex">
-                <div
-                  className="flex-initial w-[15%] h-[100px] bg-green-400 overflow-hidden rounded-lg
-       "
-                >
-                  <img
-                    src={item.listingId.images[0]}
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  className="flex-1  px-3 flex items-center
-       "
-                >
-                  <ul className="flex w-full justify-around font-medium text-gray-400">
-                    <li>{item.checkInDate}</li>
-                    <li>{item.checkoutDate}</li>
-                    <li>{item.bookingDate}</li>
-                    <li>{item.totalPrice}</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <Reservation item={item} />
           ))}
         </div>
       )}

@@ -54,11 +54,13 @@ const Category = () => {
               className="px-6  h-full group  flex items-center justify-center cursor-pointer relative"
             >
               <div className="flex flex-col items-center opacity-70  group-hover:opacity-100 ">
-                <img src={item.image} alt="icons" />
+                <img src={item.image} alt="icons" className="w-[26px]" />
 
-                <span>{item.desc}</span>
+                <span className="whitespace-nowrap text-sm mt-1">
+                  {item.desc}
+                </span>
               </div>
-              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-gray-400 h-[3px]"></div>
+              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-red-400 h-[3px]"></div>
             </div>
           ))}
         </div>

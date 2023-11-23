@@ -32,7 +32,9 @@ const UserList = () => {
           <>
             <div className="flex items-center p-2">
               <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-600"></div>
-              <span className="hover:underline ml-4">{item.firstName}</span>
+              <span className="hover:underline ml-4 cursor-pointer">
+                {item.firstName}
+              </span>
             </div>
             <div className=" p-2 text-xs text-red-500">{item.email}</div>
             <div className=" p-2 text-xs font-semibold">859485946778</div>

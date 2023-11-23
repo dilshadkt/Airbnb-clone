@@ -19,7 +19,7 @@ const Properties = () => {
       </div>
       <div className="flex flex-wrap">
         {datas.map((item) => (
-          <Card data={item} />
+          <Card data={item} status={false} />
         ))}
       </div>
     </div>

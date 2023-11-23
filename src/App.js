@@ -32,6 +32,8 @@ import AdminHome from "./pages/admin/home/Home";
 import Users from "./pages/admin/users/Users";
 import Properties from "./pages/admin/properties/Properties";
 import WhishList from "./pages/admin/Whishlist/WhishList";
+import NewProperty from "./pages/admin/newProperty/NewProperty";
+import Listing from "./pages/admin/listing/Listing";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -172,6 +174,10 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="properties" element={<Properties />} />
             <Route path="whishlist" element={<WhishList />} />
+            <Route path="newProperty" element={<NewProperty />} />
+            <Route path="newProperty/listing" element={<Listing />} />
+            <Route path="newProperty/listing" element={<Listing />} />
+            <Route path="properties/listing" element={<Listing />} />
           </Route>
         </Routes>
       </MyContext.Provider>

@@ -74,13 +74,13 @@ const Navbar = () => {
                 ) : (
                   <img src={userIcon} alt="icon" className="rounded-full" />
                 )}
-                {notification && (
+                {notification !== 0 && (
                   <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
                     {notification}
                   </div>
                 )}
 
-                {isMenuOpen ? <SideMenu /> : ""}
+                {isMenuOpen && <SideMenu />}
               </div>
             </div>
           </div>

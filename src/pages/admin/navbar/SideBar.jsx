@@ -36,9 +36,11 @@ const SideBar = () => {
             <DnsIcon className="mr-2" /> Whishlist
           </li>
         </Link>
-        <li className="my-5 hover:bg-gray-200  transition-all cursor-pointer w-full p-2 rounded-lg hover:text-black">
-          <HourglassTopIcon className="mr-2" /> New Property
-        </li>
+        <Link to={"newProperty"}>
+          <li className="my-5 hover:bg-gray-200  transition-all cursor-pointer w-full p-2 rounded-lg hover:text-black">
+            <HourglassTopIcon className="mr-2" /> New Property
+          </li>
+        </Link>
       </ul>
     </div>
   );

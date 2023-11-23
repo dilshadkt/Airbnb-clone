@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import rating from "../../../../asset/svg/rating.svg";
 import arrow from "../../../../asset/svg/Arrow.svg";
-const Card = ({ data }) => {
+import { useNavigate } from "react-router-dom";
+const Card = ({ data, status }) => {
   const [currentImg, setCurrentImage] = useState(0);
-
+  const navigate = useNavigate();
   return (
-    <div className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3">
+    <div
+      onClick={() => navigate(`listing?id=${data._id}&status=${status}`)}
+      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
+    >
       <div className="w-full h-80  items-center justify-center relative ">
         <div className="absolute w-full  opacity-0 group-hover:opacity-100    px-4 top-2/4 flex justify-between">
           <div
@@ -57,6 +61,7 @@ const Card = ({ data }) => {
         </div>
         <div className="text-gray-500 font-light">374 kilometer away</div>
         <div className="text-gray-500 font-light">1-6 Nov</div>
+
         <div className="flex">
           <span className="font-medium">₹14000</span>
           <span className="font-light ml-2">night</span>

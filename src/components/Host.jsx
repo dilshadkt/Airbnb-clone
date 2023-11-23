@@ -1,7 +1,6 @@
 import React from "react";
 import star from "../asset/svg/rating.svg";
 import global from "../asset/svg/global.svg";
-import Buttons from "./Buttons";
 
 const Host = ({ userIcon }) => {
   return (
@@ -17,7 +16,7 @@ const Host = ({ userIcon }) => {
                     <img
                       src={userIcon}
                       alt="person logo"
-                      className="w-fll h-full object-fill"
+                      className="w-full h-full object-fill"
                     />
                   </div>
                   <h4 className="font-semibold">Dilshad</h4>
@@ -75,7 +74,6 @@ const Host = ({ userIcon }) => {
                 <h4>Niyas</h4>
               </div>
             </div>
-            <Buttons margine="my-[50px]" color="bg-[black]" />
             <hr />
             <div className="text-xs font-light text-gray-400 my-7">
               To protect your payment, never transfer money or communicate

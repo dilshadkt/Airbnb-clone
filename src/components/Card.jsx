@@ -24,7 +24,7 @@ const Card = ({ data }) => {
   };
   return (
     <div
-      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
+      className="flex-1 min-w-[260px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
       onClick={() => navigate(`/rooms?id=${data._id}`)}
     >
       <div className="w-full h-80  items-center justify-center relative ">
@@ -98,7 +98,7 @@ const Card = ({ data }) => {
         <div className="text-gray-500 font-light">374 kilometer away</div>
         <div className="text-gray-500 font-light">1-6 Nov</div>
         <div className="flex">
-          <span className="font-medium">₹14000</span>
+          <span className="font-medium">₹{data.pricePeNight}</span>
           <span className="font-light ml-2">night</span>
         </div>
       </div>

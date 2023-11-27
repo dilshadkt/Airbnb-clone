@@ -34,6 +34,7 @@ import Properties from "./pages/admin/properties/Properties";
 import WhishList from "./pages/admin/Whishlist/WhishList";
 import NewProperty from "./pages/admin/newProperty/NewProperty";
 import Listing from "./pages/admin/listing/Listing";
+import ManageLIst from "./pages/manage-list/ManageLIst";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -67,10 +68,13 @@ function App() {
   const [isLiked, setIsLliked] = useState([]);
   const [notification, setNotification] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
+  const [isUserBoxOpen, setIsUserBox] = useState(true);
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(
+    isLogin ? JSON.parse(localStorage.getItem("user")) : ""
+  );
   const [formData, setFormData] = useState({
     hostid: "",
     propertyType: "",
@@ -135,6 +139,8 @@ function App() {
     setIsLliked,
     notification,
     setNotification,
+    isUserBoxOpen,
+    setIsUserBox,
   };
   return (
     <>
@@ -144,6 +150,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/rooms" element={<Rooms />} />
             <Route path="/hoisting" element={<Hoisting />} />
+            <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />

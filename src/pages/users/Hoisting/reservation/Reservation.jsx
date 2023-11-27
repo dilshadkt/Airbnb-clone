@@ -5,11 +5,11 @@ const Reservation = ({ item }) => {
     <div className="my-7 ">
       <div className="p-3 border rounded-lg flex hover:bg-slate-100 cursor-pointer">
         <div
-          className="flex-initial w-[15%] h-[100px] bg-green-400 overflow-hidden rounded-lg
+          className="flex-initial w-[15%] h-[100px] bg-gray-400 overflow-hidden rounded-lg
        "
         >
           <img
-            src={item.listingId.images[0]}
+            src={item?.listingId?.images?.[0]}
             alt=""
             className="w-full h-full object-cover"
           />
@@ -19,10 +19,10 @@ const Reservation = ({ item }) => {
        "
         >
           <ul className="flex w-full justify-around font-medium text-gray-400">
-            <li>{item.checkInDate}</li>
-            <li>{item.checkoutDate}</li>
-            <li>{item.bookingDate}</li>
-            <li className="underline">{item.totalPrice}₹</li>
+            <li>{item?.checkInDate}</li>
+            <li>{item?.checkoutDate}</li>
+            <li>{item?.bookingDate}</li>
+            <li className="underline">{item?.totalPrice}₹</li>
           </ul>
         </div>
       </div>

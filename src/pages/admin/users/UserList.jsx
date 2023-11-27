@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserShimmer from "../../../components/shimmer/usreList/UserShimmer";
+import UserBox from "./userBox/UserBox";
 
 const UserList = () => {
   const [users, setUsers] = useState(null);
   const [filterd, setFilterd] = useState(users);
+  const [details, setDetails] = useState({});
+  const [userBox, setUserBox] = useState(false);
   useEffect(() => {
     axios
       .get("admin/allUser")
@@ -14,10 +17,14 @@ const UserList = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const UserDetails = (details) => {
+    setUserBox(false);
+    setDetails(details);
+  };
   return !users ? (
     <UserShimmer />
   ) : (
-    <div className="px-[3%] py-3 ">
+    <div className="px-[3%] py-3  relative">
       <div className="grid grid-cols-6 gap-4">
         <div className="font-semibold text-sm cursor-pointer">Users</div>
         <div className="font-semibold text-sm cursor-pointer">Email</div>
@@ -30,7 +37,10 @@ const UserList = () => {
         </div>
         {filterd.slice(0, 10).map((item) => (
           <>
-            <div className="flex items-center p-2">
+            <div
+              onClick={() => UserDetails(item)}
+              className="flex items-center p-2"
+            >
               <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-600"></div>
               <span className="hover:underline ml-4 cursor-pointer">
                 {item.firstName}
@@ -54,6 +64,7 @@ const UserList = () => {
           <div onClick={() => setFilterd(users.slice(11, 20))}>next</div>
         </div>
       </div>
+      {userBox ? <></> : <UserBox setUserBox={setUserBox} item={details} />}
     </div>
   );
 };

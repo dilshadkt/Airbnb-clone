@@ -36,6 +36,12 @@ const Listing = () => {
       })
       .catch((err) => console.log(err));
   };
+  const rejectProperty = (id) => {
+    axios
+      .delete(`listings/${id}`)
+      .then((res) => navigate("/admin/newProperty"))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="mx-20 pb-8 ">
       <h1 className="text-2xl font-semibold my-5">{title}</h1>
@@ -233,7 +239,10 @@ const Listing = () => {
           >
             ACCEPT
           </div>
-          <div className="px-5 py-2 bg-red-500 text-white mx-2 rounded-xl font-medium cursor-pointer">
+          <div
+            onClick={() => rejectProperty(propertyId)}
+            className="px-5 py-2 bg-red-500 text-white mx-2 rounded-xl font-medium cursor-pointer"
+          >
             REJECT
           </div>
         </div>

@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 const Users = () => {
   return (
-    <>
+    <div>
       <div className="p-[2%]">
         <h2 className="font-semibold text-2xl">Users</h2>
         <div className="my-8 flex justify-between items-center">
@@ -24,7 +24,7 @@ const Users = () => {
       </div>
       <hr />
       <UserList />
-    </>
+    </div>
   );
 };
 

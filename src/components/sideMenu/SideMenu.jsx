@@ -27,7 +27,11 @@ const SideMenu = () => {
             <hr className="my-2" />
             <div>
               <ul className="text-gray-500">
-                <li className="py-3 px-4 hover:bg-gray-200">Manage listing</li>
+                <Link to={"/Manage"}>
+                  <li className="py-3 px-4 hover:bg-gray-200">
+                    Manage listing
+                  </li>
+                </Link>
                 <Link to={"/account-settings"}>
                   <li className="py-3 px-4 hover:bg-gray-200">Account</li>
                 </Link>

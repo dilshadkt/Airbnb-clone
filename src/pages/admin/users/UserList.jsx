@@ -18,7 +18,7 @@ const UserList = () => {
       .catch((err) => console.log(err));
   }, []);
   const UserDetails = (details) => {
-    setUserBox(false);
+    setUserBox(!userBox);
     setDetails(details);
   };
   return !users ? (
@@ -64,7 +64,7 @@ const UserList = () => {
           <div onClick={() => setFilterd(users.slice(11, 20))}>next</div>
         </div>
       </div>
-      {userBox ? <></> : <UserBox setUserBox={setUserBox} item={details} />}
+      {userBox && <UserBox setUserBox={setUserBox} item={details} />}
     </div>
   );
 };

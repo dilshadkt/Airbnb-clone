@@ -13,7 +13,7 @@ const WhishList = () => {
   return !whishlist ? (
     <ShimmerUi />
   ) : (
-    <div>
+    <div className="h-full">
       <Card data={whishlist} />
     </div>
   );

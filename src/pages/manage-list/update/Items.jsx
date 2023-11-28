@@ -5,7 +5,6 @@ import axios from "axios";
 const Items = ({ list, item }) => {
   const key = Object.keys(item).toString();
   const value = Object.values(item).toString();
-  console.log(value);
   const [title, setTitle] = useState(value);
   const [isEdit, setIsEdit] = useState(true);
   const updateList = () => {

@@ -12,7 +12,7 @@ const NewProperty = () => {
       .catch((err) => console.log(err));
   }, []);
   return newProperty.length ? (
-    <div>
+    <div className="h-full">
       <div className="px-3 my-[2%]">
         <h2 className="text-2xl font-semibold">Properties</h2>
       </div>

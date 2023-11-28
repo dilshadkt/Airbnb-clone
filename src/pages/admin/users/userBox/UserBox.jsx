@@ -9,7 +9,7 @@ const UserBox = ({ setUserBox, item }) => {
         className={`z-50 p-5 absolute w-[30%] h-[60%] top-[20%]  left-0 right-0 m-auto bg-white shadow-2xl rounded-xl`}
       >
         <div
-          onClick={() => setUserBox(true)}
+          onClick={() => setUserBox(false)}
           className="flex items-center justify-center rounded-full w-fit p-3 hover:bg-gray-200"
         >
           <img src={cancel} alt="cancel" className="w-5" />

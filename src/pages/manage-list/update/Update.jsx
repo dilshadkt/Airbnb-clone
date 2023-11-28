@@ -3,14 +3,41 @@ import cancel from "../../../asset/svg/cancel.svg";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Items from "./Items";
+import axios from "axios";
 const Update = ({ list, cancelFun }) => {
   const [editImg, setEditImg] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [waiting, setWaiting] = useState(false);
+
   const data = [
     { title: list.title },
     { address: list.address },
     { description: list.description },
     { pricePeNight: list.pricePeNight },
   ];
+  const updateList = () => {
+    const images = new FormData();
+    if (selected) {
+      setWaiting(true);
+      for (let x of selected) {
+        images.append("photos", x);
+      }
+
+      axios
+        .patch(`/listings/${list._id}`, images, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(() => {
+          setEditImg(!editImg);
+          setWaiting(false);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setEditImg(!editImg);
+    }
+  };
   return (
     <>
       <div className=" bg-black opacity-50 fixed top-0 bottom-0 right-0 left-0  z-10 "></div>
@@ -30,10 +57,19 @@ const Update = ({ list, cancelFun }) => {
           <div className="relative h-full w-full group flex items-center justify-center">
             {editImg ? (
               <>
-                <input type="file" />
+                <input
+                  type="file"
+                  required
+                  minLength={5}
+                  name="photos"
+                  multiple
+                  onChange={(e) => setSelected(e.target.files)}
+                />
                 <div
-                  onClick={() => setEditImg(!editImg)}
-                  className="absolute invisible right-0 p-3 bg-white rounded-full group-hover:visible top-0"
+                  onClick={() => updateList()}
+                  className={`absolute invisible ${
+                    waiting && `cursor-wait`
+                  } right-0 p-3 bg-white rounded-full group-hover:visible top-0`}
                 >
                   <CheckIcon />
                 </div>
@@ -54,8 +90,6 @@ const Update = ({ list, cancelFun }) => {
               </>
             )}
           </div>
-
-          {/* <input type="file" className="" /> */}
         </div>
         <div className=" my-5  justify-between">
           {data.map((item) => (

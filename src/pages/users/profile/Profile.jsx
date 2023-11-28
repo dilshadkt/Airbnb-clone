@@ -1,14 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import tick from "../../../asset/svg/tick.svg";
 import Buttons from "../../../components/Buttons";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import axios from "axios";
+import { AuthToken } from "../../../axios/AuthToken";
+import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 
 const Profile = () => {
-  return (
+  const [user, setUser] = useState([]);
+  const [image, setImage] = useState([]);
+  const [profile, setProfile] = useState();
+  const data = new FormData();
+
+  const token = localStorage.getItem("token");
+  AuthToken(token);
+
+  useEffect(() => {
+    axios
+      .post(`user/me`)
+      .then((res) => {
+        setUser(res.data);
+        setProfile(user.profilePicture);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, [user.profilePicture]);
+  const uploadUserImage = (e) => {
+    console.log("hi");
+    setImage(e.target.files);
+    console.log(image);
+
+    data.append("photos", image[0]);
+    image && console.log("ind");
+    // axios
+    //   .patch(`user/654c9a0e4381e5a419aa32f9`, data)
+    //   .then((res) => setProfile(res.data))
+    //   .catch((err) => console.log(err));
+  };
+  return user.length === 0 ? (
+    <ShimmerUi />
+  ) : (
     <div className="mx-[12%] my-[2%] flex">
       <div className="flex-initial flex flex-col w-[30%] ">
         <div className=" shadow-xl flex flex-col items-center border rounded-xl p-6">
-          <div className="w-24 h-24 bg-black rounded-full text-5xl text-white font-bold flex items-center justify-center">
-            D
+          <div className="relative w-24 h-24 bg-black rounded-full text-5xl text-white font-bold flex items-center justify-center">
+            {user?.profilePicture ? (
+              <img
+                src={profile}
+                alt="user icon"
+                className="w-24 h-24 bg-black rounded-full object-fill "
+              />
+            ) : (
+              <> {user?.firstName[0].toUpperCase()}</>
+            )}
+
+            <label className="bg-white text-black border flex items-center justify-center p-1 rounded-full absolute -bottom-2 cursor-pointer right-2">
+              <input
+                type="file"
+                className="hidden"
+                name="photos"
+                onChange={(e) => {
+                  uploadUserImage(e);
+                }}
+              />
+              <CameraAltIcon />
+            </label>
           </div>
           <h4 className="text-2xl font-bold mt-2">Dilshad</h4>
           <span className="font-medium">Guest</span>

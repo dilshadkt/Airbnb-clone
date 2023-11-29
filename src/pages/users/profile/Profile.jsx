@@ -5,10 +5,11 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import axios from "axios";
 import { AuthToken } from "../../../axios/AuthToken";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
+import cancel from "../../../asset/svg/cancel.svg";
 
 const Profile = () => {
   const [user, setUser] = useState([]);
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState(null);
   const [profile, setProfile] = useState();
   const data = new FormData();
 
@@ -26,16 +27,15 @@ const Profile = () => {
       .catch((err) => console.log(err));
   }, [user.profilePicture]);
   const uploadUserImage = (e) => {
-    console.log("hi");
-    setImage(e.target.files);
-    console.log(image);
-
     data.append("photos", image[0]);
     image && console.log("ind");
-    // axios
-    //   .patch(`user/654c9a0e4381e5a419aa32f9`, data)
-    //   .then((res) => setProfile(res.data))
-    //   .catch((err) => console.log(err));
+    axios
+      .patch(`user/654c9a0e4381e5a419aa32f9`, data)
+      .then((res) => {
+        setProfile(res.data);
+        setImage(null);
+      })
+      .catch((err) => console.log(err));
   };
   return user.length === 0 ? (
     <ShimmerUi />
@@ -59,9 +59,7 @@ const Profile = () => {
                 type="file"
                 className="hidden"
                 name="photos"
-                onChange={(e) => {
-                  uploadUserImage(e);
-                }}
+                onChange={(e) => setImage(e.target.files)}
               />
               <CameraAltIcon />
             </label>
@@ -73,6 +71,7 @@ const Profile = () => {
           <h3 className="text-xl w-[60%] font-medium">
             Dilshad's confirmed information
           </h3>
+
           <div className="flex items-center my-5">
             <img src={tick} alt="icons" className="w-6 h-5" />
             <span className="ml-2">Email address</span>
@@ -98,6 +97,29 @@ const Profile = () => {
           <Buttons color="bg-rose-600" title="Create a profile" />
         </div>
       </div>
+      {image && (
+        <div
+          onClick={() => setImage(null)}
+          className="fixed top-0 right-0 left-0 border rounded-xl bottom-0 w-[40%] bg-white shadow-2xl p-3 h-fit m-auto"
+        >
+          <div className="rounded-full cursor-pointer hover:bg-gray-200 w-fit p-1">
+            <img src={cancel} alt="cancel icon" className="w-5" />
+          </div>
+          <div className="my-[3%] flex justify-center">
+            <h3 className="text-lg text-gray-500">
+              Are you sure to change the profile picture ?{" "}
+            </h3>
+          </div>
+          <div className="mt-5 flex justify-end">
+            <div
+              onClick={() => uploadUserImage()}
+              className="cursor-pointer py-2 px-5 bg-red-500 rounded-xl text-white font-medium w-fit"
+            >
+              ok
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -18,7 +18,9 @@ const SideMenu = () => {
             <div>
               <ul className="font-medium">
                 <li className="py-3 px-4 hover:bg-gray-200">Message</li>
-                <li className="py-3 px-4 hover:bg-gray-200">Trips</li>
+                <Link to={"/trips"}>
+                  <li className="py-3 px-4 hover:bg-gray-200">Trips</li>
+                </Link>
                 <Link to={"/whishlist"}>
                   <li className="py-3 px-4 hover:bg-gray-200">Whishlist</li>
                 </Link>

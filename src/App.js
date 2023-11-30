@@ -35,6 +35,7 @@ import WhishList from "./pages/admin/Whishlist/WhishList";
 import NewProperty from "./pages/admin/newProperty/NewProperty";
 import Listing from "./pages/admin/listing/Listing";
 import ManageLIst from "./pages/manage-list/ManageLIst";
+import Trips from "./pages/users/trips/Trips";
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -151,6 +152,7 @@ function App() {
             <Route path="/rooms" element={<Rooms />} />
             <Route path="/hoisting" element={<Hoisting />} />
             <Route path="/Manage" element={<ManageLIst />} />
+            <Route path="/trips" element={<Trips />} />
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />

@@ -30,7 +30,7 @@ const Profile = () => {
     data.append("photos", image[0]);
     image && console.log("ind");
     axios
-      .patch(`user/654c9a0e4381e5a419aa32f9`, data)
+      .patch(`user/${user._id}`, data)
       .then((res) => {
         setProfile(res.data);
         setImage(null);

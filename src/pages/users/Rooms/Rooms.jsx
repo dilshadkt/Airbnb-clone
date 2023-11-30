@@ -20,7 +20,9 @@ const Rooms = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { isOpenAmenities, setCurrentImage } = useContext(MyContext);
   const [serchParams] = useSearchParams();
+  const [isTrip, setIsTrip] = useState(false);
   const type = serchParams.get("id");
+
   const {
     bedrooms,
     maxGuest,
@@ -32,8 +34,17 @@ const Rooms = () => {
     availability,
     hostid,
   } = rooms;
+  const canelTrip = () => {
+    setIsTrip(false);
+    const tripId = serchParams.get("tripId");
+    axios
+      .delete(`/book/trip/${tripId}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
+    setIsTrip(serchParams.get("booked") === "true" ? true : false);
     axios
       .get(`/listings?id=${type}`)
       .then((res) => {
@@ -41,13 +52,25 @@ const Rooms = () => {
         setCurrentImage(res.data.images[0]);
       })
       .catch((err) => console.log(err));
-  }, [type, setCurrentImage]);
+  }, [type, setCurrentImage, serchParams]);
 
   return rooms === "" ? (
     <RoomsShimmer />
   ) : (
     <>
       <div className="mx-20 pb-8 ">
+        {isTrip && (
+          <div className="p-6 border flex justify-between rounded-xl bg-green-200 my-[2%]   border-lime-600">
+            <h3>To cancel trip</h3>
+            <div
+              onClick={() => canelTrip()}
+              className="text-white hover:text-green-700 hover:font-semibold cursor-pointer"
+            >
+              cancel
+            </div>
+          </div>
+        )}
+
         <h1 className="text-2xl font-semibold my-5">{title}</h1>
         <div className="flex justify-between">
           <div className="flex">
@@ -226,7 +249,6 @@ const Rooms = () => {
           home inside out.
         </p>
         <Buttons title="Message a trip designer" width="w-[246px]" />
-
         {isOpenAmenities ? (
           <>
             {(document.body.style.overflow = "hidden")}

@@ -16,7 +16,7 @@ const UserBox = ({ setUserBox, item }) => {
         </div>
         <div className="flex items-center justify-center">
           <div className="w-[30%] min-h-[100px] rounded-full flex items-center justify-center overflow-hidden bg-gray-300">
-            <img src="" alt="icon" />
+            <img src={item?.profilePicture} alt="icon" />
           </div>
         </div>
         <div className="p-5 border rounded-xl mt-4 font-medium">

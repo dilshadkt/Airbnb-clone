@@ -4,13 +4,14 @@ import left from "../../../asset/svg/leftArrow.svg";
 // import FooterLabel from "../../../components/FooterLabel";
 import PriceSlip from "../../../components/PriceSlip";
 import MyContext from "../../../components/contex/Mycontex";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const [queryParam] = useSearchParams();
   const { checkIn, guest, user } = useContext(MyContext);
-
+  const navigate = useNavigate();
   const reservation = () => {
     const data = {
       guestId: user._id,
@@ -22,7 +23,13 @@ const Payment = () => {
     };
     axios
       .post(`/book/stay/${user._id}`, data)
-      .then((res) => console.log(res))
+      .then((res) => {
+        toast.success("succesfully ordered", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        navigate("/");
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -144,6 +151,7 @@ const Payment = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
         <div className="flex-initial w-[40%] b flex justify-center ">
           <PriceSlip />
         </div>

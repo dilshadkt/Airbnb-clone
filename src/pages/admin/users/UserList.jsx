@@ -41,7 +41,11 @@ const UserList = () => {
               onClick={() => UserDetails(item)}
               className="flex items-center p-2"
             >
-              <div className="w-7 h-7 rounded-full flex items-center justify-center bg-gray-600"></div>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center overflow-hidden bg-gray-600">
+                {item.profilePicture && (
+                  <img src={item.profilePicture} alt="profile" />
+                )}
+              </div>
               <span className="hover:underline ml-4 cursor-pointer">
                 {item.firstName}
               </span>

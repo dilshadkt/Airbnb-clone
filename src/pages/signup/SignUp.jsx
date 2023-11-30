@@ -14,8 +14,9 @@ const SignUp = () => {
   const [confrimPass, setConfirmPass] = useState("");
 
   const RegisterUser = (e) => {
-    if (confrimPass !== password) return notify("password is not match");
     e.preventDefault();
+    if (confrimPass !== password) return notify("password is not match");
+
     axios
       .post("/user/login", { firstName, lastName, email, password })
       .then((res) => {

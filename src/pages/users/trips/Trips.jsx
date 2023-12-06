@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import MyContext from "../../../components/contex/Mycontex";
 import cancel from "../../../asset/svg/cancel.svg";
 import { useNavigate } from "react-router-dom";
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
+import { useSelector } from "react-redux";
 const Trips = () => {
   const [trips, setTrips] = useState([]);
-  const { user } = useContext(MyContext);
+  const user = useSelector((store) => store.user.user);
   const [qrOpen, SetQrOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {

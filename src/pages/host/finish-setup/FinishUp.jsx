@@ -1,22 +1,24 @@
-import React, { useContext, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 const FinishUp = () => {
   const navigate = useNavigate();
-  const { formData, user } = useContext(MyContext);
+  const user = useSelector((store) => store.user.user);
+  const form = useSelector((store) => store.formdata.form);
+
+  console.log(form);
 
   const [isFinishDisable, setIsFinishDisable] = useState(false);
   const PostData = () => {
     setIsFinishDisable(true);
     const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      data.append(key, formData[key]);
+    Object.keys(form).forEach((key) => {
+      data.append(key, form[key]);
     });
 
-    for (let i = 0; i < formData.image.length; i++) {
-      data.append("photos", formData.image[i]);
+    for (let i = 0; i < form.image.length; i++) {
+      data.append("photos", form.image[i]);
     }
 
     axios
@@ -62,8 +64,7 @@ const FinishUp = () => {
         <div
           onClick={() => PostData()}
           className={`bg-rose-600 p-3 rounded-lg font-medium text-white cursor-pointer  ${
-            isFinishDisable &&
-            `opacity-50 pointer-events-none cursor-not-allowed`
+            isFinishDisable && `opacity-50 pointer-events-none cursor-wait`
           }`}
         >
           Finish

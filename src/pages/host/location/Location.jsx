@@ -1,25 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navigater from "../../../components/host-navigater/Navigater";
+import { useForm } from "react-hook-form";
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch } from "react-redux";
 
 const Location = () => {
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [iscomplete, setIscomplete] = useState(false);
-  const { setFormData, formData } = useContext(MyContext);
   const [country, setCountry] = useState([]);
-  const [house, setHouse] = useState(formData.place.house);
-  const [Area, setArea] = useState(formData.place.Area);
-  const [Street, setStreet] = useState(formData.place.Street);
-  const [landmark, setLandmark] = useState(formData.place.landmark);
-  const [city, setCity] = useState(formData.place.city);
-  const [pincode, setPincode] = useState(formData.place.pincode);
-  const [Province, setProvince] = useState(formData.place.Province);
-  const notify = () =>
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_CENTER,
-    });
+
   useEffect(() => {
     axios
       .get("https://restcountries.com/v3.1/all?fields=name,flags")
@@ -29,21 +29,9 @@ const Location = () => {
 
   const handleChanges = (e) => {
     setIscomplete(true);
-    e.preventDefault();
-    notify();
-    setFormData((prev) => ({
-      ...prev,
-      place: {
-        house,
-        Area,
-        Street,
-        landmark,
-        city,
-        pincode,
-        Province,
-      },
-    }));
+    dispatch(setForm({ key: "place", value: watch() }));
   };
+
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
       <div className="w-[40%] ">
@@ -54,9 +42,16 @@ const Location = () => {
           Your address is only shared with guests after they’ve made a
           reservation.
         </span>
-        <form onSubmit={(e) => handleChanges(e)}>
+        <form
+          onSubmit={handleSubmit(() => {
+            handleChanges();
+          })}
+        >
           <div className=" justify-center my-[5%]  ">
-            <select className="w-full border p-4 rounded-xl ">
+            <select
+              {...register("country")}
+              className="w-full border p-4 rounded-xl "
+            >
               {country.map((items, index) => (
                 <option
                   key={`${index}-${items.country}`}
@@ -68,63 +63,64 @@ const Location = () => {
             </select>
 
             <input
+              {...register("house", { required: "house number is required" })}
               type="text"
-              value={house}
               placeholder="House ,flate etc"
               className="border w-full p-4 mt-5"
-              required
-              onChange={(e) => setHouse(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">{errors.house?.message}</p>
             <input
+              {...register("area", { required: "area name is required" })}
               type="text"
-              value={Area}
               placeholder="Area village"
               className="border w-full p-4 "
-              required
-              onChange={(e) => setArea(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">{errors.area?.message}</p>
             <input
+              {...register("street", { required: "street name is erquired" })}
               type="text"
-              value={Street}
               placeholder="Street address"
               className="border w-full p-4 "
-              required
-              onChange={(e) => setStreet(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">
+              {errors.street?.message}
+            </p>
             <input
+              {...register("landmark", { required: "landmark is required" })}
               type="text"
-              value={landmark}
               placeholder="Near by landmark"
               className="border w-full p-4 "
-              required
-              onChange={(e) => setLandmark(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">
+              {errors.landmark?.message}
+            </p>
             <input
+              {...register("city", { required: "city name is required" })}
               type="text"
-              value={city}
               placeholder="city"
-              required
               className="border w-full p-4 "
-              onChange={(e) => setCity(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">{errors.city?.message}</p>
             <input
+              {...register("pincode", { required: "pincode is required" })}
               type="text"
               placeholder="Pincode"
-              value={pincode}
               className="border w-full p-4 "
-              required
-              onChange={(e) => setPincode(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">
+              {errors.pincode?.message}
+            </p>
             <input
+              {...register("province", { required: "province is required" })}
               type="text"
-              value={Province}
               placeholder="Province"
               className="border w-full p-4 "
-              required
-              onChange={(e) => setProvince(e.target.value)}
             />
+            <p className="text-sm text-red-500 my-1">
+              {errors.province?.message}
+            </p>
           </div>
-          <ToastContainer />
+
           {!iscomplete && (
             <button className="p-3 bg-rose-500 rounded-xl text-white">
               Confirm

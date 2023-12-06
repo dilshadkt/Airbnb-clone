@@ -1,19 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import bed from "../../../asset/svg/bed.svg";
-import MyContext from "../../../components/contex/Mycontex";
 import Navigater from "../../../components/host-navigater/Navigater";
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const PrivacyType = () => {
-  const { setFormData, formData } = useContext(MyContext);
-  const [selectd, setSelected] = useState(formData.houseType);
+  const dispatch = useDispatch();
+  const form = useSelector((store) => store.formdata.form);
+  const [selectd, setSelected] = useState(form.houseType);
   const handleChange = (data) => {
-    setFormData((prev) => ({
-      ...prev,
-      houseType: data,
-    }));
+    dispatch(setForm({ key: "houseType", value: data }));
     setSelected(data);
   };
-  console.log(formData.houseType);
+
   const data = [
     {
       title: "An entire place",

@@ -1,34 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../../components/Card";
 import Category from "../../../Category";
-import MyContext from "../../../components/contex/Mycontex";
+// import MyContext from "../../../components/contex/Mycontex";
 import { AuthToken } from "../../../axios/AuthToken";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
-
+import { useSelector } from "react-redux";
 const Home = () => {
-  const { datas, search, setUser, isLogin } = useContext(MyContext);
-  const [filtered, setFiltered] = useState(datas);
+  const property = useSelector((store) => store.property.property);
+  const newSearch = useSelector((store) => store.search.search);
+  const login = useSelector((store) => store.user.isLogin);
+  // const { isLogin } = useContext(MyContext);
+  const [filtered, setFiltered] = useState(property);
 
   useEffect(() => {
-    const token = isLogin && localStorage.getItem("token");
-    const useDetails = isLogin && jwtDecode(token);
-    console.log(useDetails);
-    setUser(useDetails);
+    const token = login && localStorage.getItem("token");
+    // const useDetails = isLogin && jwtDecode(token);
+    // setUser(useDetails);
     token && AuthToken(token);
-  }, [setUser, isLogin]);
+  }, [login]);
   useEffect(() => {
-    const filtered = datas.filter((item) =>
-      item?.title?.toLowerCase().includes(search?.toLowerCase())
+    const filtered = property.filter((item) =>
+      item?.title?.toLowerCase().includes(newSearch?.toLowerCase())
     );
     setFiltered(filtered);
-  }, [search, datas]);
+  }, [property, newSearch]);
   return (
     <>
       <Category />
-
       <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full">
-        {datas.length === 0 ? (
+        {property.length === 0 ? (
           <ShimmerUi />
         ) : (
           <>

@@ -9,30 +9,25 @@ import userIcon from "./asset/svg/user.svg";
 import global from "./asset/svg/global.svg";
 import threedot from "./asset/svg/threedot.svg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "./store/slice/SearchSlice";
+import { loginOpen } from "./store/slice/Auth";
 
 const Navbar = () => {
+  const NewUser = useSelector((store) => store.user.user);
+  const login = useSelector((store) => store.user.isLogin);
+  const loginBox = useSelector((store) => store.auth.login);
+  const signBox = useSelector((store) => store.auth.signin);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    setsearch,
-    setIsLoginOpen,
-    isMenuOpen,
-    setIsMenuOpen,
-    isLoginOpen,
-    isSignOpen,
-    isLogin,
-    notification,
-  } = useContext(MyContext);
-  const user =
-    isLogin &&
-    localStorage.getItem("user") &&
-    JSON.parse(localStorage?.getItem("user"));
+  const { isMenuOpen, setIsMenuOpen, notification } = useContext(MyContext);
 
   return (
     <>
       <nav className=" h-20 flex mx-20 ">
         <div className=" flex-1 flex items-center ">
           <Link to={"/"}>
-            {" "}
             <img alt="logo" src={logo} className="w-32 bg-white " />
           </Link>
         </div>
@@ -42,7 +37,7 @@ const Navbar = () => {
         >
           <input
             type="text"
-            onChange={(e) => setsearch(e.target.value)}
+            onChange={(e) => dispatch(setSearch(e.target.value))}
             placeholder="Serach"
             className="shadow-md w-96 h-10 rounded-2xl border flex items-center px-3 relative text-gray-500"
           />
@@ -51,9 +46,9 @@ const Navbar = () => {
           <div className="flex items-center">
             <span
               onClick={() =>
-                isLogin ? navigate("/hoisting") : setIsLoginOpen(true)
+                login ? navigate("/hoisting") : dispatch(loginOpen(true))
               }
-              className="text-sm font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full"
+              className="text-sm cursor-pointer font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full"
             >
               Switch to hoisting
             </span>
@@ -65,10 +60,10 @@ const Navbar = () => {
             >
               <img src={threedot} alt="icons" />
               <div className="rounded-full w-7 h-7  bg-black flex items-center justify-center ml-2 relative cursor-pointer">
-                {isLogin ? (
+                {login ? (
                   <>
                     <span className="text-white ">
-                      {user?.firstName[0]?.toUpperCase()}
+                      {NewUser?.firstName[0]?.toUpperCase()}
                     </span>
                   </>
                 ) : (
@@ -85,14 +80,14 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        {isLoginOpen ? (
+        {loginBox ? (
           <>
             <Login />
           </>
         ) : (
           <>{(document.body.style.overflowY = "")}</>
         )}
-        {isSignOpen ? (
+        {signBox ? (
           <>
             <SignUp />
           </>

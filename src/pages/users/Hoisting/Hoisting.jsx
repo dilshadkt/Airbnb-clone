@@ -7,7 +7,6 @@ import help3 from "../../../asset/stuff/Rectangle 42.png";
 import help4 from "../../../asset/stuff/Rectangle 44.png";
 import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 import Reservation from "./reservation/Reservation";
 import MyContext from "../../../components/contex/Mycontex";
@@ -29,7 +28,7 @@ const Hoisting = () => {
   return (
     <div className="m-20 ">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold ">Welcome, Dilshad! {}</h1>
+        <h1 className="text-3xl font-semibold ">Welcome,{user.firstName} ! </h1>
 
         <div onClick={() => navigate("/become-a-host")}>
           <Buttons width="w-[246px]" title="Complete your listing" />
@@ -76,8 +75,8 @@ const Hoisting = () => {
               <li>total</li>
             </ul>
           </div>
-          {resrvation.map((item) => (
-            <Reservation item={item} />
+          {resrvation.map((item, index) => (
+            <Reservation key={index} item={item} />
           ))}
         </div>
       )}

@@ -6,11 +6,14 @@ import arrow from "../asset/svg/Arrow.svg";
 import LikeHeart from "../asset/card/LikeHeart";
 import MyContext from "./contex/Mycontex";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginOpen } from "../store/slice/Auth";
 
 const Card = ({ data }) => {
-  const { user, isLogin, setIsLoginOpen, isLiked, setIsLliked } =
-    useContext(MyContext);
-
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user.user);
+  const login = useSelector((store) => store.user.isLogin);
+  const { isLiked, setIsLliked } = useContext(MyContext);
   const [currentImg, setCurrentImage] = useState(0);
   const navigate = useNavigate();
   const addTowhishList = (id) => {
@@ -30,7 +33,7 @@ const Card = ({ data }) => {
       <div className="w-full h-80  items-center justify-center relative ">
         <div
           onClick={
-            isLogin
+            login
               ? (e) => {
                   e.stopPropagation();
 
@@ -38,7 +41,7 @@ const Card = ({ data }) => {
                 }
               : (e) => {
                   e.stopPropagation();
-                  setIsLoginOpen(true);
+                  dispatch(loginOpen(true));
                 }
           }
           className={`absolute right-3 top-3 w-8 h-8 ${

@@ -2,14 +2,18 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../contex/Mycontex";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginOpen, singInOpen } from "../../store/slice/Auth";
+import { setLogin } from "../../store/slice/User";
 const SideMenu = () => {
+  const dispatch = useDispatch();
+  const login = useSelector((store) => store.user.isLogin);
   const naviagate = useNavigate();
-  const { setIsMenuOpen, setIsLoginOpen, isLogin, setIsLogin, setSignOpen } =
-    useContext(MyContext);
+  const { setIsMenuOpen } = useContext(MyContext);
 
   return (
     <>
-      {isLogin ? (
+      {login ? (
         <>
           <div
             onMouseLeave={() => setIsMenuOpen(false)}
@@ -17,7 +21,9 @@ const SideMenu = () => {
           >
             <div>
               <ul className="font-medium">
-                <li className="py-3 px-4 hover:bg-gray-200">Message</li>
+                <Link to={"/chats"}>
+                  <li className="py-3 px-4 hover:bg-gray-200">Message</li>
+                </Link>
                 <Link to={"/trips"}>
                   <li className="py-3 px-4 hover:bg-gray-200">Trips</li>
                 </Link>
@@ -45,7 +51,7 @@ const SideMenu = () => {
                 <li className="py-3 px-4 hover:bg-gray-200">Help Centre</li>
                 <li
                   onClick={() => {
-                    setIsLogin(false);
+                    dispatch(setLogin(false));
                     localStorage.clear();
                     naviagate("/");
                     window.location.reload();
@@ -67,16 +73,16 @@ const SideMenu = () => {
             <div>
               <ul className="font-medium">
                 <li
-                  onClick={() => setIsLoginOpen(true)}
-                  className="py-3 px-4 hover:bg-gray-200"
-                >
-                  Sign Up
-                </li>
-                <li
-                  onClick={() => setSignOpen(true)}
+                  onClick={() => dispatch(loginOpen(true))}
                   className="py-3 px-4 hover:bg-gray-200"
                 >
                   Log in
+                </li>
+                <li
+                  onClick={() => dispatch(singInOpen(true))}
+                  className="py-3 px-4 hover:bg-gray-200"
+                >
+                  Sign Up
                 </li>
               </ul>
             </div>

@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Listing = () => {
   const [serchParams] = useSearchParams();
-  console.log(serchParams);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [rooms, setRooms] = useState("");
   const navigate = useNavigate();

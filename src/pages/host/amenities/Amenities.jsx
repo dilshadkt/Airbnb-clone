@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
+import React, { useEffect, useRef, useState } from "react";
 import { data } from "../../../asset/amenities/data";
 import Navigater from "../../../components/host-navigater/Navigater";
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch } from "react-redux";
 
 const Amenities = () => {
-  const { setFormData } = useContext(MyContext);
+  const dispatch = useDispatch();
   const ref = useRef(0);
   const [itmes, setItems] = useState([]);
   const handlechange = (data) => {
@@ -15,11 +16,8 @@ const Amenities = () => {
     }
   };
   useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      propertyOffer: itmes,
-    }));
-  }, [itmes, setFormData]);
+    dispatch(setForm({ key: "propertyOffer", value: itmes }));
+  }, [itmes, dispatch]);
   return (
     <>
       <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">

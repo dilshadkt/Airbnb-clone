@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
-import MyContext from "./contex/Mycontex";
+import React from "react";
 import cancel from "../asset/svg/cancel.svg";
 import bed from "../asset/svg/bed.svg";
 import { data } from "../asset/amenities/data";
+import { setAmenties } from "../store/slice/User";
+import { useDispatch } from "react-redux";
 
 const Amenties = () => {
-  const { setIsOpenAmenities } = useContext(MyContext);
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className=" bg-black opacity-50 fixed top-0 bottom-0 right-0 left-0  z-10 "></div>
@@ -13,7 +15,7 @@ const Amenties = () => {
         <div className="bg-white sticky -top-5 py-2">
           <div
             className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-300  flex-col "
-            onClick={() => setIsOpenAmenities(false)}
+            onClick={() => dispatch(setAmenties())}
           >
             <img src={cancel} alt="cancel" />
           </div>

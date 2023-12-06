@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../../components/contex/Mycontex";
 import WishListCard from "../../../components/WishListCard";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 const WishList = () => {
-  const { user, setIsLliked } = useContext(MyContext);
+  const user = useSelector((store) => store.user.user);
+  const { setIsLliked } = useContext(MyContext);
 
   const [data, setData] = useState([]);
   useEffect(() => {

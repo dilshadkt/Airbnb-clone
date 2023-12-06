@@ -1,16 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { data } from "../../../asset/amenities/data";
-import MyContext from "../../../components/contex/Mycontex";
 import Navigater from "../../../components/host-navigater/Navigater";
-
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Structure = () => {
-  const { setFormData, formData } = useContext(MyContext);
-  const [selectedItem, setSelectedITem] = useState(formData.propertyType);
+  const dispatch = useDispatch();
+  const form = useSelector((store) => store.formdata.form);
+  const [selectedItem, setSelectedITem] = useState(form.propertyType);
   const handlechange = (data) => {
-    setFormData((prev) => ({
-      ...prev,
-      propertyType: data,
-    }));
+    dispatch(setForm({ key: "propertyType", value: data }));
     setSelectedITem(data);
   };
   return (

@@ -1,25 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FloorSlip from "../../../components/FloorPlan/FloorSlip";
-import MyContext from "../../../components/contex/Mycontex";
 import Navigater from "../../../components/host-navigater/Navigater";
-
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch, useSelector } from "react-redux";
 const FloorPlan = () => {
+  const dispatch = useDispatch();
+  const form = useSelector((store) => store.formdata.form);
+  console.log(form);
   const [isNext, setNext] = useState(false);
-  const { setFormData } = useContext(MyContext);
   const [guests, setGuest] = useState(1);
   const [bedrooms, setBedroom] = useState(1);
   const [beds, setBeds] = useState(0);
   const [bathrooms, setBathroom] = useState(0);
   const handleChange = () => {
-    setFormData((prev) => ({
-      ...prev,
-      aboutPlace: {
-        guests,
-        bedrooms,
-        beds,
-        bathrooms,
-      },
-    }));
+    dispatch(
+      setForm({
+        key: "aboutPlace",
+        value: {
+          guests,
+          bedrooms,
+          beds,
+          bathrooms,
+        },
+      })
+    );
+
     setNext(true);
   };
   return (
@@ -39,7 +44,6 @@ const FloorPlan = () => {
             count={bathrooms}
             setCount={setBathroom}
             title="Bathrooms"
-            onChange={() => console.log("hi")}
           />
           {isNext ? (
             <Navigater next={"stand-out"} />

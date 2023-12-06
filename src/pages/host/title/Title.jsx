@@ -1,17 +1,15 @@
-import React, { useContext, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
+import React, { useState } from "react";
 import Navigater from "../../../components/host-navigater/Navigater";
-
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch } from "react-redux";
 const Title = () => {
-  const { setFormData } = useContext(MyContext);
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [isNext, setNext] = useState(false);
   const handleChanges = (e) => {
     e.preventDefault();
-    setFormData((prev) => ({
-      ...prev,
-      title: title,
-    }));
+    dispatch(setForm({ key: "title", value: title }));
+
     setNext(true);
   };
   return (

@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "./card/Card";
-import axios from "axios";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
+import { useSelector } from "react-redux";
 const Properties = () => {
-  const [datas, setDatas] = useState();
-  useEffect(() => {
-    axios
-      .get("/listings")
-      .then((data) => setDatas(data.data))
-      .catch((err) => console.log(err));
-  }, []);
-  return !datas ? (
+  const property = useSelector((store) => store.property.property);
+
+  return property.length === 0 ? (
     <ShimmerUi />
   ) : (
     <div>
@@ -18,7 +13,7 @@ const Properties = () => {
         <h2 className="text-2xl font-semibold">Properties</h2>
       </div>
       <div className="flex flex-wrap">
-        {datas.map((item) => (
+        {property.map((item) => (
           <Card data={item} status={false} />
         ))}
       </div>

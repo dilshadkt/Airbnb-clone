@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import save from "../../../asset/svg/save.svg";
 import share from "../../../asset/svg/share.svg";
 import bed from "../../../asset/svg/bed.svg";
@@ -8,17 +8,19 @@ import Offers from "../../../components/Offers";
 import Buttons from "../../../components/Buttons";
 import PaymentCard from "../../../components/PaymentCard";
 import Amenties from "../../../components/Amenties";
-import MyContext from "../../../components/contex/Mycontex";
 import left from "../../../asset/svg/leftArrow.svg";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
+import { useSelector, useDispatch } from "react-redux";
+import { setImg } from "../../../store/slice/payment";
 
 const Rooms = () => {
+  const dispatch = useDispatch();
+  const amenties = useSelector((store) => store.user.amenties);
   const [queryParams] = useSearchParams();
   const [rooms, setRooms] = useState("");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const { isOpenAmenities, setCurrentImage } = useContext(MyContext);
   const [serchParams] = useSearchParams();
   const [isTrip, setIsTrip] = useState(false);
   const type = serchParams.get("id");
@@ -49,10 +51,10 @@ const Rooms = () => {
       .get(`/listings?id=${type}`)
       .then((res) => {
         setRooms(res.data);
-        setCurrentImage(res.data.images[0]);
+        dispatch(setImg(res.data.images[0]));
       })
       .catch((err) => console.log(err));
-  }, [type, setCurrentImage, serchParams]);
+  }, [type, dispatch, serchParams]);
 
   return rooms === "" ? (
     <RoomsShimmer />
@@ -160,8 +162,11 @@ const Rooms = () => {
               {bathrooms} bathrooms
             </div>
             <div className="flex justify-start my-6">
-              {availability.map((item) => (
-                <div className="border px-[8%] py-[2%] items-center mr-2 justify-center rounded-lg">
+              {availability.map((item, index) => (
+                <div
+                  key={index}
+                  className="border px-[8%] py-[2%] items-center mr-2 justify-center rounded-lg"
+                >
                   <div className="flex items-center ">
                     <img src={bed} alt="bed" />
                     <span>{item}</span>
@@ -216,7 +221,7 @@ const Rooms = () => {
             </div>
             <hr />
             {/* host details */}
-            <Host userIcon={images[0]} />
+            <Host userIcon={images[0]} hostid={hostid} />
             <h3 className="font-semibold text-2xl">About this place</h3>
             <div className="text-base font-light my-3">
               Fort Tiracol is one of North Goa's most iconic forts turned into
@@ -249,7 +254,7 @@ const Rooms = () => {
           home inside out.
         </p>
         <Buttons title="Message a trip designer" width="w-[246px]" />
-        {isOpenAmenities ? (
+        {amenties ? (
           <>
             {(document.body.style.overflow = "hidden")}
             <Amenties />
@@ -283,8 +288,8 @@ const Rooms = () => {
           </div>
           <div className="my-9 flex justify-center">
             <div className="w-2/4 bg-red-500 h-fit">
-              {rooms.images.map((item) => (
-                <div className="w-full">
+              {rooms.images.map((item, index) => (
+                <div key={index} className="w-full">
                   <img src={item} alt="gallery" className="w-full" />
                 </div>
               ))}

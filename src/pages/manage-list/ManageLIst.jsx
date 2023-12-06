@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import MyContext from "../../components/contex/Mycontex";
+import React, { useEffect, useState } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import ListShimmer from "../../components/shimmer/list/ListShimmer";
 import Update from "./update/Update";
+import { useSelector } from "react-redux";
 const ManageLIst = () => {
-  const { user } = useContext(MyContext);
+  const user = useSelector((store) => store.user.user);
   const [list, setList] = useState([]);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [data, setData] = useState({});

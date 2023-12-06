@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import HomeLayout from "./layouts/Home";
 import Home from "./pages/users/Home/Home";
 import Rooms from "./pages/users/Rooms/Rooms";
@@ -28,7 +27,6 @@ import Description from "./pages/host/description/Description";
 import FinishUp from "./pages/host/finish-setup/FinishUp";
 import PricePerNight from "./pages/host/price/PricePerNight";
 import AdminLayout from "./layouts/Admin";
-import AdminHome from "./pages/admin/home/Home";
 import Users from "./pages/admin/users/Users";
 import Properties from "./pages/admin/properties/Properties";
 import WhishList from "./pages/admin/Whishlist/WhishList";
@@ -36,96 +34,45 @@ import NewProperty from "./pages/admin/newProperty/NewProperty";
 import Listing from "./pages/admin/listing/Listing";
 import ManageLIst from "./pages/manage-list/ManageLIst";
 import Trips from "./pages/users/trips/Trips";
-
+import Chat from "./pages/chat/Chat";
+import { useDispatch } from "react-redux";
+import { setProperty } from "./store/slice/PropertySlice";
+import { setUser } from "./store/slice/User";
 axios.defaults.baseURL = "http://localhost:8080";
 
 function App() {
+  const dispatch = useDispatch();
   /////////// fetching data //////////////
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("user"));
     const liked = JSON.parse(localStorage.getItem("like"));
     liked && setIsLliked(liked);
-    userdata && setUser(userdata);
+    userdata && dispatch(setUser(userdata));
 
     axios
       .get("/listings")
-      .then((data) => setDatas(data.data))
+      .then((data) => {
+        dispatch(setProperty(data.data));
+      })
       .catch((err) => console.log(err));
-  }, []);
+  }, [dispatch]);
 
-  const [search, setsearch] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [datas, setDatas] = useState([]);
   const [whilList, setWhishList] = useState("");
-  const [isOpenAmenities, setIsOpenAmenities] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignOpen, setSignOpen] = useState(false);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [totalDays, setTotalDays] = useState(1);
   const [guest, setGuest] = useState("");
   const [isLiked, setIsLliked] = useState([]);
   const [notification, setNotification] = useState(0);
-  const [currentImage, setCurrentImage] = useState("");
   const [isUserBoxOpen, setIsUserBox] = useState(true);
-  const [isLogin, setIsLogin] = useState(
-    localStorage.getItem("token") ? true : false
-  );
-  const [user, setUser] = useState(
-    isLogin ? JSON.parse(localStorage.getItem("user")) : ""
-  );
-  const [formData, setFormData] = useState({
-    hostid: "",
-    propertyType: "",
-    houseType: "",
-    place: {
-      house: "",
-      Area: "",
-      Street: "",
-      landmark: "",
-      city: "",
-      pincode: "",
-      Province: "",
-    },
-    aboutPlace: {
-      guests: "",
-      bedrooms: "",
-      beds: "",
-      bathrooms: "",
-    },
-    propertyOffer: [],
-    image: [],
-    title: "",
-    description: "",
-    pricePeNight: "",
-    discount: "",
-    security: [],
-  });
-  const Pssdata = {
-    isSignOpen,
-    setSignOpen,
-    datas,
-    setDatas,
-    isOpenAmenities,
-    setIsOpenAmenities,
+
+  const Passdata = {
     whilList,
     setWhishList,
-    progress,
-    setProgress,
-    search,
-    setsearch,
     isMenuOpen,
     setIsMenuOpen,
-    isLoginOpen,
-    setIsLoginOpen,
-    isLogin,
-    setIsLogin,
-    formData,
-    setFormData,
-    user,
-    setUser,
     checkIn,
     setCheckIn,
     checkOut,
@@ -134,8 +81,6 @@ function App() {
     setTotalDays,
     guest,
     setGuest,
-    currentImage,
-    setCurrentImage,
     isLiked,
     setIsLliked,
     notification,
@@ -145,7 +90,7 @@ function App() {
   };
   return (
     <>
-      <MyContext.Provider value={Pssdata}>
+      <MyContext.Provider value={Passdata}>
         <Routes>
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<Home />} />
@@ -153,6 +98,7 @@ function App() {
             <Route path="/hoisting" element={<Hoisting />} />
             <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/trips" element={<Trips />} />
+            <Route path="/chats" element={<Chat />} />
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />
@@ -179,12 +125,10 @@ function App() {
             <Route path="finish-setup" element={<FinishUp />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminHome />} />
             <Route path="users" element={<Users />} />
             <Route path="properties" element={<Properties />} />
             <Route path="whishlist" element={<WhishList />} />
             <Route path="newProperty" element={<NewProperty />} />
-            <Route path="newProperty/listing" element={<Listing />} />
             <Route path="newProperty/listing" element={<Listing />} />
             <Route path="properties/listing" element={<Listing />} />
           </Route>

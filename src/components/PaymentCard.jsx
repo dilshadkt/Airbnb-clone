@@ -10,7 +10,6 @@ const PaymentCard = ({ night, propertyId }) => {
     setCheckOut,
     totalDays,
     setTotalDays,
-
     setGuest,
   } = useContext(MyContext);
 

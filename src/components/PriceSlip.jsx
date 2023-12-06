@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import rating from "../asset/svg/rating.svg";
 import { useSearchParams } from "react-router-dom";
-import MyContext from "./contex/Mycontex";
-
+import { useSelector } from "react-redux";
 const PriceSlip = () => {
-  const { currentImage } = useContext(MyContext);
+  const currentImg = useSelector((store) => store.payment.currentImg);
   const [searchParams] = useSearchParams();
   return (
     <div className="border rounded-lg p-5 h-fit w-[440px] sticky top-32 shadow-xl">
       <div className="pb-5 flex">
         <div className="flex-initial w-[30%] bg-red-400 h-28">
           <img
-            src={currentImage}
+            src={currentImg}
             alt="room "
             className="w-full h-full object-cover"
           />

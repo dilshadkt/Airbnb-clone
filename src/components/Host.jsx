@@ -1,8 +1,10 @@
 import React from "react";
 import star from "../asset/svg/rating.svg";
 import global from "../asset/svg/global.svg";
+import { useNavigate } from "react-router-dom";
 
-const Host = ({ userIcon }) => {
+const Host = ({ userIcon, hostid }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="my-5">
@@ -58,6 +60,12 @@ const Host = ({ userIcon }) => {
               get in touch!
             </div>
             <div className="underline font-semibold my-5 ">Show more</div>
+            <div
+              onClick={() => navigate(`/chats?propertyId=${hostid}`)}
+              className="px-5 my-4 py-2 bg-black rounded-xl w-fit font-medium flex items-center justify-center text-white cursor-pointer"
+            >
+              Message{" "}
+            </div>
             <hr />
             <h4 className="my-4 font-semibold">co-host</h4>
             <div className="flex justify-between my-3">

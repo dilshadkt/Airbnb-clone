@@ -1,22 +1,18 @@
-import React, { useContext, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navigater from "../../../components/host-navigater/Navigater";
-
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch } from "react-redux";
 const Photos = () => {
-  const { setFormData } = useContext(MyContext);
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState(null);
   const [isNext, setNext] = useState(false);
 
   const uploadImage = (e) => {
     toast.success("image uploaded", { position: toast.POSITION.TOP_CENTER });
     e.preventDefault();
-
-    setFormData((prev) => ({
-      ...prev,
-      image: selected,
-    }));
+    dispatch(setForm({ key: "image", value: selected }));
     setNext(true);
   };
 

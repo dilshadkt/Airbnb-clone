@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigater from "../../../components/host-navigater/Navigater";
-import MyContext from "../../../components/contex/Mycontex";
-
+import { setForm } from "../../../store/slice/FormSlice";
+import { useDispatch } from "react-redux";
 const PricePerNight = () => {
-  const { setFormData } = useContext(MyContext);
+  const dispatch = useDispatch();
   const [price, setPrice] = useState(0);
   useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      pricePeNight: price,
-    }));
-  }, [price, setFormData]);
+    dispatch(setForm({ key: "pricePeNight", value: price }));
+  }, [dispatch, price]);
 
   return (
     <div className="flex-1 flex flex-col items-center mt-[5%] justify-center">

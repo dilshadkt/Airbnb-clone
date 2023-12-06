@@ -1,23 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import google from "../../asset/svg/google.svg";
-import MyContext from "../../components/contex/Mycontex";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser, setLogin } from "../../store/slice/User";
+import { loginOpen } from "../../store/slice/Auth";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [userName, setUseName] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoginOpen, setIsLogin } = useContext(MyContext);
   const SignUp = (e) => {
     e.preventDefault();
     axios
       .post("/user/signin", { userName, password })
       .then((res) => {
-        console.log(res.data.propertyId);
-        setIsLoginOpen(false);
-        setIsLogin(true);
+        dispatch(loginOpen(false));
+        dispatch(setUser(res.data.user));
+        dispatch(setLogin(true));
         localStorage.setItem("like", JSON.stringify(res.data.propertyId));
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -43,7 +47,7 @@ const Login = () => {
           <div className="px-5 flex justify-between w-full">
             <div className="flex-1">
               <div
-                onClick={() => setIsLoginOpen(false)}
+                onClick={() => dispatch(loginOpen(false))}
                 className=" w-9 h-9 hover:bg-gray-300 rounded-full flex items-center justify-center"
               >
                 <img src={cancel} alt="cancel icon" className="w-[50%]" />

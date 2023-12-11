@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import logo from "./asset/logo/logo.png";
-import { Link } from "react-router-dom";
 import MyContext from "./components/contex/Mycontex";
 import SideMenu from "./components/sideMenu/SideMenu";
 import Login from "./pages/login/Login";
@@ -27,9 +26,14 @@ const Navbar = () => {
     <>
       <nav className=" h-20 flex mx-20 ">
         <div className=" flex-1 flex items-center ">
-          <Link to={"/"}>
+          <div
+            onClick={() => {
+              navigate("/");
+              window.location.reload();
+            }}
+          >
             <img alt="logo" src={logo} className="w-32 bg-white " />
-          </Link>
+          </div>
         </div>
         <div
           className=" flex-1 flex items-center

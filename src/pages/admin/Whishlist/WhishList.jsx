@@ -7,7 +7,9 @@ const WhishList = () => {
   useEffect(() => {
     axios
       .get("/addWishList")
-      .then((res) => setWhishList(res.data))
+      .then((res) => {
+        setWhishList(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
   return !whishlist ? (

@@ -12,7 +12,7 @@ const WishListCard = ({ data, remove }) => {
         <div
           key={`${item}-${index}`}
           onClick={() => navigate(`/rooms?id=${item.propertyId}`)}
-          className="group w-[20%]  overflow-hidden flex flex-col items-center   "
+          className="group w-[20%]  max-h-[250px] overflow-hidden flex flex-col items-center   "
         >
           <div className="w-[95%] h-full border-[7px] border-white   rounded-xl  shadow-md relative ">
             <img
@@ -31,10 +31,6 @@ const WishListCard = ({ data, remove }) => {
                 <img src={cancel} alt="cancel icon" className="w-4" />
               </div>
             </div>
-          </div>
-          <div className="p-5">
-            {" "}
-            <h3 className="font-medium text-sm">{item.title}</h3>
           </div>
         </div>
       ))}

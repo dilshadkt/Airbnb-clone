@@ -11,9 +11,11 @@ const SideBar = () => {
   return (
     <div className="flex-initial w-[18%] border p-3 flex h-[89vh] sticky left-0 top-[78px]">
       <ul className="pl-5 w-full text-gray-500 group">
-        <li className="my-5 hover:bg-gray-200  transition-all cursor-pointer w-full p-2 rounded-lg hover:text-black">
-          <AppsIcon className="mr-2" /> Home
-        </li>
+        <Link to={"home"}>
+          <li className="my-5 hover:bg-gray-200  transition-all cursor-pointer w-full p-2 rounded-lg hover:text-black">
+            <AppsIcon className="mr-2" /> Home
+          </li>
+        </Link>
         <li className="my-5 hover:bg-gray-200  transition-all cursor-pointer w-full p-2 rounded-lg hover:text-black ">
           <MessageIcon className="mr-2" />
           Chat

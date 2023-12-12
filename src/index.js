@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store/Store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <GoogleOAuthProvider clientId="919933473029-sr84u2rki8d8dko6e4gpqoj2gmflmjj6.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId="919933473029-sjmhspsmdbb5pr29g1h2h0s57unqkom3.apps.googleusercontent.com">
     <Provider store={store}>
       <BrowserRouter>
         <App />

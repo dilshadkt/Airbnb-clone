@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Buttons from "../../../components/Buttons";
 import listpad from "../../../asset/svg/listpad.svg";
 import help1 from "../../../asset/svg/help1.svg";
@@ -9,21 +9,22 @@ import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Reservation from "./reservation/Reservation";
-import MyContext from "../../../components/contex/Mycontex";
+
+import ListShimmer from "../../../components/shimmer/list/ListShimmer";
 const Hoisting = () => {
-  const { setNotification } = useContext(MyContext);
   const [resrvation, setReservation] = useState([]);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     axios
       .get(`/book/stay/${user._id}`)
       .then((res) => {
+        console.log(res.data);
         setReservation(res.data);
-        setNotification(resrvation.length);
       })
       .catch((err) => console.log(err));
-  }, [user._id, setNotification, resrvation.length]);
+  }, [user._id]);
 
   return (
     <div className="m-20 ">
@@ -55,7 +56,7 @@ const Hoisting = () => {
           Pending reviews(0)
         </div>
       </div>
-      {resrvation.length === 0 ? (
+      {resrvation === false ? (
         <div className="w-full bg-gray-100 flex items-center justify-center min-h-[239px] rounded-xl my-7">
           <div className=" flex flex-col items-center">
             <img src={listpad} alt="list pad" />
@@ -64,6 +65,8 @@ const Hoisting = () => {
             </h4>
           </div>
         </div>
+      ) : resrvation.length === 0 ? (
+        <ListShimmer />
       ) : (
         <div className="my-[5%]">
           <div className="flex w-full p-3 bg-red-400 rounded-xl text-white">
@@ -80,7 +83,6 @@ const Hoisting = () => {
           ))}
         </div>
       )}
-
       <h4 className="text-xl font-medium"> We’re here to help</h4>
       <div className="flex my-6">
         <div className="border rounded-xl p-5 flex mr-6">

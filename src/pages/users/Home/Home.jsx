@@ -35,7 +35,7 @@ const Home = () => {
           <>
             {" "}
             {filtered.map((item, index) => (
-              <Card data={item} key={index} />
+              <Card data={item} key={`${index}-${index}`} />
             ))}
           </>
         )}

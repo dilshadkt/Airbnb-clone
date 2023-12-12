@@ -35,20 +35,27 @@ import Listing from "./pages/admin/listing/Listing";
 import ManageLIst from "./pages/manage-list/ManageLIst";
 import Trips from "./pages/users/trips/Trips";
 import Chat from "./pages/chat/Chat";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
+import AdminHome from "./pages/admin/Home/AdminHome";
 axios.defaults.baseURL = "http://localhost:8080";
 
 function App() {
   const dispatch = useDispatch();
   /////////// fetching data //////////////
 
+  const user = useSelector((store) => store.user.user);
+  const isLogin = useSelector((store) => store.user.isLogin);
   useEffect(() => {
-    const userdata = JSON.parse(localStorage.getItem("user"));
+    const userdata = JSON.parse(localStorage.getItem("NewUser"));
     const liked = JSON.parse(localStorage.getItem("like"));
     liked && setIsLliked(liked);
     userdata && dispatch(setUser(userdata));
+    isLogin &&
+      axios
+        .get(`/book/stay/${user._id}`)
+        .then((res) => setNotification(res.data.length));
 
     axios
       .get("/listings")
@@ -56,7 +63,7 @@ function App() {
         dispatch(setProperty(data.data));
       })
       .catch((err) => console.log(err));
-  }, [dispatch]);
+  }, [dispatch, user._id, isLogin]);
 
   const [whilList, setWhishList] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -127,6 +134,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="users" element={<Users />} />
             <Route path="properties" element={<Properties />} />
+            <Route path="home" element={<AdminHome />} />
             <Route path="whishlist" element={<WhishList />} />
             <Route path="newProperty" element={<NewProperty />} />
             <Route path="newProperty/listing" element={<Listing />} />

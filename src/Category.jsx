@@ -67,7 +67,10 @@ const Category = () => {
               onClick={() => filterList(item.title)}
               className="px-5  h-full group  flex items-center justify-center cursor-pointer relative"
             >
-              <div className="flex flex-col justify-center items-center opacity-70  group-hover:opacity-100 ">
+              <div
+                key={index}
+                className="flex flex-col justify-center items-center opacity-70  group-hover:opacity-100 "
+              >
                 {item.img}
 
                 <span className="whitespace-nowrap text-sm mt-1">

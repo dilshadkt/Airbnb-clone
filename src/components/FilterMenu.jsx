@@ -15,7 +15,7 @@ const FilterMenu = ({ filter }) => {
   const bedroom = ["any", 1, 2, 3, 4, 5, 6, 7, "8+"];
   const { register, watch } = useForm({
     defaultValues: {
-      minimum: 800,
+      minimum: 200,
       maximum: 800,
     },
   });
@@ -87,7 +87,7 @@ const FilterMenu = ({ filter }) => {
                   <input
                     {...register("minimum")}
                     type="number"
-                    min={800}
+                    min={200}
                     max={100000}
                     className="px-2  outline-none"
                   />

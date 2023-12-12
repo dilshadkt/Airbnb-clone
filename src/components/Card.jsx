@@ -14,9 +14,11 @@ const Card = ({ data }) => {
   const user = useSelector((store) => store.user.user);
   const login = useSelector((store) => store.user.isLogin);
   const { isLiked, setIsLliked } = useContext(MyContext);
+
   const [currentImg, setCurrentImage] = useState(0);
   const navigate = useNavigate();
   const addTowhishList = (id) => {
+    setIsLliked((prev) => [...prev, id]);
     axios
       .post(`/addWishList/${user._id}?propertyId=${id}`)
       .then((res) => {

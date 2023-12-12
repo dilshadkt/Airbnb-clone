@@ -9,7 +9,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_71)">
+        <g clipPath="url(#clip0_222_71)">
           <mask
             id="mask0_222_71"
             style={{ maskType: "luminance" }}
@@ -46,7 +46,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_81)">
+        <g clipPath="url(#clip0_222_81)">
           <mask
             id="mask0_222_81"
             style={{ maskType: "luminance" }}
@@ -83,7 +83,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_91)">
+        <g clipPath="url(#clip0_222_91)">
           <mask
             id="mask0_222_91"
             style={{ maskType: "luminance" }}
@@ -104,25 +104,25 @@ export const data = [
               d="M17.9999 13.9991H12L11.883 14.0061C11.386 14.0631 11 14.4861 11 14.9991V19.999L11.007 20.116C11.065 20.613 11.487 20.999 12 20.999H17.9999L18.1169 20.992C18.6139 20.934 18.9999 20.512 18.9999 19.999V14.9991L18.9929 14.8821C18.9349 14.3851 18.5129 13.9991 17.9999 13.9991ZM16.9999 18.999H13V15.9991H16.9999V18.999Z"
               fill="#222222"
             />
-            <path d="M9 24.125V34.9999" stroke="#222222" stroke-width="2" />
+            <path d="M9 24.125V34.9999" stroke="#222222" strokeWidth="2" />
             <path
               d="M21.0039 35.9959H20.2689H8.99805V24.016H21.0039V34.6299V35.9959Z"
               stroke="#222222"
-              stroke-width="1.998"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.998"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M8.99805 24.017L21.0039 35.9969"
               stroke="#222222"
-              stroke-width="1.998"
-              stroke-miterlimit="10"
+              strokeWidth="1.998"
+              strokeMiterlimit="10"
             />
             <path
               d="M21.0039 24.017L8.99805 35.9969"
               stroke="#222222"
-              stroke-width="1.998"
-              stroke-miterlimit="10"
+              strokeWidth="1.998"
+              strokeMiterlimit="10"
             />
           </g>
         </g>
@@ -144,7 +144,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_113)">
+        <g clipPath="url(#clip0_222_113)">
           <mask
             id="mask0_222_113"
             style={{ maskType: "luminance" }}
@@ -157,13 +157,13 @@ export const data = [
             <path d="M45 0H0V45H45V0Z" fill="white" />
           </mask>
           <g mask="url(#mask0_222_113)">
-            <path d="M8.875 19.675V25.762" stroke="#222222" stroke-width="2" />
+            <path d="M8.875 19.675V25.762" stroke="#222222" strokeWidth="2" />
             <path
               d="M6.87695 29.756H10.875V25.762H6.87695V29.756Z"
               stroke="#222222"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M19.5 21.499V21.999H20L24 22C24.252 22 24.461 22.186 24.495 22.429L24.5 22.514V31.5C24.5 31.752 24.313 31.961 24.071 31.995L23.985 32H20H19.5V32.5C19.5 33.827 18.806 35.068 17.602 35.922C16.701 36.561 15.57 36.942 14.362 36.993L14.071 37H7C4.582 37 2.609 35.092 2.504 32.7L2.5 32.494V19.5C2.5 19.248 2.687 19.039 2.929 19.005L3.014 19H19C19.252 19 19.461 19.186 19.495 19.429L19.5 19.514V21.499ZM8.5 20.499V19.999H8L4 20H3.5V20.5V32.5C3.5 34.295 4.851 35.774 6.592 35.976L6.599 35.977L6.607 35.978L6.78 35.993L6.795 35.994H6.809L6.985 35.999L6.993 36H7H14.077C15.172 36 16.212 35.682 17.023 35.107C17.873 34.504 18.418 33.656 18.491 32.716L18.492 32.706L18.493 32.696L18.499 32.519L18.5 32.509V32.5V20.5V20H18L10 19.999H9.5V20.499M23.5 23.5V23H23H20H19.5V23.5V30.5V31H20H23H23.5V30.5V23.5Z"
@@ -197,17 +197,17 @@ export const data = [
                 <path
                   d="M9.87498 6.75C9.87498 6.75 9.87498 10.625 7.62498 12.75C5.49598 14.761 6.12498 17.875 6.12498 17.875"
                   stroke="#FF0000"
-                  stroke-width="2.8"
+                  strokeWidth="2.8"
                 />
                 <path
                   d="M15.384 6.75C15.384 6.75 15.384 10.625 13.134 12.75C11.005 14.761 11.634 17.875 11.634 17.875"
                   stroke="#FF0000"
-                  stroke-width="2.8"
+                  strokeWidth="2.8"
                 />
                 <path
                   d="M20.65 6.75C20.65 6.75 20.65 10.625 18.4 12.75C16.271 14.761 16.9 17.875 16.9 17.875"
                   stroke="#FF0000"
-                  stroke-width="2.8"
+                  strokeWidth="2.8"
                 />
               </g>
             </mask>
@@ -241,7 +241,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_221)">
+        <g clipPath="url(#clip0_222_221)">
           <mask
             id="mask0_222_221"
             style={{ maskType: "luminance" }}
@@ -282,7 +282,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_241)">
+        <g clipPath="url(#clip0_222_241)">
           <mask
             id="mask0_222_241"
             style={{ maskType: "luminance" }}
@@ -319,7 +319,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_470)">
+        <g clipPath="url(#clip0_222_470)">
           <mask
             id="mask0_222_470"
             style={{ maskType: "luminance" }}
@@ -356,7 +356,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_480)">
+        <g clipPath="url(#clip0_222_480)">
           <mask
             id="mask0_222_480"
             style={{ maskType: "luminance" }}
@@ -376,16 +376,16 @@ export const data = [
             <path
               d="M12.25 16.25V8.56201"
               stroke="#222222"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M17.385 12.504H12.375V8.49805H17.385V12.504Z"
               stroke="#222222"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
         </g>
@@ -407,7 +407,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_497)">
+        <g clipPath="url(#clip0_222_497)">
           <mask
             id="mask0_222_497"
             style={{ maskType: "luminance" }}
@@ -444,7 +444,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_507)">
+        <g clipPath="url(#clip0_222_507)">
           <mask
             id="mask0_222_507"
             style={{ maskType: "luminance" }}
@@ -481,7 +481,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_517)">
+        <g clipPath="url(#clip0_222_517)">
           <mask
             id="mask0_222_517"
             style={{ maskType: "luminance" }}
@@ -518,7 +518,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_527)">
+        <g clipPath="url(#clip0_222_527)">
           <mask
             id="mask0_222_527"
             style={{ maskType: "luminance" }}
@@ -559,7 +559,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_539)">
+        <g clipPath="url(#clip0_222_539)">
           <mask
             id="mask0_222_539"
             style={{ maskType: "luminance" }}
@@ -596,7 +596,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_624)">
+        <g clipPath="url(#clip0_222_624)">
           <mask
             id="mask0_222_624"
             style={{ maskType: "luminance" }}
@@ -633,7 +633,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_634)">
+        <g clipPath="url(#clip0_222_634)">
           <mask
             id="mask0_222_634"
             style={{ maskType: "luminance" }}
@@ -670,7 +670,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_644)">
+        <g clipPath="url(#clip0_222_644)">
           <mask
             id="mask0_222_644"
             style={{ maskType: "luminance" }}
@@ -707,7 +707,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_654)">
+        <g clipPath="url(#clip0_222_654)">
           <mask
             id="mask0_222_654"
             style={{ maskType: "luminance" }}
@@ -744,7 +744,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_664)">
+        <g clipPath="url(#clip0_222_664)">
           <mask
             id="mask0_222_664"
             style={{ maskType: "luminance" }}
@@ -781,7 +781,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_672)">
+        <g clipPath="url(#clip0_222_672)">
           <mask
             id="mask0_222_672"
             style={{ maskType: "luminance" }}
@@ -818,7 +818,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_682)">
+        <g clipPath="url(#clip0_222_682)">
           <mask
             id="mask0_222_682"
             style={{ maskType: "luminance" }}
@@ -855,7 +855,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_692)">
+        <g clipPath="url(#clip0_222_692)">
           <mask
             id="mask0_222_692"
             style={{ maskType: "luminance" }}
@@ -892,7 +892,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_702)">
+        <g clipPath="url(#clip0_222_702)">
           <mask
             id="mask0_222_702"
             style={{ maskType: "luminance" }}
@@ -929,7 +929,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_712)">
+        <g clipPath="url(#clip0_222_712)">
           <mask
             id="mask0_222_712"
             style={{ maskType: "luminance" }}
@@ -970,7 +970,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_723)">
+        <g clipPath="url(#clip0_222_723)">
           <mask
             id="mask0_222_723"
             style={{ maskType: "luminance" }}
@@ -1007,7 +1007,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_733)">
+        <g clipPath="url(#clip0_222_733)">
           <mask
             id="mask0_222_733"
             style={{ maskType: "luminance" }}
@@ -1044,7 +1044,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_743)">
+        <g clipPath="url(#clip0_222_743)">
           <mask
             id="mask0_222_743"
             style={{ maskType: "luminance" }}
@@ -1081,7 +1081,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_753)">
+        <g clipPath="url(#clip0_222_753)">
           <mask
             id="mask0_222_753"
             style={{ maskType: "luminance" }}
@@ -1118,7 +1118,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_763)">
+        <g clipPath="url(#clip0_222_763)">
           <mask
             id="mask0_222_763"
             style={{ maskType: "luminance" }}
@@ -1134,8 +1134,8 @@ export const data = [
             <path
               d="M2.125 35.9969H30.125"
               stroke="#222222"
-              stroke-width="2"
-              stroke-miterlimit="10"
+              strokeWidth="2"
+              strokeMiterlimit="10"
             />
             <mask
               id="mask1_222_763"
@@ -1165,34 +1165,34 @@ export const data = [
                 <path
                   d="M25.024 11.929L22.194 9.099L16.125 15.168L10.054 9.099L7.224 11.929L13.293 17.998L7.224 24.069L10.054 26.899L16.125 20.828L22.194 26.899L25.024 24.069L18.955 17.998L25.024 11.929Z"
                   stroke="#222222"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </mask>
               <g mask="url(#mask2_222_763)">
                 <path
                   d="M8.25806 35.6191L12.5671 16.1071L14.6261 16.1251"
                   stroke="#222222"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M24.1161 35.8691L19.8091 16.2351L18.4381 16.2501"
                   stroke="#222222"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </g>
             </g>
             <path
               d="M25.024 11.929L22.194 9.099L16.125 15.168L10.054 9.099L7.224 11.929L13.293 17.998L7.224 24.069L10.054 26.899L16.125 20.828L22.194 26.899L25.024 24.069L18.955 17.998L25.024 11.929Z"
               stroke="#222222"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
         </g>
@@ -1214,7 +1214,7 @@ export const data = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_222_797)">
+        <g clipPath="url(#clip0_222_797)">
           <mask
             id="mask0_222_797"
             style={{ maskType: "luminance" }}

@@ -5,8 +5,11 @@ import MyContext from "../../../components/contex/Mycontex";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loginOpen } from "../../../store/slice/Auth";
 const Payment = () => {
+  const dispatch = useDispatch();
+  const login = useSelector((store) => store.user.isLogin);
   const [queryParam] = useSearchParams();
   const user = useSelector((store) => store.user.user);
   const { checkIn, guest } = useContext(MyContext);
@@ -218,7 +221,9 @@ const Payment = () => {
               </p>
               <div
                 // onClick={reservation}
-                onClick={() => displayRazorpay()}
+                onClick={() =>
+                  login ? displayRazorpay() : dispatch(loginOpen(true))
+                }
                 className="bg-rose-500 py-3 cursor-pointer px-5 w-fit rounded-xl  font-medium text-white"
               >
                 Confirm and pay

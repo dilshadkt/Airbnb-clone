@@ -17,7 +17,7 @@ const Photos = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center">
+    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center sm:mx-5">
       <h1 className="text-4xl font-semibold">
         Add some photos of your casa particular
       </h1>
@@ -27,7 +27,7 @@ const Photos = () => {
       </h4>
       <form
         method="post"
-        className="p-5 m-5 border"
+        className="p-5 m-5 border sm:flex sm:flex-col sm:items-center"
         encType="multipart/form-data"
         onSubmit={(e) => uploadImage(e)}
       >
@@ -39,7 +39,7 @@ const Photos = () => {
           multiple
           onChange={(e) => setSelected(e.target.files)}
         />
-        <button className="p-3 text-white font-semibold bg-rose-500 rounded-xl">
+        <button className="p-3 text-white font-semibold bg-rose-500 rounded-xl sm:mt-4">
           Upload
         </button>
         <ToastContainer />

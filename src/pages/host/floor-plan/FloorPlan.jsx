@@ -29,7 +29,7 @@ const FloorPlan = () => {
   };
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
-      <div className="w-[40%] ">
+      <div className="w-[40%] sm:w-full sm:mx-5">
         <h1 className="text-3xl font-medium my-4">
           Let's start with the basics
         </h1>

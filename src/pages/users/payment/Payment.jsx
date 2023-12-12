@@ -113,7 +113,7 @@ const Payment = () => {
     <>
       {/* <Navbar /> */}
       <hr />
-      <div className="mx-48 my-8 flex">
+      <div className="mx-48 sm:mx-5 my-8 flex sm:flex-col">
         <div className="flex-1  flex flex-col ">
           <div className="flex items-center">
             <img src={left} alt="left arrow" />
@@ -232,7 +232,7 @@ const Payment = () => {
           </div>
         </div>
         <ToastContainer />
-        <div className="flex-initial w-[40%] b flex justify-center ">
+        <div className="flex-initial w-[40%] sm:w-full b flex justify-center ">
           <PriceSlip />
         </div>
       </div>

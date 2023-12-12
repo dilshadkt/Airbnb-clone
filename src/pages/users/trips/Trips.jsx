@@ -27,8 +27,11 @@ const Trips = () => {
       </div>
       <div>
         <div className="my-6">
-          {trips.map((item) => (
-            <div className="p-5 border flex my-4 rounded-xl  items-center justify-between">
+          {trips.map((item, index) => (
+            <div
+              key={index}
+              className="p-5 border flex my-4 rounded-xl  items-center justify-between"
+            >
               <div
                 onClick={() =>
                   navigate(
@@ -42,7 +45,7 @@ const Trips = () => {
                   alt="lisitng"
                   className="w-[200px] rounded-xl max-h-[150px] object-cover"
                 />
-                <div className="ml-5 text-gray-400 font-thin flex flex-col justify-center">
+                <div className="ml-5 text-gray-400 font-thin flex flex-col justify-center sm:hidden">
                   <h3 className="text-lg font-semibold text-gray-600">
                     {item?.listingId?.title}
                   </h3>
@@ -59,7 +62,7 @@ const Trips = () => {
               </div>
               <div
                 onClick={() => SetQrOpen(!qrOpen)}
-                className="cursor-pointer"
+                className="cursor-pointer sm:w-[60px]"
               >
                 <img
                   src="https://media.istockphoto.com/id/828088276/vector/qr-code-illustration.jpg?s=612x612&w=0&k=20&c=FnA7agr57XpFi081ZT5sEmxhLytMBlK4vzdQxt8A70M="

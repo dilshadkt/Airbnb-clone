@@ -13,7 +13,7 @@ const Title = () => {
     setNext(true);
   };
   return (
-    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center">
+    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center sm:mx-5">
       <h1 className="text-4xl font-semibold">
         Now, let's give your casa particular a title
       </h1>
@@ -21,7 +21,7 @@ const Title = () => {
         Short titles work best. Have fun with it – you can always change it
         later.
       </h4>
-      <form onSubmit={(e) => handleChanges(e)} className=" w-[40%]">
+      <form onSubmit={(e) => handleChanges(e)} className=" w-[40%] sm:w-full">
         <textarea
           required
           minLength={5}

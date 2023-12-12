@@ -3,7 +3,7 @@ import Navigater from "../../../components/host-navigater/Navigater";
 
 const StandOut = () => {
   return (
-    <div className="flex mx-[15%] mt-[5%] mb-4  ">
+    <div className="flex mx-[15%] mt-[5%] mb-4 sm:flex-col-reverse sm:py-[7%] ">
       <div className="flex-1 flex flex-col items-start justify-center">
         <h4 className="text-lg font-medium">Step 2</h4>
         <h1 className="my-6 text-5xl font-medium">Make your place stand out</h1>

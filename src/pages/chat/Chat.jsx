@@ -45,8 +45,8 @@ const Chat = () => {
     });
   }, []);
   return (
-    <div className="mx-[12%] flex justify-center my-[3%]">
-      <div className="bg-white relative rounded-xl shadow-2xl w-2/4 h-[70vh]">
+    <div className="mx-[12%] sm:mx-5 flex justify-center my-[3%]">
+      <div className="bg-white relative rounded-xl shadow-2xl w-2/4 sm:w-full h-[70vh]">
         <div className="border-b p-3 flex justify-between">
           <div className="flex">
             <div>

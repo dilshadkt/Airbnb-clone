@@ -13,12 +13,12 @@ const Description = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center">
+    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center sm:mx-5">
       <h1 className="text-4xl font-semibold">Create your description</h1>
       <h4 className="text-gray-500 text-xl mt-4">
         Share what makes your place special.
       </h4>
-      <form className=" w-[40%] " onSubmit={(e) => handleChanges(e)}>
+      <form className=" w-[40%] sm:w-full" onSubmit={(e) => handleChanges(e)}>
         <textarea
           required
           minLength={50}

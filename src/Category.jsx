@@ -33,7 +33,7 @@ const Category = () => {
     }
   };
   return (
-    <div className="h-20  mx-20 flex  ">
+    <div className="h-20  mx-20 flex sm:mx-5  ">
       <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative">
         <div
           className={`absolute  right-0  ${
@@ -91,7 +91,7 @@ const Category = () => {
           <span className="text-sm ml-2 ">Filter </span>
         </div>
 
-        <div className="w-48 ml-3 h-12  border flex items-center justify-center rounded-xl cursor-pointer ">
+        <div className="w-48 ml-3 h-12  border flex items-center justify-center rounded-xl cursor-pointer sm:hidden ">
           <span>Display before taxes</span>
         </div>
       </div>

@@ -24,8 +24,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=" h-20 flex mx-20 ">
-        <div className=" flex-1 flex items-center ">
+      <nav className=" h-20 flex mx-20 sm:mx-5 ">
+        <div className=" flex-1 flex items-center sm:hidden ">
           <div
             onClick={() => {
               navigate("/");
@@ -36,7 +36,7 @@ const Navbar = () => {
           </div>
         </div>
         <div
-          className=" flex-1 flex items-center
+          className=" flex-1 flex items-center sm:flex-initial sm:w-[70%]
       justify-center"
         >
           <input
@@ -52,12 +52,12 @@ const Navbar = () => {
               onClick={() =>
                 login ? navigate("/hoisting") : dispatch(loginOpen(true))
               }
-              className="text-sm cursor-pointer font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full"
+              className="text-sm sm:hidden cursor-pointer font-medium mx-2 hover:bg-gray-200 px-5 py-3 rounded-full"
             >
               Switch to hoisting
             </span>
 
-            <img src={global} alt="icon" />
+            <img src={global} alt="icon" className="sm:hidden" />
             <div
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="border px-3 py-2 flex items-center justify-center rounded-3xl ml-2 hover:shadow-md"

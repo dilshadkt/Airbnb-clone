@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Category />
-      <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full">
+      <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full sm:mx-5">
         {property === false ? (
           <Nomatch />
         ) : property.length === 0 ? (

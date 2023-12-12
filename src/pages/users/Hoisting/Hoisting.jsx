@@ -27,12 +27,14 @@ const Hoisting = () => {
   }, [user._id]);
 
   return (
-    <div className="m-20 ">
+    <div className="m-20 sm:m-5 ">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold ">Welcome,{user.firstName} ! </h1>
+        <h1 className="text-3xl font-semibold  sm:text-xl">
+          Welcome,{user.firstName} !{" "}
+        </h1>
 
         <div onClick={() => navigate("/become-a-host")}>
-          <Buttons width="w-[246px]" title="Complete your listing" />
+          <Buttons width="w-[246px] sm:w-fit" title="Complete your listing" />
         </div>
       </div>
       <div className="flex justify-between my-6 mt-8">
@@ -42,7 +44,7 @@ const Hoisting = () => {
         </span>
       </div>
 
-      <div className="flex ">
+      <div className="flex sm:hidden">
         <div className="border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950">
           checking out (0)
         </div>
@@ -111,20 +113,20 @@ const Hoisting = () => {
         </div>
       </div>
       <h4 className="text-xl font-medium">Resources and tips</h4>
-      <div className="my-6 flex w-full justify-between">
-        <div className="w-[23.5%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
+      <div className="my-6 flex w-full justify-between sm:flex-wrap">
+        <div className="w-[23.5%] sm:w-[48%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
           <img src={help2} alt="help one" className="w-full object-fill" />
           <h4 className="py-6">How to get piad for hosting</h4>
         </div>
-        <div className="w-[23.5%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
+        <div className="w-[23.5%] sm:w-[48%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
           <img src={help3} alt="help one" className="w-full object-fill" />
           <h4 className="py-6">How to take greate photo with your phone</h4>
         </div>
-        <div className="w-[23.5%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
+        <div className="w-[23.5%] sm:w-[48%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
           <img src={help4} alt="help one" className="w-full object-fill" />
           <h4 className="py-6">Make your home ready for customer</h4>
         </div>
-        <div className="w-[23.5%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
+        <div className="w-[23.5%] sm:w-[48%] border-2 flex flex-col items-center rounded-3xl cursor-pointer">
           <img src={help5} alt="help one" className="w-full object-fill" />
           <h4 className="py-6">How to write a listing description that work</h4>
         </div>

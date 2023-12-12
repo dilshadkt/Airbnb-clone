@@ -49,6 +49,11 @@ const SideMenu = () => {
             <div>
               <ul className="text-gray-500">
                 <li className="py-3 px-4 hover:bg-gray-200">Help Centre</li>
+                <Link to={"/hoisting"}>
+                  <li className="py-3 px-4 hover:bg-gray-200">
+                    Switch to hoisting
+                  </li>
+                </Link>
                 <li
                   onClick={() => {
                     dispatch(setLogin(false));

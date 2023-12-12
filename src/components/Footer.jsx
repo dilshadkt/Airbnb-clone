@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <>
       <div className="bg-gray-100 ">
-        <div className="flex">
+        <div className="flex sm:flex-col sm:items-center">
           <div className="flex-1 ">
             <div className=" mx-20 my-14">
               <h4 className="font-semibold text-base">Support</h4>
@@ -34,7 +34,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-initial w-[40%]">
+          <div className="flex-initial w-[40%] ">
             <div className="my-14  w-fit">
               <h4 className="font-semibold text-base">Airbnb</h4>
               <ul className="text-sm">
@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
 
         <hr className="pt-5" />
-        <div className="flex justify-between  h-16 items-center mx-20">
+        <div className="flex sm:flex-col justify-between  h-16 items-center mx-20">
           <div>
             <ul className="flex">
               <li>© 2023 Airbnb, Inc.</li>

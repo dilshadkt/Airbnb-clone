@@ -32,7 +32,7 @@ const PaymentCard = ({ night, propertyId }) => {
     }
   };
   return (
-    <div className="border  overflow-hidden h-fit p-5 w-[415px] rounded-lg sticky top-[200px] shadow-2xl bg-white">
+    <div className="border  overflow-hidden h-fit p-5 w-[415px] sm:w-[100%] rounded-lg sticky top-[200px] shadow-2xl bg-white">
       <form>
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-medium">₹{night} night</h2>

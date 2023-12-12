@@ -18,7 +18,7 @@ const Reservation = ({ item }) => {
           className="flex-1  px-3 flex items-center
        "
         >
-          <ul className="flex w-full justify-around font-medium text-gray-400">
+          <ul className="flex w-full justify-around font-medium text-gray-400 sm:text-sm">
             <li>{item?.checkInDate}</li>
             <li>{item?.checkoutDate}</li>
             <li>{item?.bookingDate}</li>

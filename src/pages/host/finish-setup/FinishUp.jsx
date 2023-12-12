@@ -38,7 +38,7 @@ const FinishUp = () => {
   };
 
   return (
-    <div className="flex mx-[15%] mt-[5%] mb-4  ">
+    <div className="flex mx-[15%] mt-[5%] mb-4 sm:flex-col-reverse sm:pb-[10%] ">
       <div className="flex-1 flex flex-col items-start justify-center">
         <h4 className="text-lg font-medium">Step 3</h4>
         <h1 className="my-6 text-5xl font-medium">Finish up and publish</h1>

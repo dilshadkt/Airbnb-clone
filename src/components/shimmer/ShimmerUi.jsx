@@ -5,7 +5,7 @@ const ShimmerUi = () => {
 
   return (
     <>
-      <div className="flex flex-wrap items-center w-full sm:m-5">
+      <div className="flex flex-wrap justify-center items-center w-full sm:m-5">
         {arr.map((item, index) => (
           <div
             key={`${item}-${index}`}

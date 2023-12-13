@@ -35,6 +35,7 @@ const Rooms = () => {
     images,
     availability,
     hostid,
+    hostName,
   } = rooms;
   const canelTrip = () => {
     setIsTrip(false);
@@ -145,7 +146,7 @@ const Rooms = () => {
           <div className="flex-1">
             <div className=" items-center justify-between flex">
               <h1 className="text-2xl">
-                Room in a heritage hotel hosted by {hostid}
+                Room in a heritage hotel hosted by {hostName}
               </h1>
               <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
                 <img

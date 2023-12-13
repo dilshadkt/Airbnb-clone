@@ -41,7 +41,6 @@ const Payment = () => {
     };
 
     const result = await axios.post("/payment/orders", totalprice);
-    console.log(result.data);
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -65,9 +64,7 @@ const Payment = () => {
           razorpaySignature: response.razorpay_signature,
         };
 
-        const result = await axios
-          .post("/payment/success", data)
-          .then(() => reservation);
+        const result = await axios.post("/payment/success", data);
 
         alert(result.data.msg);
       },

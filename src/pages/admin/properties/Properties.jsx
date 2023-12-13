@@ -12,7 +12,7 @@ const Properties = () => {
       <div className="px-3 my-[2%]">
         <h2 className="text-2xl font-semibold">Properties</h2>
       </div>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         {property.map((item) => (
           <Card data={item} status={false} />
         ))}

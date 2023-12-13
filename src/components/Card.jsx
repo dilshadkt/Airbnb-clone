@@ -29,7 +29,7 @@ const Card = ({ data }) => {
   };
   return (
     <div
-      className="flex-1 min-w-[260px]    group  lg:max-w-[20%] sm:max-w-[100%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
+      className="  group  h-full mb-10 cursor-pointer z-0 mx-3"
       onClick={() => navigate(`/rooms?id=${data._id}`)}
     >
       <div className="w-full h-80  items-center justify-center relative ">

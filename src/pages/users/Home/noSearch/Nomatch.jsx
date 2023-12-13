@@ -6,7 +6,7 @@ const Nomatch = () => {
       <div className="flex justify-center flex-col items-center">
         <img src={nofound} alt="not found" className="w-[150px]" />
         <h3 className="text-xl font-semibold">No exact matches</h3>
-        <p className="my-[5%]">
+        <p className="my-[5%] sm:px-[5%]">
           Try changing or removing some of your filters or adjusting your search
           area.
         </p>

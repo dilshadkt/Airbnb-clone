@@ -26,17 +26,18 @@ const Home = () => {
   return (
     <>
       <Category />
-      <div className="mx-[5%] my-6 flex justify-start flex-wrap h-full sm:mx-5">
+      <div>
         {property === false ? (
           <Nomatch />
         ) : property.length === 0 ? (
           <ShimmerUi />
         ) : (
           <>
-            {" "}
-            {filtered.map((item, index) => (
-              <Card data={item} key={`${index}-${index}`} />
-            ))}
+            <div className="mx-[5%] my-6 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  h-full sm:mx-5">
+              {filtered.map((item, index) => (
+                <Card data={item} key={`${index}-${index}`} />
+              ))}
+            </div>
           </>
         )}
       </div>

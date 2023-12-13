@@ -8,7 +8,7 @@ const Card = ({ data, status }) => {
   return (
     <div
       onClick={() => navigate(`listing?id=${data._id}&status=${status}`)}
-      className="flex-1 min-w-[250px]    group  lg:max-w-[20%] xl:max-w-[23.4%] md:max-w-[40%] h-full mb-10 cursor-pointer z-0 mx-3"
+      className=" h-full mb-10 cursor-pointer z-0 mx-3"
     >
       <div className="w-full h-80  items-center justify-center relative ">
         <div className="absolute w-full  opacity-0 group-hover:opacity-100    px-4 top-2/4 flex justify-between">

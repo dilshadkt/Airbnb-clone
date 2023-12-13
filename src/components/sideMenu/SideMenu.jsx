@@ -50,7 +50,7 @@ const SideMenu = () => {
               <ul className="text-gray-500">
                 <li className="py-3 px-4 hover:bg-gray-200">Help Centre</li>
                 <Link to={"/hoisting"}>
-                  <li className="py-3 px-4 hover:bg-gray-200">
+                  <li className="py-3 px-4 hover:bg-gray-200 hidden sm:flex">
                     Switch to hoisting
                   </li>
                 </Link>

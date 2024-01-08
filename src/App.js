@@ -58,7 +58,7 @@ function App() {
         .then((res) => setNotification(res.data.length));
 
     axios
-      .get("http://localhost:8080/listings")
+      .get("/listings")
       .then((data) => {
         console.log(data);
         dispatch(setProperty(data.data));

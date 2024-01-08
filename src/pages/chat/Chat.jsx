@@ -85,7 +85,7 @@ const Chat = () => {
                 <div className="text-[10px] w-full text-end">{item.time}</div>
 
                 <div
-                  className="absolute w-0 h-0 top-0 -z-10 -left-[7px] 
+                  className="absolute w-0 h-0 top-0 -z-10 -left-[7px]
 border-l-[50px] border-l-transparent
 border-t-[35px] border-t-red-500
 border-r-[10px] border-r-transparent  "

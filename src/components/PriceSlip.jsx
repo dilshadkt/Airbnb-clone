@@ -8,7 +8,7 @@ const PriceSlip = () => {
   return (
     <div className="border rounded-lg p-5 h-fit w-[440px] sticky top-32 shadow-xl">
       <div className="pb-5 flex">
-        <div className="flex-initial w-[30%] bg-red-400 h-28">
+        <div className="flex-initial w-[30%] bg-gray-200 h-28">
           <img
             src={currentImg}
             alt="room "

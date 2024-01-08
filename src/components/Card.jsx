@@ -18,14 +18,29 @@ const Card = ({ data }) => {
   const [currentImg, setCurrentImage] = useState(0);
   const navigate = useNavigate();
   const addTowhishList = (id) => {
-    setIsLliked((prev) => [...prev, id]);
-    axios
-      .post(`/addWishList/${user._id}?propertyId=${id}`)
-      .then((res) => {
-        setIsLliked(res.data);
-        localStorage.setItem("like", JSON.stringify(res.data));
-      })
-      .catch((err) => console.log(err));
+    if (isLiked.includes(id)) {
+      const filterd = isLiked.filter((item) => item !== id);
+      setIsLliked(filterd);
+      axios
+        .delete(`/addWishList/${user._id}?propertyId=${id}`)
+        .then((res) => {
+          setIsLliked(res.data.map((item) => item.propertyId));
+          localStorage.setItem(
+            "like",
+            JSON.stringify(res.data.map((item) => item.propertyId))
+          );
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setIsLliked((prev) => [...prev, id]);
+      axios
+        .post(`/addWishList/${user._id}?propertyId=${id}`)
+        .then((res) => {
+          setIsLliked(res.data);
+          localStorage.setItem("like", JSON.stringify(res.data));
+        })
+        .catch((err) => console.log(err));
+    }
   };
   return (
     <div

@@ -1,18 +1,25 @@
-import React, { useContext } from "react";
-import left from "../../../asset/svg/leftArrow.svg";
-import PriceSlip from "../../../components/PriceSlip";
-import MyContext from "../../../components/contex/Mycontex";
-import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import left from "../../../asset/svg/leftArrow.svg";
+import MyContext from "../../../components/contex/Mycontex";
+import PriceSlip from "../../../components/PriceSlip";
 import { loginOpen } from "../../../store/slice/Auth";
 const Payment = () => {
   const dispatch = useDispatch();
   const login = useSelector((store) => store.user.isLogin);
   const [queryParam] = useSearchParams();
   const user = useSelector((store) => store.user.user);
-  const { checkIn, guest } = useContext(MyContext);
+  const [owner, setOwner] = useState({});
+  const { startDate, guest, endDate } = useContext(MyContext);
+  useEffect(() => {
+    axios
+      .get(`/listings/user/${queryParam.get("propertyId")}`)
+      .then((res) => setOwner(res.data))
+      .catch((err) => console.log(err));
+  }, [queryParam]);
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -49,7 +56,7 @@ const Payment = () => {
     const { amount, id: order_id, currency } = result.data;
 
     const options = {
-      key: "rzp_test_pggV8wnOYabOW4", // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_8c2zeWAe00TVFz", // Enter the Key ID generated from the Dashboard
       amount: amount.toString(),
       currency: currency,
       name: "Dilshad KT",
@@ -66,12 +73,14 @@ const Payment = () => {
 
         const result = await axios.post("/payment/success", data);
 
-        alert(result.data.msg);
+        if (result.data.msg === "success") {
+          reservation();
+        }
       },
       prefill: {
-        name: "Dilshad",
-        email: "dilshad@example.com",
-        contact: "9526558430",
+        name: owner.firstName,
+        email: owner.email,
+        contact: owner.phone,
       },
       notes: {
         address: "Dilshad near college",
@@ -85,31 +94,26 @@ const Payment = () => {
     paymentObject.open();
   }
 
-  const navigate = useNavigate();
   const reservation = () => {
     const data = {
       guestId: user._id,
       listingId: queryParam.get("propertyId"),
-      checkInDate: queryParam.get("checkin"),
-      checkoutDate: queryParam.get("chekout"),
+      checkInDate: JSON.stringify(startDate),
+      checkoutDate: JSON.stringify(endDate),
       totalPrice: queryParam.get("totalPrice"),
       bookingDate: new Date().toJSON().slice(0, 10),
     };
     axios
       .post(`/book/stay/${user._id}`, data)
-      .then((res) => {
+      .then(() => {
         toast.success("succesfully ordered", {
           position: toast.POSITION.TOP_CENTER,
         });
-        navigate("/");
-        console.log(res);
       })
       .catch((err) => console.log(err));
   };
   return (
     <>
-      {/* <Navbar /> */}
-      <hr />
       <div className="mx-48 sm:mx-5 my-8 flex sm:flex-col">
         <div className="flex-1  flex flex-col ">
           <div className="flex items-center">
@@ -121,7 +125,13 @@ const Payment = () => {
             <div className="flex  justify-between  my-5 items-start">
               <div className="flex flex-col  ">
                 <h4 className="font-medium">Dates</h4>
-                <span className="text-sm">{checkIn ? checkIn : "date"}</span>
+                <span className="text-sm">
+                  {startDate
+                    ? `${startDate.getDate()} / ${
+                        startDate.getMonth() + 1
+                      } / ${startDate.getFullYear()}`
+                    : "date"}
+                </span>
               </div>
               <div className="flex items-start    ">
                 <span className="font-medium underline cursor-pointer">
@@ -233,7 +243,6 @@ const Payment = () => {
           <PriceSlip />
         </div>
       </div>
-      {/* <FooterLabel /> */}
     </>
   );
 };

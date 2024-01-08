@@ -34,12 +34,12 @@ import NewProperty from "./pages/admin/newProperty/NewProperty";
 import Listing from "./pages/admin/listing/Listing";
 import ManageLIst from "./pages/manage-list/ManageLIst";
 import Trips from "./pages/users/trips/Trips";
-import Chat from "./pages/chat/Chat";
+// import Chat from "./pages/chat/Chat";
 import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
 import AdminHome from "./pages/admin/Home/AdminHome";
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,8 +58,9 @@ function App() {
         .then((res) => setNotification(res.data.length));
 
     axios
-      .get("/listings")
+      .get("http://localhost:8080/listings")
       .then((data) => {
+        console.log(data);
         dispatch(setProperty(data.data));
       })
       .catch((err) => console.log(err));
@@ -67,10 +68,12 @@ function App() {
 
   const [whilList, setWhishList] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+  );
   const [totalDays, setTotalDays] = useState(1);
-  const [guest, setGuest] = useState("");
+  const [guest, setGuest] = useState(1);
   const [isLiked, setIsLliked] = useState([]);
   const [notification, setNotification] = useState(0);
   const [isUserBoxOpen, setIsUserBox] = useState(true);
@@ -80,10 +83,10 @@ function App() {
     setWhishList,
     isMenuOpen,
     setIsMenuOpen,
-    checkIn,
-    setCheckIn,
-    checkOut,
-    setCheckOut,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
     totalDays,
     setTotalDays,
     guest,
@@ -105,7 +108,7 @@ function App() {
             <Route path="/hoisting" element={<Hoisting />} />
             <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/trips" element={<Trips />} />
-            <Route path="/chats" element={<Chat />} />
+            {/* <Route path="/chats" element={<Chat />} /> */}
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />

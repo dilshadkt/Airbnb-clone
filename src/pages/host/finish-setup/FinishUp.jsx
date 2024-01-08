@@ -13,10 +13,10 @@ const FinishUp = () => {
   const PostData = () => {
     setIsFinishDisable(true);
     const data = new FormData();
-    Object.keys(form).forEach((key) => {
-      data.append(key, form[key]);
-    });
-
+    // Object.keys(form).forEach((key) => {
+    //   data.append(key, form[key]);
+    // });
+    data.append("property", JSON.stringify(form));
     for (let i = 0; i < form.image.length; i++) {
       data.append("photos", form.image[i]);
     }

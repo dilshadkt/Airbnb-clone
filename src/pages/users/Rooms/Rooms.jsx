@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import save from "../../../asset/svg/save.svg";
 import share from "../../../asset/svg/share.svg";
-import bed from "../../../asset/svg/bed.svg";
 import heritage from "../../../asset/svg/heritage.svg";
 import Host from "../../../components/Host";
 import Offers from "../../../components/Offers";
@@ -24,7 +23,6 @@ const Rooms = () => {
   const [serchParams] = useSearchParams();
   const [isTrip, setIsTrip] = useState(false);
   const type = serchParams.get("id");
-
   const {
     bedrooms,
     maxGuest,
@@ -162,19 +160,7 @@ const Rooms = () => {
               <span className="mx-2">7 beds</span>
               {bathrooms} bathrooms
             </div>
-            <div className="flex justify-start my-6">
-              {availability.map((item, index) => (
-                <div
-                  key={index}
-                  className="border px-[8%] py-[2%] items-center mr-2 justify-center rounded-lg"
-                >
-                  <div className="flex items-center ">
-                    <img src={bed} alt="bed" />
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+
             <hr />
             <div className="my-5">
               <div className="flex">
@@ -244,6 +230,7 @@ const Rooms = () => {
               night={pricePeNight}
               maxGuest={maxGuest}
               propertyId={queryParams.get("id")}
+              availability={availability}
             />
           </div>
         </div>

@@ -1,36 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Buttons from "./Buttons";
 import MyContext from "./contex/Mycontex";
 
-const PaymentCard = ({ night, propertyId }) => {
+const PaymentCard = ({ night, propertyId, availability }) => {
+  const excludedDate = availability.map(
+    (item) =>
+      item && {
+        start: new Date(JSON.parse(item.checkIn)),
+        end: new Date(JSON.parse(item.checkOut)),
+      }
+  );
+
   const {
+    startDate,
+    endDate,
     checkIn,
-    setCheckIn,
+    setStartDate,
     checkOut,
-    setCheckOut,
+    setEndDate,
     totalDays,
     setTotalDays,
     setGuest,
   } = useContext(MyContext);
+  useEffect(() => {
+    const calculateTotalDays = (checkInDate, checkOutDate) => {
+      const timeDiffrence = checkOutDate.getTime() - checkInDate.getTime();
+      const dayDiffrence = timeDiffrence / (1000 * 60 * 60 * 24);
 
-  const handleCheckInChange = (e) => {
-    setCheckIn(e.target.value);
-    calculateTotalDays(e.target.value, checkOut);
-  };
+      setTotalDays(Math.round(dayDiffrence));
+    };
+    calculateTotalDays(startDate, endDate);
+  }, [startDate, endDate, setTotalDays]);
 
-  const handleCheckOutChange = (e) => {
-    setCheckOut(e.target.value);
-    calculateTotalDays(checkIn, e.target.value);
-  };
-  const calculateTotalDays = (checkInDate, checkOutDate) => {
-    if (checkInDate && checkOutDate) {
-      const startDate = new Date(checkInDate);
-      const endDate = new Date(checkOutDate);
-      const timeDifference = endDate - startDate;
-      const daysDifference = timeDifference / (1000 * 3600 * 24);
-      setTotalDays(daysDifference);
-    }
-  };
   return (
     <div className="border  overflow-hidden h-fit p-5 w-[415px] sm:w-[100%] rounded-lg sticky top-[200px] shadow-2xl bg-white">
       <form>
@@ -43,12 +46,25 @@ const PaymentCard = ({ night, propertyId }) => {
             <div className="flex-1 border p-3">
               <h3 className="font-medium">CHECK-IN</h3>
               <span>
-                <input type="date" onChange={handleCheckInChange} />
+                <span>
+                  <DatePicker
+                    showIcon
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    excludeDateIntervals={excludedDate}
+                  />
+                </span>
               </span>
             </div>
             <div className="flex-1 borde p-3 ">
               <h3 className="font-medium">CHECK-OUT</h3>
-              <input type="date" onChange={handleCheckOutChange} required />
+
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                excludeDateIntervals={excludedDate}
+              />
             </div>
           </div>
           <div className=" border p-3">
@@ -56,7 +72,7 @@ const PaymentCard = ({ night, propertyId }) => {
             <span className="w-full">
               <select
                 className="w-full py-2"
-                onChange={(e) => console.log(setGuest(e.target.value))}
+                onChange={(e) => setGuest(e.target.value)}
               >
                 <option value={0}>guest</option>
                 <option value={1}>1 guest</option>

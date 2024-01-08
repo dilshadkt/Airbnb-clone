@@ -63,20 +63,23 @@ const Navbar = () => {
               className="border px-3 py-2 flex items-center justify-center rounded-3xl ml-2 hover:shadow-md"
             >
               <img src={threedot} alt="icons" />
+
               <div className="rounded-full w-7 h-7  bg-black flex items-center justify-center ml-2 relative cursor-pointer">
                 {login ? (
                   <>
                     <span className="text-white ">
                       {NewUser?.firstName[0]?.toUpperCase()}
                     </span>
+                    <div
+                      className={`absolute  ${
+                        notification === 80 && `hidden`
+                      } -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white`}
+                    >
+                      {notification}
+                    </div>
                   </>
                 ) : (
                   <img src={userIcon} alt="icon" className="rounded-full" />
-                )}
-                {notification && (
-                  <div className="absolute -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white">
-                    {notification}
-                  </div>
                 )}
 
                 {isMenuOpen && <SideMenu />}
@@ -91,13 +94,7 @@ const Navbar = () => {
         ) : (
           <>{(document.body.style.overflowY = "")}</>
         )}
-        {signBox ? (
-          <>
-            <SignUp />
-          </>
-        ) : (
-          ""
-        )}
+        {signBox && <SignUp />}
       </nav>
       <hr />
     </>

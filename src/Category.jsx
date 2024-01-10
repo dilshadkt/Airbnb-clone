@@ -33,7 +33,7 @@ const Category = () => {
     }
   };
   return (
-    <div className="h-20  mx-20 flex sm:mx-5  ">
+    <div className="h-20  px-20 flex sm:mx-5  shadow-md ">
       <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative">
         <div
           className={`absolute  right-0  ${
@@ -74,7 +74,7 @@ const Category = () => {
                   {item.title}
                 </span>
               </div>
-              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-red-400 h-[3px]"></div>
+              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-gray-300 h-[3px]"></div>
             </div>
           ))}
         </div>

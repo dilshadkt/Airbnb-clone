@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../../components/Card";
-import Category from "../../../Category";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 import { useSelector } from "react-redux";
 import Nomatch from "./noSearch/Nomatch";
@@ -19,7 +18,6 @@ const Home = () => {
   }, [property, newSearch]);
   return (
     <>
-      <Category />
       <div>
         {property === false ? (
           <Nomatch />

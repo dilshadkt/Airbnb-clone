@@ -5,6 +5,7 @@ import AuthSlice from "./slice/Auth";
 import PaymentSlice from "./slice/payment";
 import User from "./slice/User";
 import FormSlice from "./slice/FormSlice";
+import InteractionSlice from "./slice/InteractionSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     auth: AuthSlice,
     payment: PaymentSlice,
     formdata: FormSlice,
+    interaction: InteractionSlice,
   },
 });
 export default store;

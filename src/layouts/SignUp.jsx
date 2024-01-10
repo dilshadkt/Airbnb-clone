@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import MyContext from "../../components/contex/Mycontex";
-import axios from "axios";
+import axios from "../config/axiosConfig";
 
 const SignUp = () => {
   const { setSignOpen } = useContext(MyContext);

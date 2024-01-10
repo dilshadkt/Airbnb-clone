@@ -4,6 +4,8 @@ const authSlice = createSlice({
   initialState: {
     login: false,
     signin: false,
+    forgetPassword: false,
+    token: localStorage.getItem("token") || null,
   },
   reducers: {
     loginOpen: (state, action) => {
@@ -12,7 +14,15 @@ const authSlice = createSlice({
     singInOpen: (state, action) => {
       state.signin = action.payload;
     },
+    forgetOpen: (state, action) => {
+      state.forgetPassword = action.payload;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+      localStorage.setItem("token", action.payload);
+    },
   },
 });
-export const { loginOpen, singInOpen } = authSlice.actions;
+export const { loginOpen, singInOpen, forgetOpen, setToken } =
+  authSlice.actions;
 export default authSlice.reducer;

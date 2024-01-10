@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import axios from "../../config/axiosConfig";
 import { singInOpen } from "../../store/slice/Auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { setLogin, setUser } from "../../store/slice/User";

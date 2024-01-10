@@ -18,7 +18,7 @@ import Structure from "./pages/host/structure/Structure";
 import PrivacyType from "./pages/host/privacy-type/PrivacyType";
 import Location from "./pages/host/location/Location";
 import FloorPlan from "./pages/host/floor-plan/FloorPlan";
-import axios from "axios";
+import axios from "./config/axiosConfig";
 import StandOut from "./pages/host/stand-out/StandOut";
 import Amenities from "./pages/host/amenities/Amenities";
 import Photos from "./pages/host/photos/Photos";
@@ -39,7 +39,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
 import AdminHome from "./pages/admin/Home/AdminHome";
-axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
+
+// axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
 
   const user = useSelector((store) => store.user.user);
   const isLogin = useSelector((store) => store.user.isLogin);
+
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("NewUser"));
     const liked = JSON.parse(localStorage.getItem("like"));
@@ -54,13 +56,15 @@ function App() {
     userdata && dispatch(setUser(userdata));
     isLogin &&
       axios
-        .get(`/book/stay/${user._id}`)
-        .then((res) => setNotification(res.data.length));
+        .get(`/book/stay`)
+        .then((res) => {
+          setNotification(res.data.length);
+        })
+        .catch((err) => console.log(err));
 
     axios
       .get("/listings")
       .then((data) => {
-        console.log(data);
         dispatch(setProperty(data.data));
       })
       .catch((err) => console.log(err));

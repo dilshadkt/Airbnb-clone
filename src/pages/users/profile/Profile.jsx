@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import tick from "../../../asset/svg/tick.svg";
 import Buttons from "../../../components/Buttons";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import axios from "axios";
-import { AuthToken } from "../../../axios/AuthToken";
+import axios from "../../../config/axiosConfig";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 import cancel from "../../../asset/svg/cancel.svg";
 
@@ -12,9 +11,6 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [profile, setProfile] = useState();
   const data = new FormData();
-
-  const token = localStorage.getItem("token");
-  AuthToken(token);
 
   useEffect(() => {
     axios
@@ -30,7 +26,7 @@ const Profile = () => {
     data.append("photos", image[0]);
     image && console.log("ind");
     axios
-      .patch(`user/${user._id}`, data)
+      .patch(`user`, data)
       .then((res) => {
         setProfile(res.data);
         setImage(null);

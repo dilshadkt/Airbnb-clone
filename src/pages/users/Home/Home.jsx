@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../../components/Card";
 import Category from "../../../Category";
-import { AuthToken } from "../../../axios/AuthToken";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 import { useSelector } from "react-redux";
 import Nomatch from "./noSearch/Nomatch";
@@ -9,13 +8,8 @@ import Nomatch from "./noSearch/Nomatch";
 const Home = () => {
   const property = useSelector((store) => store.property.property);
   const newSearch = useSelector((store) => store.search.search);
-  const login = useSelector((store) => store.user.isLogin);
   const [filtered, setFiltered] = useState(property);
 
-  useEffect(() => {
-    const token = login && localStorage.getItem("token");
-    token && AuthToken(token);
-  }, [login]);
   useEffect(() => {
     if (property === false) return setFiltered([]);
     const filtered = property.filter((item) =>

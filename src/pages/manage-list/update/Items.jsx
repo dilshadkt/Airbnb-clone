@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 const Items = ({ list, item }) => {
   const key = Object.keys(item).toString();
   const value = Object.values(item).toString();

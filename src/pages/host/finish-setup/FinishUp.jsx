@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import { useSelector } from "react-redux";
 const FinishUp = () => {
   const navigate = useNavigate();

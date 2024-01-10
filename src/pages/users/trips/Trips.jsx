@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import cancel from "../../../asset/svg/cancel.svg";
 import { useNavigate } from "react-router-dom";
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
@@ -11,7 +11,7 @@ const Trips = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`/book/trip/${user._id}`)
+      .get(`/book/trip`)
       .then((res) => {
         setTrips(res.data);
         console.log(res.data);

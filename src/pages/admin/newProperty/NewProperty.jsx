@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ShimmerUi from "../../../components/shimmer/ShimmerUi";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import Card from "../properties/card/Card";
 
 const NewProperty = () => {
@@ -17,8 +17,8 @@ const NewProperty = () => {
         <h2 className="text-2xl font-semibold">Properties</h2>
       </div>
       <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-        {newProperty.map((item) => (
-          <Card data={item} status={true} />
+        {newProperty.map((item, index) => (
+          <Card key={index} data={item} status={true} />
         ))}
       </div>
     </div>

@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import google from "../../asset/svg/google.svg";
 import { useGoogleLogin } from "@react-oauth/google";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import axios from "../../config/axiosConfig";
 import { useDispatch } from "react-redux";
 import { setUser, setLogin } from "../../store/slice/User";
-import { loginOpen } from "../../store/slice/Auth";
-
+import { loginOpen, forgetOpen, setToken } from "../../store/slice/Auth";
+import { setLike } from "../../store/slice/InteractionSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const [googleUser, setGoogleUser] = useState([]);
   const [userName, setUseName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   useEffect(() => {
     //////  GOOGLE AUTH AUTHENTICATION 🚀🚀//////////
     const googleSignUp = (data) => {
@@ -23,10 +23,15 @@ const Login = () => {
           dispatch(loginOpen(false));
           dispatch(setUser(res.data.user));
           dispatch(setLogin(true));
-          localStorage.setItem("like", JSON.stringify(res.data.propertyId));
+
+          dispatch(setLike(JSON.stringify(res.data.propertyId)));
+          console.log(res.data.propertyId);
+          // dispatch(setToken(res.data.toke));
+          dispatch(setToken(res.data.token));
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
-          window.location.reload();
+
+          // window.location.reload();
         })
         .catch((err) => console.log(err));
     };
@@ -54,6 +59,7 @@ const Login = () => {
     axios
       .post("/user/signin", { userName, password })
       .then((res) => {
+        window.location.reload();
         dispatch(loginOpen(false));
         dispatch(setUser(res.data.user));
         dispatch(setLogin(true));
@@ -61,25 +67,28 @@ const Login = () => {
         localStorage.setItem("like", JSON.stringify(res.data.propertyId));
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("NewUser", JSON.stringify(res.data.user));
-        window.location.reload();
+        setError(null);
       })
       .catch((err) => {
-        notify(err.response.data);
+        setError(err.response.data);
       });
   };
-  const notify = (err) =>
-    toast.warning(err, {
-      position: toast.POSITION.TOP_CENTER,
-    });
+
   ///////////// LOGIN FUNCTION ///////////
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setGoogleUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
+
+  ////////// Forget Password ///////////
+  const forgetPassword = () => {
+    dispatch(loginOpen(false));
+    dispatch(forgetOpen(true));
+  };
   return (
     <>
       <div className="fixed top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-30 flex items-center justify-center"></div>
-      <div className="fixed top-0 left-0 bottom-0 right-0 m-auto bg-white z-40 w-[30%] sm:w-[90%] h-[50%] rounded-2xl  overflow-hidden">
+      <div className="fixed top-0 left-0 bottom-0 right-0 m-auto bg-white z-40 w-[30%] py-5 sm:w-[90%] h-fit rounded-2xl  overflow-hidden">
         <div className="flex-intial h-[13%]  flex items-center">
           <div className="px-5 flex justify-between w-full">
             <div className="flex-1">
@@ -113,7 +122,17 @@ const Login = () => {
               placeholder="password"
               className="w-full p-3 border rounded-lg my-3    "
             />
-            <ToastContainer />
+            {error && (
+              <>
+                <p className="text-red-500 text-sm mb-2"> {error}</p>
+                <span
+                  onClick={() => forgetPassword()}
+                  className="text-sm font-semibold  cursor-pointer"
+                >
+                  forget Password ?
+                </span>
+              </>
+            )}
 
             <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
               Login

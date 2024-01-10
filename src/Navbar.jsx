@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "./store/slice/SearchSlice";
 import { loginOpen } from "./store/slice/Auth";
+import ForgetPassword from "./pages/login/ForgetPassword";
 
 const Navbar = () => {
   const NewUser = useSelector((store) => store.user.user);
   const login = useSelector((store) => store.user.isLogin);
   const loginBox = useSelector((store) => store.auth.login);
   const signBox = useSelector((store) => store.auth.signin);
+  const forgetPassword = useSelector((store) => store.auth.forgetPassword);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ const Navbar = () => {
                     </span>
                     <div
                       className={`absolute  ${
-                        notification === 80 && `hidden`
+                        notification === 0 && `hidden`
                       } -top-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-white`}
                     >
                       {notification}
@@ -95,6 +97,7 @@ const Navbar = () => {
           <>{(document.body.style.overflowY = "")}</>
         )}
         {signBox && <SignUp />}
+        {forgetPassword && <ForgetPassword />}
       </nav>
       <hr />
     </>

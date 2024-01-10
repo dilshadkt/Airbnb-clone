@@ -8,7 +8,7 @@ import Offers from "../../../components/Offers";
 import left from "../../../asset/svg/leftArrow.svg";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 const Listing = () => {
   const [serchParams] = useSearchParams();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -222,8 +222,8 @@ const Listing = () => {
         </div>
         <div className="my-9 flex justify-center">
           <div className="w-2/4 bg-red-500 h-fit">
-            {rooms?.images?.map((item) => (
-              <div className="w-full">
+            {rooms?.images?.map((item, index) => (
+              <div key={index} className="w-full">
                 <img src={item} alt="gallery" className="w-full" />
               </div>
             ))}

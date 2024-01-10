@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cancel from "../asset/svg/cancel.svg";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../config/axiosConfig";
 import { useDispatch } from "react-redux";
 import { setProperty } from "../store/slice/PropertySlice";
 
@@ -59,12 +59,12 @@ const FilterMenu = ({ filter }) => {
           <h5 className="text-sm font-light mt-1">
             Search rooms, entire homes or any type of place.
           </h5>
-          <div className="flex items-center justify-center py-6 mx-[10%]">
+          <div className="flex items-center justify-center py-6 mx-[8%]">
             <div className=" my-3 flex w-full rounded-2xl ">
               {roomType.map((item) => (
                 <div
                   onClick={() => (type === item ? setType([]) : setType(item))}
-                  className={`hover:border-red-500 flex items-center justify-center rounded-2xl rounded-bl-2xl text-xl font-semibold flex-1 p-6  border ${
+                  className={`hover:border-red-500 mx-1 flex items-center justify-center rounded-2xl rounded-bl-2xl text-xl font-semibold flex-1 p-6  border ${
                     type === item && `bg-black text-white`
                   }`}
                 >

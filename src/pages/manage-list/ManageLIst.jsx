@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../config/axiosConfig";
 import React, { useEffect, useState } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
@@ -12,7 +12,7 @@ const ManageLIst = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     axios
-      .get(`/listings/manageList/${user._id}`)
+      .get(`/listings/manageList`)
       .then((res) => {
         setList(res.data);
         console.log(res.data);

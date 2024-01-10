@@ -9,7 +9,7 @@ import PaymentCard from "../../../components/PaymentCard";
 import Amenties from "../../../components/Amenties";
 import left from "../../../asset/svg/leftArrow.svg";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
 import { useSelector, useDispatch } from "react-redux";
 import { setImg } from "../../../store/slice/payment";

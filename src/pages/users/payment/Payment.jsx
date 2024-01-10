@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -104,7 +104,7 @@ const Payment = () => {
       bookingDate: new Date().toJSON().slice(0, 10),
     };
     axios
-      .post(`/book/stay/${user._id}`, data)
+      .post(`/book/stay`, data)
       .then(() => {
         toast.success("succesfully ordered", {
           position: toast.POSITION.TOP_CENTER,

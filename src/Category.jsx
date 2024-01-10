@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import roundeArrow from "./asset/svg/roundeArrow.svg";
 import { data } from "./asset/host/data";
-import axios from "axios";
+import axios from "./config/axiosConfig";
 import filter from "./asset/svg/fiter.svg";
 import { useDispatch } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";

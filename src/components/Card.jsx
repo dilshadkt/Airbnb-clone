@@ -5,39 +5,35 @@ import rating from "../asset/svg/rating.svg";
 import arrow from "../asset/svg/Arrow.svg";
 import LikeHeart from "../asset/card/LikeHeart";
 import MyContext from "./contex/Mycontex";
-import axios from "axios";
+import axios from "../config/axiosConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { loginOpen } from "../store/slice/Auth";
-
+import { setLike } from "../store/slice/InteractionSlice";
 const Card = ({ data }) => {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user.user);
   const login = useSelector((store) => store.user.isLogin);
   const { isLiked, setIsLliked } = useContext(MyContext);
-
   const [currentImg, setCurrentImage] = useState(0);
   const navigate = useNavigate();
   const addTowhishList = (id) => {
     if (isLiked.includes(id)) {
       const filterd = isLiked.filter((item) => item !== id);
+
       setIsLliked(filterd);
       axios
-        .delete(`/addWishList/${user._id}?propertyId=${id}`)
+        .delete(`/addWishList?propertyId=${id}`)
         .then((res) => {
-          setIsLliked(res.data.map((item) => item.propertyId));
-          localStorage.setItem(
-            "like",
-            JSON.stringify(res.data.map((item) => item.propertyId))
+          dispatch(
+            setLike(JSON.stringify(res.data.map((item) => item.propertyId)))
           );
         })
         .catch((err) => console.log(err));
     } else {
       setIsLliked((prev) => [...prev, id]);
       axios
-        .post(`/addWishList/${user._id}?propertyId=${id}`)
+        .post(`/addWishList?propertyId=${id}`)
         .then((res) => {
-          setIsLliked(res.data);
-          localStorage.setItem("like", JSON.stringify(res.data));
+          dispatch(setLike(JSON.stringify(res.data)));
         })
         .catch((err) => console.log(err));
     }

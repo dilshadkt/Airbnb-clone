@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import Navigater from "../../../components/host-navigater/Navigater";
 import { useForm } from "react-hook-form";
 import { setForm } from "../../../store/slice/FormSlice";

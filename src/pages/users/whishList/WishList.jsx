@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import MyContext from "../../../components/contex/Mycontex";
+import axios from "../../../config/axiosConfig";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import WishListCard from "../../../components/WishListCard";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import WishShimmer from "../../../components/shimmer/usreList/WishShimmer";
+import { setLike } from "../../../store/slice/InteractionSlice";
+
 const WishList = () => {
   const user = useSelector((store) => store.user.user);
-  const { setIsLliked } = useContext(MyContext);
-
   const [data, setData] = useState([]);
+  const dipatch = useDispatch();
   useEffect(() => {
     axios
       .get(`/addWishList/${user._id}`)
@@ -20,13 +20,11 @@ const WishList = () => {
   const remove = (id) => {
     setData((prev) => prev.filter((item) => item.propertyId !== id));
     axios
-      .delete(`/addWishList/${user._id}?propertyId=${id}`)
+      .delete(`/addWishList?propertyId=${id}`)
       .then((res) => {
         setData(res.data);
-        setIsLliked(res.data.map((item) => item.propertyId));
-        localStorage.setItem(
-          "like",
-          JSON.stringify(res.data.map((item) => item.propertyId))
+        dipatch(
+          setLike(JSON.stringify(res.data.map((item) => item.propertyId)))
         );
       })
       .catch((err) => console.log(err));

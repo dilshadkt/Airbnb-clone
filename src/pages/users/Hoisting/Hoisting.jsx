@@ -7,7 +7,7 @@ import help3 from "../../../asset/stuff/Rectangle 42.png";
 import help4 from "../../../asset/stuff/Rectangle 44.png";
 import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 import Reservation from "./reservation/Reservation";
 
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
@@ -18,13 +18,13 @@ const Hoisting = () => {
 
   useEffect(() => {
     axios
-      .get(`/book/stay/${user._id}`)
+      .get(`/book/stay`)
       .then((res) => {
         console.log(res.data);
         setReservation(res.data);
       })
       .catch((err) => console.log(err));
-  }, [user._id]);
+  }, []);
 
   return (
     <div className="m-20 sm:m-5 ">

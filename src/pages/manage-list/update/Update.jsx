@@ -3,7 +3,7 @@ import cancel from "../../../asset/svg/cancel.svg";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Items from "./Items";
-import axios from "axios";
+import axios from "../../../config/axiosConfig";
 const Update = ({ list, cancelFun }) => {
   const [editImg, setEditImg] = useState(false);
   const [selected, setSelected] = useState(null);

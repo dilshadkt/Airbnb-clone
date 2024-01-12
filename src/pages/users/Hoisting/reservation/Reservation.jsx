@@ -19,10 +19,10 @@ const Reservation = ({ item }) => {
        "
         >
           <ul className="flex w-full justify-around font-medium text-gray-400 sm:text-sm">
-            <li>{item?.checkInDate}</li>
-            <li>{item?.checkoutDate}</li>
+            <li>{new Date(JSON.parse(item.checkInDate)).toDateString()}</li>
+            <li>{new Date(JSON.parse(item.checkoutDate)).toDateString()}</li>
             <li>{item?.bookingDate}</li>
-            <li className="underline">{item?.totalPrice}₹</li>
+            <li className="underline">₹{item?.totalPrice}</li>
           </ul>
         </div>
       </div>

@@ -18,13 +18,12 @@ const Profile = () => {
       .then((res) => {
         setUser(res.data);
         setProfile(user.profilePicture);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, [user.profilePicture]);
   const uploadUserImage = (e) => {
     data.append("photos", image[0]);
-    image && console.log("ind");
+
     axios
       .patch(`user`, data)
       .then((res) => {

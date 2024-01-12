@@ -3,7 +3,7 @@ import star from "../asset/svg/rating.svg";
 import global from "../asset/svg/global.svg";
 import { useNavigate } from "react-router-dom";
 
-const Host = ({ userIcon, hostid }) => {
+const Host = ({ userIcon, hostid, hostName }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -15,13 +15,17 @@ const Host = ({ userIcon, hostid }) => {
               <div className="flex-1  flex items-center justify-end">
                 <div className=" flex flex-col items-center">
                   <div className="w-28 h-28 rounded-full overflow-hidden flex items-center justify-center">
-                    <img
-                      src={userIcon}
-                      alt="person logo"
-                      className="w-full h-full object-fill"
-                    />
+                    {userIcon ? (
+                      <img
+                        src={userIcon}
+                        alt="person logo"
+                        className="w-full h-full object-fill"
+                      />
+                    ) : (
+                      <p></p>
+                    )}
                   </div>
-                  <h4 className="font-semibold">Dilshad</h4>
+                  <h4 className="font-semibold">{hostName}</h4>
                   <span>host</span>
                 </div>
               </div>

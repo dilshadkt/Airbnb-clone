@@ -7,7 +7,7 @@ const FinishUp = () => {
   const user = useSelector((store) => store.user.user);
   const form = useSelector((store) => store.formdata.form);
 
-  console.log(form);
+  // console.log(form);
 
   const [isFinishDisable, setIsFinishDisable] = useState(false);
   const PostData = () => {
@@ -22,7 +22,7 @@ const FinishUp = () => {
     }
 
     axios
-      .post(`/listings/become-a-host?userId=${user._id}`, data, {
+      .post(`/listings/become-a-host`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

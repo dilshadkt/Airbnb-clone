@@ -9,22 +9,71 @@ import help5 from "../../../asset/stuff/Rectangle 45.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../config/axiosConfig";
 import Reservation from "./reservation/Reservation";
-
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
+import notfound from "./not.png";
+
 const Hoisting = () => {
   const [resrvation, setReservation] = useState([]);
+  const [fileterdReservation, setFilteredReservation] = useState([]);
+  const [checkout, setCheckout] = useState(0);
+  const [currenlty, setCurrently] = useState(0);
+  const [arrving, setArriving] = useState(0);
+  const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("NewUser"));
 
+  const checkingOut = (e) => {
+    const text = e.target.textContent.split(" ")[0];
+    setSelected(text);
+    switch (text) {
+      case "checking":
+        setFilteredReservation(checkout);
+        break;
+      case "Currently":
+        setFilteredReservation(currenlty);
+        break;
+      case "Arriving":
+        setFilteredReservation(arrving);
+        break;
+      case "Pending":
+        setFilteredReservation(null);
+        break;
+      default:
+        setFilteredReservation(resrvation);
+    }
+  };
   useEffect(() => {
     axios
       .get(`/book/stay`)
       .then((res) => {
-        console.log(res.data);
         setReservation(res.data);
+        console.log(res.data);
+
+        setFilteredReservation(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
+  useEffect(() => {
+    let dateObj = new Date();
+    const checkouts = resrvation?.filter(
+      (item) =>
+        new Date(JSON.parse(item.checkoutDate)).toDateString() >
+        new Date().toDateString()
+    );
+    setCheckout(checkouts);
+    const currentlys = resrvation?.filter(
+      (item) =>
+        new Date(JSON.parse(item.checkInDate)).toDateString() ===
+        new Date().toDateString()
+    );
+    setCurrently(currentlys);
+    const arriving = resrvation?.filter(
+      (item) =>
+        new Date(JSON.parse(item.checkInDate)) <
+        dateObj.setDate(dateObj.getDate() + 7)
+    );
+    setArriving(arriving);
+  }, [resrvation]);
 
   return (
     <div className="m-20 sm:m-5 ">
@@ -39,22 +88,47 @@ const Hoisting = () => {
       </div>
       <div className="flex justify-between my-6 mt-8">
         <h4 className="  text-xl font-medium">Your reservations</h4>
-        <span className="underline font-medium cursor-pointer">
+        <span
+          onClick={() => {
+            setFilteredReservation(resrvation);
+          }}
+          className="underline font-medium cursor-pointer"
+        >
           All reservation ({resrvation.length})
         </span>
       </div>
 
       <div className="flex sm:hidden">
-        <div className="border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950">
-          checking out (0)
+        <div
+          onClick={(e) => checkingOut(e)}
+          className={`${
+            selected.includes("checking") && `bg-black text-white`
+          } border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950`}
+        >
+          checking out <span className="font-medium">({checkout.length})</span>
         </div>
-        <div className="border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950">
-          Currently hosting (0)
+        <div
+          onClick={(e) => checkingOut(e)}
+          className={`${
+            selected.includes("Currently") && `bg-black text-white`
+          } border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950`}
+        >
+          Currently hosting ({currenlty.length})
         </div>
-        <div className="border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950">
-          Arriving soon (0)
+        <div
+          onClick={(e) => checkingOut(e)}
+          className={`${
+            selected.includes("Arriving") && `bg-black text-white`
+          } border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950`}
+        >
+          Arriving soon ({arrving.length})
         </div>
-        <div className="border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950">
+        <div
+          onClick={(e) => checkingOut(e)}
+          className={`${
+            selected.includes("Pending") && `bg-black text-white`
+          } border rounded-full px-6 py-2 mr-3 cursor-pointer hover:border-slate-950`}
+        >
           Pending reviews(0)
         </div>
       </div>
@@ -80,9 +154,15 @@ const Hoisting = () => {
               <li>total</li>
             </ul>
           </div>
-          {resrvation.map((item, index) => (
-            <Reservation key={index} item={item} />
-          ))}
+          {fileterdReservation ? (
+            fileterdReservation.map((item, index) => (
+              <Reservation key={index} item={item} />
+            ))
+          ) : (
+            <div className="flex  items-center justify-center">
+              <img src={notfound} alt="not found" />
+            </div>
+          )}
         </div>
       )}
       <h4 className="text-xl font-medium"> We’re here to help</h4>

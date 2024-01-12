@@ -6,11 +6,13 @@ import filter from "./asset/svg/fiter.svg";
 import { useDispatch } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import FilterMenu from "./components/FilterMenu";
+import { useLocation } from "react-router-dom";
+
 const Category = () => {
   const [isFilteOpen, setFilterOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const dipatch = useDispatch();
-
+  const { pathname } = useLocation();
   const filterList = (title) => {
     dipatch(setProperty([]));
     axios
@@ -33,7 +35,11 @@ const Category = () => {
     }
   };
   return (
-    <div className="h-20  px-20 flex sm:mx-5  shadow-md ">
+    <div
+      className={`h-20 ${
+        pathname === "/" ? `flex` : `hidden`
+      } px-20  sm:px-5  shadow-md `}
+    >
       <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative">
         <div
           className={`absolute  right-0  ${

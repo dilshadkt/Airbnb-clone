@@ -17,6 +17,7 @@ import { setImg } from "../../../store/slice/payment";
 const Rooms = () => {
   const dispatch = useDispatch();
   const amenties = useSelector((store) => store.user.amenties);
+
   const [queryParams] = useSearchParams();
   const [rooms, setRooms] = useState("");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -24,17 +25,20 @@ const Rooms = () => {
   const [isTrip, setIsTrip] = useState(false);
   const type = serchParams.get("id");
   const {
-    bedrooms,
-    maxGuest,
-    bathrooms,
+    aboutPlace,
+
     pricePeNight,
-    address,
+    description,
+    place,
     title,
     images,
     availability,
     hostid,
     hostName,
+    profile,
   } = rooms;
+  console.log(rooms);
+
   const canelTrip = () => {
     setIsTrip(false);
     const tripId = serchParams.get("tripId");
@@ -76,7 +80,8 @@ const Rooms = () => {
         <div className="flex justify-between">
           <div className="flex">
             <span className="underline mr-3">1 reviews</span>
-            <span className="underline">{address}</span>
+            <span className="underline ">{place?.city},</span>
+            <span className="underline  ">{place?.country}</span>
           </div>
           <div className=" flex">
             <div className="flex items-center">
@@ -89,7 +94,7 @@ const Rooms = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-[400px] flex mt-7 rounded-2xl overflow-hidden  relative">
+        <div className="w-full h-[400px] flex mt-7 rounded-2xl overflow-hidden  relative -z-10 ">
           <div className=" flex-1  bg-gray-400 mr-2">
             <img
               src={images[0]}
@@ -116,7 +121,6 @@ const Rooms = () => {
             </div>
             <div className="flex-1  flex overflow-hidden">
               <div className="flex-1 mr-2 bg-gray-400">
-                {" "}
                 <img
                   src={images[3]}
                   alt="room2 "
@@ -124,7 +128,6 @@ const Rooms = () => {
                 />
               </div>
               <div className="flex-1 bg-gray-400 ">
-                {" "}
                 <img
                   src={images[4]}
                   alt="room2 "
@@ -144,21 +147,27 @@ const Rooms = () => {
           <div className="flex-1">
             <div className=" items-center justify-between flex">
               <h1 className="text-2xl">
-                Room in a heritage hotel hosted by {hostName}
+                {` ${title} hosted by
+                ${hostName}`}
               </h1>
+
               <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
-                <img
-                  src={images[0]}
-                  alt="icon"
-                  className="w-full h-full object-fill"
-                />
+                {profile ? (
+                  <img
+                    src={profile}
+                    alt="icon"
+                    className="w-full h-full object-fill"
+                  />
+                ) : (
+                  <div>d</div>
+                )}
               </div>
             </div>
-            <div className="text-lg font-light">
-              <span>{maxGuest} guests</span>.
-              <span className="mx-2">{bedrooms} bedrooms</span>.
-              <span className="mx-2">7 beds</span>
-              {bathrooms} bathrooms
+            <div className=" font-normal">
+              <span>{aboutPlace?.guests} guests</span>
+              <span className="mx-2">{aboutPlace?.bedrooms} bedrooms</span>
+              <span className="mx-2">{aboutPlace?.beds} beds</span>
+              {aboutPlace?.bathrooms} bathrooms
             </div>
 
             <hr />
@@ -208,17 +217,9 @@ const Rooms = () => {
             </div>
             <hr />
             {/* host details */}
-            <Host userIcon={images[0]} hostid={hostid} />
+            <Host userIcon={profile} hostid={hostid} hostName={hostName} />
             <h3 className="font-semibold text-2xl">About this place</h3>
-            <div className="text-base font-light my-3">
-              Fort Tiracol is one of North Goa's most iconic forts turned into
-              boutique hotel, just minutes from the Tiracol Jetty. You’ll love
-              my place because of the comfortable bed, the high ceilings, the
-              unrivaled views of the sea on one side and the river on the other,
-              the food at our signature restaurant - The Tavern, the traditional
-              Portuguese furniture, the location and service. Fort Tiracol is
-              good for couples, solo adventurers & families
-            </div>
+            <div className="text-base font-light my-3">{description}</div>
             <div className="underline font-semibold my-5 cursor-pointer">
               Show more
             </div>
@@ -228,7 +229,7 @@ const Rooms = () => {
           <div className="flex-initial w-[40%] sm:w-full flex justify-center ">
             <PaymentCard
               night={pricePeNight}
-              maxGuest={maxGuest}
+              maxGuest={aboutPlace.guests}
               propertyId={queryParams.get("id")}
               availability={availability}
             />

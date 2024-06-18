@@ -87,6 +87,7 @@ const Login = () => {
   };
   return (
     <>
+      {(document.body.style.overflow = "hidden")}
       <div className="fixed top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-50 flex items-center justify-center"></div>
       <div className="fixed top-0 left-0 bottom-0 right-0 m-auto bg-white z-[60] w-[30%] py-5 sm:w-[90%] h-fit rounded-2xl  overflow-hidden">
         <div className="flex-intial h-[13%]  flex items-center">

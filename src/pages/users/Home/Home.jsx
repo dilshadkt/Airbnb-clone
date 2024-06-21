@@ -25,7 +25,7 @@ const Home = () => {
           <ShimmerUi />
         ) : (
           <>
-            <div className="mx-[5%] my-6 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  h-full sm:mx-5">
+            <div className="md:mx-[5%] my-6 grid lg:grid-cols-4 md:grid-cols-3  grid-cols-1 h-full mx-[10px]">
               {filtered.map((item, index) => (
                 <Card data={item} key={`${index}-${index}`} />
               ))}

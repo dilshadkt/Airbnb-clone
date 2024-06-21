@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import FilterMenu from "./components/FilterMenu";
 import { useLocation } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 const Category = () => {
   const [isFilteOpen, setFilterOpen] = useState(false);
@@ -38,11 +39,11 @@ const Category = () => {
     <div
       className={`h-20 ${
         pathname === "/" ? `flex` : `hidden`
-      } px-20  sm:px-5  shadow-md `}
+      } md:px-20 shadow md:shadow-md `}
     >
-      <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative">
+      <div className="flex-1  flex overflow-x-scroll scrollbar-hide relative z-20 ">
         <div
-          className={`absolute  right-0  ${
+          className={`absolute hidden md:flex  right-0  ${
             currentIndex === Math.round((data.length - 1) / 9)
               ? `invisible`
               : `visible`
@@ -51,7 +52,7 @@ const Category = () => {
           <img src={roundeArrow} onClick={goToNext} alt="arrow" />
         </div>
         <div
-          className={`absolute  left-0  ${
+          className={`absolute hidden md:flex  left-0  ${
             currentIndex === 0 ? `invisible` : `visible`
           }  bg-white h-full flex items-center w-8 justify-center z-10 opacity-80`}
         >
@@ -69,14 +70,14 @@ const Category = () => {
         >
           {data.map((item, index) => (
             <div
-              key={index}
+              key={nanoid()}
               onClick={() => filterList(item.title)}
-              className="px-5  h-full group  flex items-center justify-center cursor-pointer relative"
+              className="px-5   h-full group  flex items-center justify-center cursor-pointer relative"
             >
-              <div className="flex flex-col justify-center items-center opacity-70  group-hover:opacity-100 ">
+              <div className="flex w-8 md:w-full flex-col justify-center items-center opacity-90 md:opacity-70  group-hover:opacity-100 ">
                 {item.img}
 
-                <span className="whitespace-nowrap text-sm mt-1">
+                <span className="whitespace-nowrap text-xs md:text-sm mt-1">
                   {item.title}
                 </span>
               </div>
@@ -85,7 +86,7 @@ const Category = () => {
           ))}
         </div>
       </div>
-      <div className="flex-initial w-1/4  flex items-center justify-end">
+      <div className="hidden  flex-initial w-1/4  md:flex items-center justify-end">
         <div
           onClick={() => setFilterOpen(true)}
           className="w-28 h-12  border flex items-center justify-center rounded-xl cursor-pointer"
@@ -94,7 +95,7 @@ const Category = () => {
           <span className="text-sm ml-2 ">Filter </span>
         </div>
 
-        <div className="w-48 ml-3 h-12  border flex items-center justify-center rounded-xl cursor-pointer sm:hidden ">
+        <div className="w-48 ml-3 h-12  border md:flex items-center justify-center rounded-xl cursor-pointer hidden ">
           <span>Display before taxes</span>
         </div>
       </div>

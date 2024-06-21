@@ -78,13 +78,16 @@ const SideMenu = () => {
             <div>
               <ul className="font-medium">
                 <li
-                  onClick={() => dispatch(loginOpen(true))}
+                  onClick={() =>
+                    document.getElementById("authForm")?.showModal()
+                  }
                   className="py-3 px-4 hover:bg-gray-200"
                 >
                   Log in
                 </li>
+
                 <li
-                  onClick={() => dispatch(singInOpen(true))}
+                  onClick={() => document.getElementById("signup")?.showModal()}
                   className="py-3 px-4 hover:bg-gray-200"
                 >
                   Sign Up

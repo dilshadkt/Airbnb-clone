@@ -7,12 +7,12 @@ const WishListCard = ({ data, remove }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-wrap ">
+    <div className="grid grid-cols-2 ">
       {data?.map((item, index) => (
         <div
           key={`${item}-${index}`}
           onClick={() => navigate(`/rooms?id=${item.propertyId}`)}
-          className="group w-[20%]  max-h-[250px] overflow-hidden flex flex-col items-center   "
+          className="group   h-[150px] overflow-hidden flex flex-col items-center   "
         >
           <div className="w-[95%] h-full border-[7px] border-white   rounded-xl  shadow-md relative ">
             <img

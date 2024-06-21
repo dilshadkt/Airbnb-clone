@@ -10,7 +10,14 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.filter-gray {
+  filter: brightness(0) saturate(100%) invert(51%) sepia(8%) saturate(225%)
+    hue-rotate(314deg) brightness(95%) contrast(86%);
+}
+.filter-red {
+  filter: invert(27%) sepia(92%) saturate(7470%) hue-rotate(358deg)
+    brightness(97%) contrast(107%);
+}
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

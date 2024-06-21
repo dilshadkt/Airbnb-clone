@@ -37,7 +37,6 @@ const Rooms = () => {
     hostName,
     profile,
   } = rooms;
-  console.log(rooms);
 
   const canelTrip = () => {
     setIsTrip(false);
@@ -63,7 +62,7 @@ const Rooms = () => {
     <RoomsShimmer />
   ) : (
     <>
-      <div className="mx-20 pb-8 sm:mx-5">
+      <div className="md:mx-20 pb-8 mx-5">
         {isTrip && (
           <div className="p-6 border flex justify-between rounded-xl bg-green-200 my-[2%]   border-lime-600">
             <h3>To cancel trip</h3>
@@ -143,7 +142,7 @@ const Rooms = () => {
             <span className="font-medium">show all </span>
           </div>
         </div>
-        <div className="flex sm:flex-col mt-8">
+        <div className="flex md:flex-row flex-col mt-8">
           <div className="flex-1">
             <div className=" items-center justify-between flex">
               <h1 className="text-2xl">
@@ -226,7 +225,7 @@ const Rooms = () => {
             <hr />
             <Offers />
           </div>
-          <div className="flex-initial w-[40%] sm:w-full flex justify-center ">
+          <div className="flex-initial md:w-[40%] w-full flex justify-center ">
             <PaymentCard
               night={pricePeNight}
               maxGuest={aboutPlace.guests}

@@ -3,14 +3,21 @@ import global from "../asset/svg/global.svg";
 import insta from "../asset/svg/insta.svg";
 import facebook from "../asset/svg/facebok.svg";
 import linkedin from "../asset/svg/linkedin.svg";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+
   return (
     <>
-      <div className="bg-gray-100 ">
-        <div className="flex sm:flex-col sm:items-center">
-          <div className="flex-1 ">
-            <div className=" mx-20 my-14">
+      <div
+        className={`bg-gray-100  ${
+          location.pathname === `/whishlist` && `hidden`
+        }`}
+      >
+        <div className="flex md:flex-row flex-col items-center">
+          <div className="flex-1 flex items-center justify-start w-full ">
+            <div className=" md:mx-20 mx-5 my-14 ">
               <h4 className="font-semibold text-base">Support</h4>
               <ul className="text-sm">
                 <li className="mt-2">Help Centre</li>
@@ -22,8 +29,8 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-1  ">
-            <div className="my-14  w-fit">
+          <div className="flex-1 flex justify-start  w-full ">
+            <div className="md:my-14  w-fit mx-5 md:0">
               <h4 className="font-semibold text-base">Hosting</h4>
               <ul className="text-sm">
                 <li className="mt-2">Airbnb your home</li>
@@ -34,8 +41,8 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-initial w-[40%] ">
-            <div className="my-14  w-fit">
+          <div className="flex-initial md:w-[40%]  w-full ">
+            <div className="my-14  mx-5 md:mx-0 w-fit">
               <h4 className="font-semibold text-base">Airbnb</h4>
               <ul className="text-sm">
                 <li className="mt-2">Newsroom</li>
@@ -49,8 +56,8 @@ const Footer = () => {
         </div>
 
         <hr className="pt-5" />
-        <div className="flex sm:flex-col justify-between  h-16 items-center mx-20">
-          <div>
+        <div className="flex md:flex-row flex-col justify-start  md:justify-between  h-16 items-start md:items-center mx-5 md:mx-20">
+          <div className="">
             <ul className="flex">
               <li>© 2023 Airbnb, Inc.</li>
               <li>Privacy</li>

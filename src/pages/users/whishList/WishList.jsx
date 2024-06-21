@@ -31,7 +31,7 @@ const WishList = () => {
   };
 
   return (
-    <div className="mx-20 my-10">
+    <div className=" mx-5 md:mx-20 my-3 md:my-10">
       <h1 className="text-3xl font-semibold">Wishlists</h1>
 
       <div className="my-10 ">

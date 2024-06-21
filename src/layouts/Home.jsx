@@ -6,20 +6,23 @@ import { Outlet, useLocation } from "react-router-dom";
 const HomeLayout = () => {
   const { pathname } = useLocation();
   return (
-    <>
+    <div className="flex flex-col ">
       <div
-        className={`md:hidden h-[63px] ${
+        className={` h-[63px] ${
           pathname === "/" ? `flex` : `hidden`
         } bg-[rgb(247,247,247)] border  items-center justify-center `}
       >
-        <p className="underline font-semibold text-[15px]">
+        <p className="hidden   md:flex underline font-semibold text-[15px]">
           Learn about Guest Favourites, the most loved homes on Airbnb
+        </p>
+        <p className="block md:hidden underline font-semibold text-[15px]">
+          Learn more about icons
         </p>
       </div>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -100,11 +100,14 @@ const FullNavbar = ({ fullNav }) => {
         </div>
       </div>
       {selectedItem === "destination" && (
-        <div className="absolute -bottom-[410px] py-8 px-5 rounded-3xl w-[50%] h-[400px] bg-white border-gray-200/70 border shadow-xl z-50">
+        <div className="absolute -bottom-[410px] lg:py-4 xl:py-8 px-5 rounded-3xl w-[50%] max-h-[400px] h-fit bg-white border-gray-200/70 border shadow-xl z-50">
           <h4 className="font-bold"> Search by region</h4>
           <div className="grid grid-cols-3 gap-1 mt-7">
             {destination.map((item) => (
-              <div key={item.id} className="hover:bg-[#EFEFEF] p-2 rounded-2xl">
+              <div
+                key={item.id}
+                className="hover:bg-[#EFEFEF] md:p-1 xl:p-2 rounded-2xl"
+              >
                 <img
                   src={item.image}
                   alt=""

@@ -21,16 +21,19 @@ const Trips = () => {
   return trips.length === 0 ? (
     <ListShimmer />
   ) : (
-    <div onClick={() => SetQrOpen(!qrOpen)} className="mx-[10%] my-[2%] ">
+    <div
+      onClick={() => SetQrOpen(!qrOpen)}
+      className="mx-5 md:mx-[10%] my-3 md:my-[2%] "
+    >
       <div>
-        <h2 className="text-3xl font-semibold ">Trips </h2>
+        <h2 className="text-xl md:text-3xl font-semibold ">Trips </h2>
       </div>
       <div>
-        <div className="my-6">
+        <div className="md:my-6">
           {trips.map((item, index) => (
             <div
               key={index}
-              className="p-5 border flex my-4 rounded-xl  items-center justify-between"
+              className="p-2 md:p-5 border flex flex-col md:flex-row   my-4 rounded-xl  items-center justify-between"
             >
               <div
                 onClick={() =>
@@ -38,7 +41,7 @@ const Trips = () => {
                     `/rooms?id=${item.listingId._id}&booked=true&tripId=${item._id}`
                   )
                 }
-                className=" flex-initial w-[40%] cursor-pointer   flex "
+                className=" flex-initial w-full md:w-[40%] cursor-pointer   flex "
               >
                 <img
                   src={item?.listingId?.images?.[0]}
@@ -46,18 +49,19 @@ const Trips = () => {
                   className="w-[200px] rounded-xl max-h-[150px] object-cover"
                 />
                 <div className="ml-5 text-gray-400 font-thin flex flex-col justify-center sm:hidden">
-                  <h3 className="text-lg font-semibold text-gray-600">
+                  <h3 className="md:text-lg font-semibold text-gray-600">
                     {item?.listingId?.title}
                   </h3>
                   <p className="my-2">{item?.listingId?.location}</p>
                   <h3>{item.address}</h3>
-                  <h3 className="mt-2">₹{item?.listingId?.pricePeNight}</h3>
+                  <h3 className="mt-2 font-semibold">
+                    ₹{item?.listingId?.pricePeNight}
+                  </h3>
                 </div>
               </div>
-              <div>
+              <div className="w-full flex">
                 <h5 className="text-sm text-gray-400">{item?.checkInDate}</h5>
-              </div>
-              <div>
+
                 <h5 className="text-sm text-gray-400">{item.checkoutDate}</h5>
               </div>
               <div
@@ -67,7 +71,7 @@ const Trips = () => {
                 <img
                   src="https://media.istockphoto.com/id/828088276/vector/qr-code-illustration.jpg?s=612x612&w=0&k=20&c=FnA7agr57XpFi081ZT5sEmxhLytMBlK4vzdQxt8A70M="
                   alt="qr-code"
-                  className="max-h-[150px]"
+                  className="max-h-[150px] hidden"
                 />
               </div>
             </div>

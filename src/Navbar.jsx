@@ -54,11 +54,12 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`${pathname === "/" ? `sticky` : `static`}  ${
-          pathname === "/whishlist" && `hidden`
-        } top-0 z-30 bg-white rounded-3xl overflow-hidden`}
+        className={`${pathname === "/" ? `sticky` : `static`}   ${
+          ["/whishlist", "/trips", "/account-settings"].includes(pathname) &&
+          `hidden md:block`
+        } top-0 z-[1000] bg-white rounded-3xl `}
       >
-        <nav className=" py-4 flex items-start max-w-screen-2xl mx-auto px-5 sticky top-0 ">
+        <nav className=" py-4 flex items-start max-w-screen-2xl mx-auto px-5  ">
           <div className=" flex-1 md:flex items-center hidden ">
             <div
               onClick={() => {

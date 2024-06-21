@@ -18,6 +18,10 @@ input::-webkit-inner-spin-button {
   filter: invert(27%) sepia(92%) saturate(7470%) hue-rotate(358deg)
     brightness(97%) contrast(107%);
 }
+.filter-white {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
+    hue-rotate(288deg) brightness(102%) contrast(102%);
+}
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

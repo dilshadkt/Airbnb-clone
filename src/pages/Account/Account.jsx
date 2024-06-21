@@ -2,6 +2,7 @@ import React from "react";
 import { data } from "../../asset/accounts/data";
 import AccountCards from "../../components/AccountCards";
 import { Link } from "react-router-dom";
+import { accountSettings, supportSettings } from "../../constants";
 
 const Account = () => {
   return (
@@ -31,7 +32,7 @@ const Account = () => {
       </section>
       {/* MOBILE VIEW  */}
 
-      <section className="flex flex-col md:hidden mx-5 md:mx-[13%] my-[10%] ">
+      <section className="flex flex-col pb-28  h-full relative overflow-y-auto text-gray-800 md:hidden mx-5 md:mx-[13%] my-[10%] ">
         <div className="flex items-center justify-between w-full">
           <h4 className="font-semibold text-3xl">Profile</h4>
           <img
@@ -61,6 +62,89 @@ const Account = () => {
             </p>
           </div>
           <img src="/assets/home.jpg" alt="home" />
+        </div>
+        <div className="my-10 flex items-center justify-between w-full">
+          <div className="flex items-center">
+            <p className="font-semibold">2024 Summer release features</p>
+            <span className="bg-red-500 ml-2 font-semibold text-sm rounded-md flex items-center justify-center leading-[18px] text-white px-[2px]">
+              New
+            </span>
+          </div>
+          <img src="/assets/svg/right.svg" alt="arrow" className="w-4" />
+        </div>
+        <div>
+          <h4 className="text-xl font-semibold">Account settings</h4>
+          <ul>
+            {accountSettings.map((item) => (
+              <li
+                key={item.id}
+                className="flex my-7 items-center justify-between"
+              >
+                <div className="flex items-center">
+                  <img
+                    src={item.icon}
+                    alt={item.titel}
+                    className="w-6 opacity-80"
+                  />
+                  <span className="ml-3 font-medium">{item.titel}</span>
+                </div>
+                <img
+                  src={"/assets/svg/right.svg"}
+                  alt="arrow"
+                  className="w-4"
+                />
+              </li>
+            ))}
+          </ul>
+          <hr />
+          <div className="mt-8">
+            <h4 className="text-xl font-semibold">Support</h4>
+            <ul className="mt-7 ">
+              {supportSettings.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex my-7 items-center justify-between"
+                >
+                  <div className="flex items-center">
+                    <img
+                      src={item.icon}
+                      alt={item.titel}
+                      className="w-6 opacity-80"
+                    />
+                    <span className="ml-3 font-medium">{item.titel}</span>
+                  </div>
+                  <img
+                    src={"/assets/svg/right.svg"}
+                    alt="arrow"
+                    className="w-4"
+                  />
+                </li>
+              ))}
+            </ul>
+            <hr className="mt-2" />
+            <div className="mt-7">
+              <div className="flex items-center font-semibold text-sm">
+                <img
+                  src="/assets/svg/global.svg"
+                  className="w-5"
+                  alt="global"
+                />
+                <span className="ml-2">English (IN)</span>
+                <span className="ml-4">INR</span>
+              </div>
+              <button className="w-full rounded-lg border-gray-800 p-3 border font-semibold my-5">
+                Log out
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="fixed bottom-24 left-0 right-0 mx-auto bg-gray-900 flex items-center justify-between text-white w-fit px-6 py-4 rounded-full">
+          <img
+            src="/assets/svg/switch.svg"
+            alt="switch"
+            className="w-4 filter-white"
+          />{" "}
+          <span className="ml-2 font-semibold"> Switch to hosting</span>
         </div>
       </section>
     </>

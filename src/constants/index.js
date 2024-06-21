@@ -70,3 +70,38 @@ export const mobilNav = [
     icon: "/assets/nav/mobile/profile.svg",
   },
 ];
+
+export const accountSettings = [
+  {
+    id: 1,
+    titel: "Personal info",
+    icon: "/assets/nav/mobile/profile.svg",
+  },
+  {
+    id: 2,
+    titel: "Account",
+    icon: "/assets/svg/account.svg",
+  },
+];
+export const supportSettings = [
+  {
+    id: 1,
+    titel: "Visit the help center",
+    icon: "/assets/svg/help.svg",
+  },
+  {
+    id: 2,
+    titel: "Get help with safety issue",
+    icon: "/assets/svg/safety.svg",
+  },
+  {
+    id: 3,
+    titel: "Report nighbourhood concern",
+    icon: "/assets/svg/report.svg",
+  },
+  {
+    id: 4,
+    titel: "How Airbnb works",
+    icon: "/assets/nav/mobile/trips.svg",
+  },
+];

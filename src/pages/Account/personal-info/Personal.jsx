@@ -11,20 +11,27 @@ const Personal = () => {
   const [isMobileEdit, setIsMobileEdit] = useState(false);
 
   return (
-    <div className=" mx-[15%] my-[2%] ">
-      <div className="flex items-center">
+    <div className="mx-5 md:mx-[15%] my-[2%] ">
+      <div className="hidden  md:flex items-center">
         <Link to={"/account-settings"}>
           <h3 className="hover:underline">Account</h3>
         </Link>
         <img src={left} alt="left icon" className="rotate-180 mx-2 w-3" />
         <h3>Personal info</h3>
       </div>
+      <Link to={"/account-settings"}>
+        <img
+          src="/assets/svg/right.svg"
+          className="rotate-180 w-4 mt-5 "
+          alt=""
+        />
+      </Link>
       <h1 className="text-3xl font-bold py-3">Personal info</h1>
       <div className="my-7 flex text-sm">
-        <div className="flex-1 mr-[10%] relative">
+        <div className="flex-1 md:mr-[10%] relative">
           <div className="py-6 flex ">
             <div className="flex-1 ">
-              <div className="text-base">Legal name</div>
+              <div className="text-base font-semibold">Legal name</div>
               <div className="text-gray-500 font-thin">{user?.firstName}</div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">
@@ -34,7 +41,7 @@ const Personal = () => {
           <hr />
           <div className="py-6 flex ">
             <div className="flex-1 ">
-              <div className="text-base">Email address</div>
+              <div className="text-base font-semibold">Email address</div>
               <div className="text-gray-500 font-thin">
                 {`${user?.email.slice(0, 1)}*****${user?.email.slice(9)}`}
               </div>
@@ -48,7 +55,7 @@ const Personal = () => {
           <div className="py-6 relative z-50 ">
             <div className=" flex ">
               <div className="flex-1 ">
-                <div className="text-base">Phone numbers</div>
+                <div className="text-base font-semibold">Phone numbers</div>
                 <div className="text-gray-500 font-thin">
                   Add a number so confirmed guests and Airbnb can get in touch.
                   You can add other numbers and choose how they’re used.
@@ -94,7 +101,7 @@ const Personal = () => {
           <hr />
           <div className="py-6 flex ">
             <div className="flex-1 ">
-              <div className="text-base">Government ID</div>
+              <div className="text-base font-semibold">Government ID</div>
               <div className="text-gray-500 font-thin">Not provided</div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">
@@ -105,7 +112,7 @@ const Personal = () => {
           <hr />
           <div className="py-6 flex ">
             <div className="flex-1 ">
-              <div className="text-base">Address</div>
+              <div className="text-base font-semibold">Address</div>
               <div className="text-gray-500 font-thin">Not provided</div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">
@@ -116,7 +123,7 @@ const Personal = () => {
           <hr />
           <div className="py-6 flex ">
             <div className="flex-1 ">
-              <div className="text-base">Emergency contact</div>
+              <div className="text-base font-semibold">Emergency contact</div>
               <div className="text-gray-500 font-thin">Not provided</div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">
@@ -131,7 +138,7 @@ const Personal = () => {
           ></div>
           <hr />
         </div>
-        <div className="flex-initial w-[27%]  border rounded-xl px-5 py-6">
+        <div className="hidden md:block flex-initial w-[27%]  border rounded-xl px-5 py-6">
           <div>
             <img src={lock} alt="icon" className="w-[30%]" />
             <h3 className="font-medium text-lg">

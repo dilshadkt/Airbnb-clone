@@ -62,7 +62,7 @@ const Rooms = () => {
     <RoomsShimmer />
   ) : (
     <>
-      <div className="md:mx-20 pb-8 mx-5">
+      <div className="md:mx-20 pb-8 ">
         {isTrip && (
           <div className="p-6 border flex justify-between rounded-xl bg-green-200 my-[2%]   border-lime-600">
             <h3>To cancel trip</h3>
@@ -75,8 +75,8 @@ const Rooms = () => {
           </div>
         )}
 
-        <h1 className="text-2xl font-semibold my-5">{title}</h1>
-        <div className="flex justify-between">
+        <h1 className="hidden md:block text-2xl font-semibold my-5">{title}</h1>
+        <div className="hidden md:flex justify-between">
           <div className="flex">
             <span className="underline mr-3">1 reviews</span>
             <span className="underline ">{place?.city},</span>

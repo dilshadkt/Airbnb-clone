@@ -74,12 +74,14 @@ export const mobilNav = [
 export const accountSettings = [
   {
     id: 1,
+    path: "/account-settings/personal",
     titel: "Personal info",
     icon: "/assets/nav/mobile/profile.svg",
   },
   {
     id: 2,
     titel: "Account",
+    path: "/account-settings?detail=true",
     icon: "/assets/svg/account.svg",
   },
 ];

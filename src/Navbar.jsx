@@ -55,8 +55,7 @@ const Navbar = () => {
     <>
       <header
         className={`${pathname === "/" ? `sticky` : `static`}   ${
-          ["/whishlist", "/trips", "/account-settings"].includes(pathname) &&
-          `hidden md:block`
+          ["/"].includes(pathname) ? `block` : `hidden md:block`
         } top-0 z-[1000] bg-white rounded-3xl `}
       >
         <nav className=" py-4 flex items-start max-w-screen-2xl mx-auto px-5  ">

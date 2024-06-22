@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { data } from "../../asset/accounts/data";
 import AccountCards from "../../components/AccountCards";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { accountSettings, supportSettings } from "../../constants";
 
 const Account = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const details = queryParams.get("detail");
+  const [detailed, setDetailed] = useState(details || false);
+  useEffect(() => {
+    setDetailed(details || false);
+  }, [details]);
+
   return (
     <>
-      <section className="hidden md:block mx-5 md:mx-[13%] my-[3%]">
+      <section
+        className={`${
+          detailed ? `block` : `hidden  md:block`
+        }  mx-5 md:mx-[13%] my-[3%] pb-5 md:pb-0`}
+      >
         <h1 className="text-3xl font-semibold">Accounts</h1>
-        <h3 className="text-lg font-medium my-5">
+        <h3 className="hidden md:block text-lg font-medium my-5">
           Dilshad Kt,
           <span className="font-normal"> hmydilshadkt@gmail.com </span>.
           <Link to={"profile"}>
             <span className="underline">Go to profile</span>
           </Link>
         </h3>
-        <div className="flex flex-wrap justify-between my-9">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-9">
           {data.map((item, index) => (
             <AccountCards
               key={index}
@@ -26,13 +38,17 @@ const Account = () => {
             />
           ))}
         </div>
-        <div className="w-full flex items-center justify-center p-6 text-gray-400">
+        <div className="w-full hidden md:flex items-center justify-center p-6 text-gray-400">
           <span>need to deactive your account ?</span>
         </div>
       </section>
       {/* MOBILE VIEW  */}
 
-      <section className="flex flex-col pb-28  h-full relative overflow-y-auto text-gray-800 md:hidden mx-5 md:mx-[13%] my-[10%] ">
+      <section
+        className={`${
+          detailed ? "hidden" : `flex md:hidden`
+        }  flex-col pb-28  h-full relative overflow-y-auto text-gray-800  mx-5 md:mx-[13%] my-[10%] `}
+      >
         <div className="flex items-center justify-between w-full">
           <h4 className="font-semibold text-3xl">Profile</h4>
           <img
@@ -41,19 +57,26 @@ const Account = () => {
             className="w-6"
           />
         </div>
-        <div className="flex items-center justify-between my-5 mt-9">
-          <div className="flex items-center">
-            <div className="w-14 h-14 rounded-full bg-black"></div>
-            <div className="grid ml-3">
-              <h5 className="font-semibold">Dilshad</h5>
-              <span className="text-sm text-gray-500 font-medium">
-                {" "}
-                Show profile
-              </span>
+
+        <Link to={"/account-settings/profile"}>
+          <div className="flex items-center justify-between my-5 mt-9">
+            <div className="flex items-center">
+              <div className="w-14 h-14 rounded-full bg-black"></div>
+              <div className="grid ml-3">
+                <h5 className="font-semibold">Dilshad</h5>
+                <span className="text-sm text-gray-500 font-medium">
+                  {" "}
+                  Show profile
+                </span>
+              </div>
             </div>
+            <img
+              src="/assets/svg/right.svg"
+              alt="notification"
+              className="w-4"
+            />
           </div>
-          <img src="/assets/svg/right.svg" alt="notification" className="w-4" />
-        </div>
+        </Link>
         <div className="w-full p-3 mt-2 flex items-center justify-between border border-gray-300/70 shadow-lg bg-white rounded-xl h-[120px]">
           <div className=" ">
             <h5 className="font-semibold text-lg">Airbnb your place</h5>
@@ -76,24 +99,23 @@ const Account = () => {
           <h4 className="text-xl font-semibold">Account settings</h4>
           <ul>
             {accountSettings.map((item) => (
-              <li
-                key={item.id}
-                className="flex my-7 items-center justify-between"
-              >
-                <div className="flex items-center">
+              <Link key={item.id} to={item.path}>
+                <li className="flex my-7 items-center justify-between">
+                  <div className="flex items-center">
+                    <img
+                      src={item.icon}
+                      alt={item.titel}
+                      className="w-6 opacity-80"
+                    />
+                    <span className="ml-3 font-medium">{item.titel}</span>
+                  </div>
                   <img
-                    src={item.icon}
-                    alt={item.titel}
-                    className="w-6 opacity-80"
+                    src={"/assets/svg/right.svg"}
+                    alt="arrow"
+                    className="w-4"
                   />
-                  <span className="ml-3 font-medium">{item.titel}</span>
-                </div>
-                <img
-                  src={"/assets/svg/right.svg"}
-                  alt="arrow"
-                  className="w-4"
-                />
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
           <hr />

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { mobilNav } from "../../../constants";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
 
 const MobilNav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const login = useSelector((store) => store.user.isLogin);
+  console.log(login);
   const location = useLocation();
 
   useEffect(() => {
@@ -37,31 +41,59 @@ const MobilNav = () => {
         } transition duration-300 ease-in-out`}
       >
         <ul
-          className={`flex justify-between  px-5 py-3  text-gray-600 font-semibold`}
+          className={`flex ${
+            login ? `justify-between` : `justify-center gap-8`
+          }  px-5 py-3  text-gray-600 font-semibold`}
         >
-          {mobilNav.map((item) => (
-            <Link key={item.id} to={item.path}>
-              <li className="flex items-center justify-center flex-col">
-                <img
-                  src={item.icon}
-                  alt={item.title}
-                  className={`w-6  ${
-                    location.pathname === item.path
-                      ? `filter-red`
-                      : `filter-gray `
-                  }`}
-                />
-                <span
-                  className={`${
-                    location.pathname === item.path && `text-red-500`
-                  } text-[10px] mt-1`}
+          {!login
+            ? mobilNav.slice(5).map((item) => (
+                <li
+                  key={nanoid()}
+                  className="flex items-center justify-center flex-col"
                 >
-                  {" "}
-                  {item.title}
-                </span>
-              </li>
-            </Link>
-          ))}
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className={`w-6  ${
+                      location.pathname === item.path
+                        ? `filter-red`
+                        : `filter-gray `
+                    }`}
+                  />
+                  <span
+                    className={`${
+                      location.pathname === item.path && `text-red-500`
+                    } text-[10px] mt-1`}
+                  >
+                    {" "}
+                    {item.title}
+                  </span>
+                </li>
+              ))
+            : mobilNav.slice(0, 5).map((item) => (
+                <Link key={item.id} to={item.path}>
+                  <li className="flex items-center justify-center flex-col">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      className={`w-6  ${
+                        location.pathname === item.path
+                          ? `filter-red`
+                          : `filter-gray `
+                      }`}
+                    />
+                    <span
+                      className={`${
+                        location.pathname === item.path && `text-red-500`
+                      } text-[10px] mt-1`}
+                    >
+                      {" "}
+                      {item.title}
+                    </span>
+                  </li>
+                </Link>
+              ))}
+          {}
         </ul>
       </div>
     </div>

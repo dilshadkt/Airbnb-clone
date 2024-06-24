@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { data } from "../../asset/accounts/data";
 import AccountCards from "../../components/AccountCards";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { accountSettings, supportSettings } from "../../constants";
+import { setLogin } from "../../store/slice/User";
+import { useDispatch } from "react-redux";
 
 const Account = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const details = queryParams.get("detail");
   const [detailed, setDetailed] = useState(details || false);
+  const dispatch = useDispatch();
+  const naviagate = useNavigate();
   useEffect(() => {
     setDetailed(details || false);
   }, [details]);
@@ -156,7 +160,14 @@ const Account = () => {
                 <span className="ml-2">English (IN)</span>
                 <span className="ml-4">INR</span>
               </div>
-              <button className="w-full rounded-lg border-gray-800 p-3 border font-semibold my-5">
+              <button
+                onClick={() => {
+                  dispatch(setLogin(false));
+                  localStorage.clear();
+                  naviagate("/");
+                }}
+                className="w-full rounded-lg border-gray-800 p-3 border font-semibold my-5"
+              >
                 Log out
               </button>
             </div>

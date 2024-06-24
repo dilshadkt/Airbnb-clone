@@ -26,7 +26,9 @@ const MobilNav = () => {
   return (
     <div
       className={`${
-        location.pathname === "/rooms" ? `hidden` : `block`
+        ["/rooms", "/account-settings/profile"].includes(location.pathname)
+          ? `hidden`
+          : `block`
       } fixed bottom-0  z-50 w-full block md:hidden`}
     >
       <div

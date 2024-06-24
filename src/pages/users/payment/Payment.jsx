@@ -114,13 +114,13 @@ const Payment = () => {
   };
   return (
     <>
-      <div className="mx-48 sm:mx-5 my-8 flex sm:flex-col">
+      <div className="md:mx-48 mx-5 my-8 flex flex-col md:flex-row">
         <div className="flex-1  flex flex-col ">
           <div className="flex items-center">
             <img src={left} alt="left arrow" />
             <h1 className="text-3xl ml-4">Confirm and pay</h1>
           </div>
-          <div className="p-8">
+          <div className="mt-5 md:mt-0 md:p-8">
             <h3 className="text-xl font-medium">Your trip</h3>
             <div className="flex  justify-between  my-5 items-start">
               <div className="flex flex-col  ">
@@ -239,7 +239,7 @@ const Payment = () => {
           </div>
         </div>
         <ToastContainer />
-        <div className="flex-initial w-[40%] sm:w-full b flex justify-center ">
+        <div className="flex-initial md:w-[40%] w-full b flex justify-center ">
           <PriceSlip />
         </div>
       </div>

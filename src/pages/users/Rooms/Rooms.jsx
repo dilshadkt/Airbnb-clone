@@ -281,9 +281,19 @@ const Rooms = () => {
             <span className="underline text-sm font-semibold">16-21 jul </span>
           </div>
 
-          <button className=" flex items-center cursor-pointer justify-center rounded-lg bg-rose-500 py-3 text-white font-semibold">
-            Reserve
-          </button>
+          <Buttons
+            color="bg-rose-500"
+            width="w-full"
+            title="Reserve"
+            // path={`book/stay?pricePernight=${night}&checkin=${checkIn}&chekout=${checkOut}&totalPrice=${
+            //   Number(night) * totalDays
+            // }&totalDays=${totalDays}&airbnbTax=${
+            //   (Number(night) * totalDays * 5) / 100
+            // }&grandTotal=${
+            //   Number(night) * totalDays + (Number(night) * totalDays * 5) / 100
+            // }&propertyId=${propertyId}`}
+            path={`book/stay`}
+          />
         </div>
       </div>
     </>

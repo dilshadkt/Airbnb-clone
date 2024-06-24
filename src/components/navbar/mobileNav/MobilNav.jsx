@@ -6,18 +6,18 @@ const MobilNav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
-  const controlNavbar = () => {
-    if (window.scrollY > lastScrollY) {
-      // if scroll down hide the navbar
-      setIsVisible(false);
-    } else {
-      // if scroll up show the navbar
-      setIsVisible(true);
-    }
-    setLastScrollY(window.scrollY);
-  };
 
   useEffect(() => {
+    const controlNavbar = () => {
+      if (window.scrollY > lastScrollY) {
+        // if scroll down hide the navbar
+        setIsVisible(false);
+      } else {
+        // if scroll up show the navbar
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);

@@ -107,3 +107,71 @@ export const supportSettings = [
     icon: "/assets/nav/mobile/trips.svg",
   },
 ];
+
+export const profileQuestions = [
+  {
+    id: 1,
+    icon: "/assets/profile/school.svg",
+    title: "Where i went to school",
+  },
+  {
+    id: 2,
+    icon: "/assets/profile/work.svg",
+    title: "My work",
+  },
+  {
+    id: 3,
+    icon: "/assets/profile/where.svg",
+    title: "Where i live",
+  },
+  {
+    id: 4,
+    icon: "/assets/profile/language.svg",
+    title: "Languages i speak",
+  },
+  {
+    id: 5,
+    icon: "/assets/profile/decade.svg",
+    title: "Decade i was born",
+  },
+  {
+    id: 6,
+    icon: "/assets/profile/song.svg",
+    title: "My favourite song in secondary school",
+  },
+  {
+    id: 7,
+    icon: "/assets/profile/school.svg",
+    title: "Where i went to school",
+  },
+  {
+    id: 8,
+    icon: "/assets/profile/like.svg",
+    title: "i'm obsessed with",
+  },
+  {
+    id: 9,
+    icon: "/assets/profile/bulb.svg",
+    title: "My fun fact",
+  },
+  {
+    id: 10,
+    icon: "/assets/profile/skill.svg",
+    title: "My most useless skill",
+  },
+  {
+    id: 11,
+    icon: "/assets/profile/biography.svg",
+    title: "My biographic title would be",
+  },
+  {
+    id: 12,
+    icon: "/assets/profile/time.svg",
+    title: "I spend too much time   ",
+  },
+  {
+    id: 13,
+    icon: "/assets/profile/pets.svg",
+    title: "Pets",
+  },
+];

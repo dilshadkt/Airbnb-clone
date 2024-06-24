@@ -6,11 +6,13 @@ import axios from "../../../config/axiosConfig";
 import cancel from "../../../asset/svg/cancel.svg";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import Drawyer from "../../../components/shared/Drawyer";
 
 const Profile = () => {
   const [user, setUser] = useState([]);
   const [image, setImage] = useState(null);
   const [profile, setProfile] = useState();
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const data = new FormData();
 
   useEffect(() => {
@@ -45,7 +47,12 @@ const Profile = () => {
             className="w-4 rotate-180"
           />
         </Link>
-        <span className="font-semibold underline">Edit</span>
+        <span
+          onClick={() => setIsEditOpen(!isEditOpen)}
+          className="font-semibold underline"
+        >
+          Edit
+        </span>
       </div>
       <div className="mx-5 md:mx-[12%] my-[2%] flex flex-col md:flex-row">
         <div className="flex-initial border-b md:border-b-0 flex flex-col w-full  md:w-[30%] ">
@@ -134,6 +141,7 @@ const Profile = () => {
           </div>
         )}
       </div>
+      <Drawyer isOpne={isEditOpen} setIsOpen={setIsEditOpen} />
     </>
   );
 };

@@ -175,3 +175,26 @@ export const profileQuestions = [
     title: "Pets",
   },
 ];
+
+export const Whether = [
+  {
+    id: 1,
+    icon: "/assets/profile/plane.png",
+    title: "Next destination",
+  },
+  {
+    id: 2,
+    icon: "/assets/profile/day.png",
+    title: "Next destination",
+  },
+  {
+    id: 3,
+    icon: "/assets/profile/glob.png",
+    title: "Next destination",
+  },
+  {
+    id: 4,
+    icon: "/assets/profile/work.png",
+    title: "Next destination",
+  },
+];

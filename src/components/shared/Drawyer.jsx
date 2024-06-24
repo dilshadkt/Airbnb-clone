@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { profileQuestions } from "../../constants/index";
+import { profileQuestions, Whether } from "../../constants/index";
 import { nanoid } from "nanoid";
 const Drawyer = ({ isOpne, setIsOpen }) => {
   return (
@@ -83,7 +83,20 @@ const Drawyer = ({ isOpne, setIsOpen }) => {
               </p>
             </div>
           </div>
+          <div className="flex scrollbar-hide items-center overflow-x-auto w-full my-5">
+            {Whether.map((item) => (
+              <div className="flex flex-col items-center">
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="min-w-[180px] h-[100px] object-contain filter-gray"
+                />
+                <p className="mt-4 text-gray-600 text-sm">{item.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
+
         <div className="flex items-center justify-center p-4 px-6 border-t">
           <button className="w-full h-full bg-black text-white py-3 font-semibold border-none  rounded-lg">
             Done

@@ -5,12 +5,9 @@ const ShimmerUi = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center items-center w-full sm:m-5">
+      <div className="  grid grid-cols-2 md:gap-5  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4   w-full ">
         {arr.map((item, index) => (
-          <div
-            key={`${item}-${index}`}
-            className="animate-pulse w-[20%] sm:w-full  m-6 sm:m-0"
-          >
+          <div key={`${item}-${index}`} className="animate-pulse  ">
             <div className=" h-[270px] rounded-xl bg-gray-300"></div>
             <div className="my-3">
               <div className="bg-gray-300 h-[10px] w-[70%]"></div>

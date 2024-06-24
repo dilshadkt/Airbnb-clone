@@ -13,6 +13,7 @@ import axios from "../../../config/axiosConfig";
 import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
 import { useSelector, useDispatch } from "react-redux";
 import { setImg } from "../../../store/slice/payment";
+import ImageCourosal from "../../../components/shared/ImageCourosal";
 
 const Rooms = () => {
   const dispatch = useDispatch();
@@ -93,7 +94,9 @@ const Rooms = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-[400px] flex mt-7 rounded-2xl overflow-hidden  relative -z-10 ">
+
+        {/* Gallery in desktop view */}
+        <div className="hidden w-full h-[400px] md:flex mt-7 rounded-2xl overflow-hidden  relative -z-10 ">
           <div className=" flex-1  bg-gray-400 mr-2">
             <img
               src={images[0]}
@@ -142,145 +145,149 @@ const Rooms = () => {
             <span className="font-medium">show all </span>
           </div>
         </div>
-        <div className="flex md:flex-row flex-col mt-8">
-          <div className="flex-1">
-            <div className=" items-center justify-between flex">
-              <h1 className="text-2xl">
-                {` ${title} hosted by
+        {/* Gallery in mobile view */}
+        <ImageCourosal images={images} />
+        <div className="mx-5 md:mx-0">
+          <div className="flex md:flex-row flex-col mt-8">
+            <div className="flex-1">
+              <div className=" items-center justify-between flex">
+                <h1 className="text-2xl">
+                  {` ${title} hosted by
                 ${hostName}`}
-              </h1>
+                </h1>
 
-              <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
-                {profile ? (
-                  <img
-                    src={profile}
-                    alt="icon"
-                    className="w-full h-full object-fill"
-                  />
-                ) : (
-                  <div>d</div>
-                )}
+                <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
+                  {profile ? (
+                    <img
+                      src={profile}
+                      alt="icon"
+                      className="w-full h-full object-fill"
+                    />
+                  ) : (
+                    <div>d</div>
+                  )}
+                </div>
               </div>
+              <div className=" font-normal">
+                <span>{aboutPlace?.guests} guests</span>
+                <span className="mx-2">{aboutPlace?.bedrooms} bedrooms</span>
+                <span className="mx-2">{aboutPlace?.beds} beds</span>
+                {aboutPlace?.bathrooms} bathrooms
+              </div>
+
+              <hr />
+              <div className="my-5">
+                <div className="flex">
+                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
+                    <img src={heritage} alt="heritage" />
+                  </div>
+
+                  <div className="flex-1 flex flex-col justify-center">
+                    <h3 className="text-base font-medium">
+                      Room in a heritage hotel
+                    </h3>
+                    <span className="text-gray-400">
+                      Your own room in a home, plus access to shared spaces.
+                    </span>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
+                    <img src={heritage} alt="heritage" />
+                  </div>
+
+                  <div className="flex-1 flex flex-col justify-center">
+                    <h3 className="text-base font-medium">
+                      Room in a heritage hotel
+                    </h3>
+                    <span className="text-gray-400">
+                      Your own room in a home, plus access to shared spaces.
+                    </span>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
+                    <img src={heritage} alt="heritage" />
+                  </div>
+
+                  <div className="flex-1 flex flex-col justify-center">
+                    <h3 className="text-base font-medium">
+                      Room in a heritage hotel
+                    </h3>
+                    <span className="text-gray-400">
+                      Your own room in a home, plus access to shared spaces.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              {/* host details */}
+              <Host userIcon={profile} hostid={hostid} hostName={hostName} />
+              <h3 className="font-semibold text-2xl">About this place</h3>
+              <div className="text-base font-light my-3">{description}</div>
+              <div className="underline font-semibold my-5 cursor-pointer">
+                Show more
+              </div>
+              <hr />
+              <Offers />
             </div>
-            <div className=" font-normal">
-              <span>{aboutPlace?.guests} guests</span>
-              <span className="mx-2">{aboutPlace?.bedrooms} bedrooms</span>
-              <span className="mx-2">{aboutPlace?.beds} beds</span>
-              {aboutPlace?.bathrooms} bathrooms
-            </div>
-
-            <hr />
-            <div className="my-5">
-              <div className="flex">
-                <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                  <img src={heritage} alt="heritage" />
-                </div>
-
-                <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-base font-medium">
-                    Room in a heritage hotel
-                  </h3>
-                  <span className="text-gray-400">
-                    Your own room in a home, plus access to shared spaces.
-                  </span>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                  <img src={heritage} alt="heritage" />
-                </div>
-
-                <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-base font-medium">
-                    Room in a heritage hotel
-                  </h3>
-                  <span className="text-gray-400">
-                    Your own room in a home, plus access to shared spaces.
-                  </span>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                  <img src={heritage} alt="heritage" />
-                </div>
-
-                <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-base font-medium">
-                    Room in a heritage hotel
-                  </h3>
-                  <span className="text-gray-400">
-                    Your own room in a home, plus access to shared spaces.
-                  </span>
-                </div>
-              </div>
-            </div>
-            <hr />
-            {/* host details */}
-            <Host userIcon={profile} hostid={hostid} hostName={hostName} />
-            <h3 className="font-semibold text-2xl">About this place</h3>
-            <div className="text-base font-light my-3">{description}</div>
-            <div className="underline font-semibold my-5 cursor-pointer">
-              Show more
-            </div>
-            <hr />
-            <Offers />
-          </div>
-          <div className="flex-initial md:w-[40%] w-full flex justify-center ">
-            <PaymentCard
-              night={pricePeNight}
-              maxGuest={aboutPlace.guests}
-              propertyId={queryParams.get("id")}
-              availability={availability}
-            />
-          </div>
-        </div>
-        <hr />
-        <h3 className="font-semibold text-2xl my-5">Seaside Luxury</h3>
-        <p className="font-light mb-5">
-          Each Airbnb Luxe reservation comes with a Trip Designer, your
-          concierge, trip planner, and local destination expert. They know this
-          home inside out.
-        </p>
-        <Buttons title="Message a trip designer" width="w-[246px]" />
-        {amenties ? (
-          <>
-            {(document.body.style.overflow = "hidden")}
-            <Amenties />
-          </>
-        ) : (
-          <>{(document.body.style.overflow = "")}</>
-        )}
-        <div
-          className={`bg-white absolute top-0 right-0 left-0  p-5 ${
-            isGalleryOpen ? `` : `hidden`
-          }`}
-        >
-          <div className="flex justify-between">
-            <div
-              onClick={() => setIsGalleryOpen(false)}
-              className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-300"
-            >
-              <img src={left} alt="left icon" />
-            </div>
-
-            <div className=" flex">
-              <div className="flex items-center">
-                <img src={share} alt="share icon" />
-                <span className="ml-2">share</span>
-              </div>
-              <div className="flex items-center ml-4">
-                <img src={save} alt="save icon" />
-                <span>save</span>
-              </div>
+            <div className="flex-initial md:w-[40%] w-full flex justify-center ">
+              <PaymentCard
+                night={pricePeNight}
+                maxGuest={aboutPlace.guests}
+                propertyId={queryParams.get("id")}
+                availability={availability}
+              />
             </div>
           </div>
-          <div className="my-9 flex justify-center">
-            <div className="w-2/4 bg-red-500 h-fit">
-              {rooms.images.map((item, index) => (
-                <div key={index} className="w-full">
-                  <img src={item} alt="gallery" className="w-full" />
+          <hr />
+          <h3 className="font-semibold text-2xl my-5">Seaside Luxury</h3>
+          <p className="font-light mb-5">
+            Each Airbnb Luxe reservation comes with a Trip Designer, your
+            concierge, trip planner, and local destination expert. They know
+            this home inside out.
+          </p>
+          <Buttons title="Message a trip designer" width="w-[246px]" />
+          {amenties ? (
+            <>
+              {(document.body.style.overflow = "hidden")}
+              <Amenties />
+            </>
+          ) : (
+            <>{(document.body.style.overflow = "")}</>
+          )}
+          <div
+            className={`bg-white absolute top-0 right-0 left-0  p-5 ${
+              isGalleryOpen ? `` : `hidden`
+            }`}
+          >
+            <div className="flex justify-between">
+              <div
+                onClick={() => setIsGalleryOpen(false)}
+                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-300"
+              >
+                <img src={left} alt="left icon" />
+              </div>
+
+              <div className=" flex">
+                <div className="flex items-center">
+                  <img src={share} alt="share icon" />
+                  <span className="ml-2">share</span>
                 </div>
-              ))}
+                <div className="flex items-center ml-4">
+                  <img src={save} alt="save icon" />
+                  <span>save</span>
+                </div>
+              </div>
+            </div>
+            <div className="my-9 flex justify-center">
+              <div className="w-2/4 bg-red-500 h-fit">
+                {rooms.images.map((item, index) => (
+                  <div key={index} className="w-full">
+                    <img src={item} alt="gallery" className="w-full" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

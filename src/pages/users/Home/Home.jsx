@@ -22,7 +22,9 @@ const Home = () => {
         {property === false ? (
           <Nomatch />
         ) : property.length === 0 ? (
-          <ShimmerUi />
+          <div className="md:mx-[5%] my-6 mx:5">
+            <ShimmerUi />
+          </div>
         ) : (
           <>
             <div className="md:mx-[5%] my-6 grid lg:grid-cols-4 md:grid-cols-3  grid-cols-1 h-full mx-[10px]">

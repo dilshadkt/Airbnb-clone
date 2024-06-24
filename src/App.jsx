@@ -112,7 +112,7 @@ function App() {
             <Route path="/hoisting" element={<Hoisting />} />
             <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/trips" element={<Trips />} />
-            <Route path="/chats" element={<Chat />} />
+            {/* <Route path="/chats" element={<Chat />} /> */}
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />

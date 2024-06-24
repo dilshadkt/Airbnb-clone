@@ -61,7 +61,9 @@ const Account = () => {
         <Link to={"/account-settings/profile"}>
           <div className="flex items-center justify-between my-5 mt-9">
             <div className="flex items-center">
-              <div className="w-14 h-14 rounded-full bg-black"></div>
+              <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center text-2xl">
+                D
+              </div>
               <div className="grid ml-3">
                 <h5 className="font-semibold">Dilshad</h5>
                 <span className="text-sm text-gray-500 font-medium">

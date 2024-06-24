@@ -7,11 +7,11 @@ const Host = ({ userIcon, hostid, hostName }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="my-5">
+      <div className="my-5 ">
         <h2 className="text-2xl font-medium">Meet your Host</h2>
-        <div className="bg-gray-100 my-9 flex flex-col items-center justify-center rounded-2xl">
-          <div className="w-96">
-            <div className="w-96  h-60 flex bg-white  mt-11 mb-6 rounded-2xl">
+        <div className="  md:my-9 flex flex-col items-center justify-center rounded-2xl">
+          <div className="w-full md:w-96">
+            <div className="md:w-96  h-60 shadow-2xl border flex bg-white  mt-11 mb-6 rounded-2xl">
               <div className="flex-1  flex items-center justify-end">
                 <div className=" flex flex-col items-center">
                   <div className="w-28 h-28 rounded-full overflow-hidden flex items-center justify-center">
@@ -25,7 +25,7 @@ const Host = ({ userIcon, hostid, hostName }) => {
                       <p></p>
                     )}
                   </div>
-                  <h4 className="font-semibold">{hostName}</h4>
+                  <h4 className="font-semibold text-2xl  mt-2">{hostName}</h4>
                   <span>host</span>
                 </div>
               </div>
@@ -33,7 +33,7 @@ const Host = ({ userIcon, hostid, hostName }) => {
                 <div className="flex flex-col justify-around h-full">
                   <div>
                     <span className="text-xl font-bold">26</span>
-                    <h5>Reviews</h5>
+                    <h5 className="text-xs">Reviews</h5>
                   </div>
                   <hr className="w-[50%]" />
                   <div>
@@ -41,12 +41,12 @@ const Host = ({ userIcon, hostid, hostName }) => {
                       4.8
                       <img src={star} alt="rating icon" />
                     </span>
-                    <h5>Rating</h5>
+                    <h5 className="text-xs">Rating</h5>
                   </div>
                   <hr className="w-[50%]" />
                   <div>
                     <span className="text-xl font-bold">5</span>
-                    <h5>Years of hosting</h5>
+                    <h5 className="text-xs">Years of hosting</h5>
                   </div>
                 </div>
               </div>

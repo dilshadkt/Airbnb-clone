@@ -21,7 +21,7 @@ const Offers = () => {
         {result.map((item, index) => (
           <div key={index} className=" w-[45%] my-2 mr-4 flex">
             <img src={item.img} alt="icons" />
-            <span className="ml-4">{item.desc}</span>
+            <span className="ml-4 whitespace-nowrap">{item.desc}</span>
           </div>
         ))}
       </div>

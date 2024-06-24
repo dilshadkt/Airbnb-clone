@@ -22,7 +22,7 @@ const Home = () => {
         {property === false ? (
           <Nomatch />
         ) : property.length === 0 ? (
-          <div className="md:mx-[5%] my-6 mx:5">
+          <div className="md:mx-[5%] my-6 mx-5">
             <ShimmerUi />
           </div>
         ) : (

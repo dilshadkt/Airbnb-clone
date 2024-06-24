@@ -8,12 +8,13 @@ import Buttons from "../../../components/Buttons";
 import PaymentCard from "../../../components/PaymentCard";
 import Amenties from "../../../components/Amenties";
 import left from "../../../asset/svg/leftArrow.svg";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "../../../config/axiosConfig";
 import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
 import { useSelector, useDispatch } from "react-redux";
 import { setImg } from "../../../store/slice/payment";
 import ImageCourosal from "../../../components/shared/ImageCourosal";
+import { nanoid } from "nanoid";
 
 const Rooms = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const Rooms = () => {
   const type = serchParams.get("id");
   const {
     aboutPlace,
-
     pricePeNight,
     description,
     place,
@@ -38,7 +38,6 @@ const Rooms = () => {
     hostName,
     profile,
   } = rooms;
-
   const canelTrip = () => {
     setIsTrip(false);
     const tripId = serchParams.get("tripId");
@@ -77,20 +76,33 @@ const Rooms = () => {
         )}
 
         <h1 className="hidden md:block text-2xl font-semibold my-5">{title}</h1>
-        <div className="hidden md:flex justify-between">
-          <div className="flex">
+        <div className=" flex justify-between items-center">
+          <div className="hidden md:flex items-center">
             <span className="underline mr-3">1 reviews</span>
-            <span className="underline ">{place?.city},</span>
-            <span className="underline  ">{place?.country}</span>
+            <span className="underline">{place?.city},</span>
+            <span className="underline">{place?.country}</span>
           </div>
-          <div className=" flex">
-            <div className="flex items-center">
-              <img src={share} alt="share icon" />
-              <span className="ml-2">share</span>
-            </div>
-            <div className="flex items-center ml-4">
-              <img src={save} alt="save icon" />
-              <span>save</span>
+          <div
+            className=" flex my-5 md:my-0 items-center justify-between w-full md:w-fit
+            mx-7 "
+          >
+            <Link to={"/"} className="flex md:hidden items-center">
+              <img
+                src="/assets/svg/right.svg"
+                alt=""
+                className="w-3 rotate-180"
+              />
+              <span className="text-base ml-2 font-semibold">Home</span>
+            </Link>
+            <div className=" flex items-center">
+              <div className="flex items-center">
+                <img src={share} alt="share icon" />
+                <span className="hidden md:block ml-2">share</span>
+              </div>
+              <div className="flex items-center ml-4">
+                <img src={save} alt="save icon" />
+                <span className="hidden md:block">save</span>
+              </div>
             </div>
           </div>
         </div>
@@ -147,78 +159,48 @@ const Rooms = () => {
         </div>
         {/* Gallery in mobile view */}
         <ImageCourosal images={images} />
-        <div className="mx-5 md:mx-0">
-          <div className="flex md:flex-row flex-col mt-8">
+        <div className="mx-7 md:mx-0">
+          <div className="flex md:flex-row flex-col mt-4 md:mt-8">
             <div className="flex-1">
               <div className=" items-center justify-between flex">
-                <h1 className="text-2xl">
-                  {` ${title} hosted by
-                ${hostName}`}
-                </h1>
-
-                <div className="w-11 h-11 rounded-full overflow-hidden bg-black flex items-center justify-center ">
-                  {profile ? (
-                    <img
-                      src={profile}
-                      alt="icon"
-                      className="w-full h-full object-fill"
-                    />
-                  ) : (
-                    <div>d</div>
-                  )}
-                </div>
+                <h1 className="text-2xl font-semibold">{` ${title} `}</h1>
               </div>
-              <div className=" font-normal">
+              <div className="  md:hidden mt-2 flex font-medium capitalize">
+                <span className=" mr-1">{place?.city},</span>
+                <span className="mr-1  ">{place?.country}</span>
+              </div>
+              <div className="text-gray-600 text-sm md:text-base  mb-5 mb:mb-1">
                 <span>{aboutPlace?.guests} guests</span>
                 <span className="mx-2">{aboutPlace?.bedrooms} bedrooms</span>
                 <span className="mx-2">{aboutPlace?.beds} beds</span>
                 {aboutPlace?.bathrooms} bathrooms
               </div>
-
               <hr />
-              <div className="my-5">
-                <div className="flex">
-                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                    <img src={heritage} alt="heritage" />
-                  </div>
-
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-base font-medium">
-                      Room in a heritage hotel
-                    </h3>
-                    <span className="text-gray-400">
-                      Your own room in a home, plus access to shared spaces.
-                    </span>
-                  </div>
+              <div className="flex items-center my-5">
+                <div className="w-10 h-10 rounded-full bg-black"></div>
+                <div className="ml-3 grid grid-cols-1">
+                  <h5 className="capitalize font-semibold">{hostName}</h5>
+                  <span className="text-sm text-gray-500">Emotion</span>
                 </div>
-                <div className="flex">
-                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                    <img src={heritage} alt="heritage" />
-                  </div>
+              </div>
+              <hr />
+              <div className="my-5 grid  gap-2">
+                {new Array(3).fill(" ").map((item) => (
+                  <div key={nanoid()} className="flex ">
+                    <div className="flex-initial flex items-center justify-center px-4 py-6">
+                      <img src={heritage} alt="heritage" className="w-full" />
+                    </div>
 
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-base font-medium">
-                      Room in a heritage hotel
-                    </h3>
-                    <span className="text-gray-400">
-                      Your own room in a home, plus access to shared spaces.
-                    </span>
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h3 className="text-base font-medium">
+                        Room in a heritage hotel
+                      </h3>
+                      <span className="text-gray-600 text-sm">
+                        Your own room in a home, plus access to shared spaces.
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex">
-                  <div className="flex-initial w-[15%]  flex items-center justify-center px-4 py-6">
-                    <img src={heritage} alt="heritage" />
-                  </div>
-
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-base font-medium">
-                      Room in a heritage hotel
-                    </h3>
-                    <span className="text-gray-400">
-                      Your own room in a home, plus access to shared spaces.
-                    </span>
-                  </div>
-                </div>
+                ))}
               </div>
               <hr />
               {/* host details */}
@@ -290,6 +272,18 @@ const Rooms = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="fixed md:hidden bottom-0 h-20 border-t bg-white  w-full px-7 grid grid-cols-2 items-center">
+          <div className="grid ">
+            <h4 className="font-semibold">
+              59,024 <span className="font-medium text-sm">night</span>
+            </h4>
+            <span className="underline text-sm font-semibold">16-21 jul </span>
+          </div>
+
+          <button className=" flex items-center cursor-pointer justify-center rounded-lg bg-rose-500 py-3 text-white font-semibold">
+            Reserve
+          </button>
         </div>
       </div>
     </>

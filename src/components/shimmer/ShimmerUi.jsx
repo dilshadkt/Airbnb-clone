@@ -5,7 +5,7 @@ const ShimmerUi = () => {
 
   return (
     <>
-      <div className="  grid grid-cols-2 md:gap-5  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4   w-full ">
+      <div className="  grid grid-cols-1 md:gap-5  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4   w-full ">
         {arr.map((item, index) => (
           <div key={`${item}-${index}`} className="animate-pulse  ">
             <div className=" h-[270px] rounded-xl bg-gray-300"></div>

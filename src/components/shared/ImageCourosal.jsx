@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useEffect, useRef, useState } from "react";
 
 const ImageCourosal = ({ images }) => {
@@ -29,15 +30,17 @@ const ImageCourosal = ({ images }) => {
     <div className="relative block md:hidden ">
       <div
         ref={containerRef}
-        className="w-full h-[300px]  bg-blue-200 flex items-center overflow-x-auto snap-x snap-mandatory"
+        className="w-full h-[300px] scrollbar-hidden   flex items-center overflow-x-auto snap-x "
       >
         {images?.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt=""
-            className="min-w-[400px] h-full object-cover snap-center"
-          />
+          <div key={nanoid()} className="min-w-[400px] h-full snap-center">
+            <img
+              key={index}
+              src={img}
+              alt=""
+              className="w-full h-full object-cover "
+            />
+          </div>
         ))}
       </div>
       <div className="mt-2 absolute bottom-4 right-4 bg-black/60 text-center rounded-md">

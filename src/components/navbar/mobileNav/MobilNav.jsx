@@ -6,7 +6,6 @@ const MobilNav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
-
   const controlNavbar = () => {
     if (window.scrollY > lastScrollY) {
       // if scroll down hide the navbar
@@ -25,7 +24,11 @@ const MobilNav = () => {
     };
   }, [lastScrollY]);
   return (
-    <div className="fixed bottom-0  z-50 w-full block md:hidden">
+    <div
+      className={`${
+        location.pathname === "/rooms" ? `hidden` : `block`
+      } fixed bottom-0  z-50 w-full block md:hidden`}
+    >
       <div
         className={` bg-white border-t text-gray-800 ${
           isVisible ? "translate-y-0" : "translate-y-[100%]"

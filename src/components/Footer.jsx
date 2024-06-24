@@ -12,7 +12,9 @@ const Footer = () => {
     <>
       <div
         className={`bg-gray-100  ${
-          ["/"].includes(location.pathname) ? `block` : `hidden md:block`
+          ["/", "/rooms"].includes(location.pathname)
+            ? `block`
+            : `hidden md:block`
         }`}
       >
         <div className="flex md:flex-row flex-col items-center">

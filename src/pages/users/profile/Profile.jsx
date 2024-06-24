@@ -3,8 +3,9 @@ import tick from "../../../asset/svg/tick.svg";
 import Buttons from "../../../components/Buttons";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import axios from "../../../config/axiosConfig";
-import ShimmerUi from "../../../components/shimmer/ShimmerUi";
 import cancel from "../../../asset/svg/cancel.svg";
+import { Link } from "react-router-dom";
+import Shimmer from "./Shimmer";
 
 const Profile = () => {
   const [user, setUser] = useState([]);
@@ -33,11 +34,18 @@ const Profile = () => {
       .catch((err) => console.log(err));
   };
   return user.length === 0 ? (
-    <ShimmerUi />
+    <Shimmer />
   ) : (
     <>
-      <div className="sticky h-12 bg-white w-full  flex items-center px-5 top-0 z-40 ">
-        gdsg
+      <div className="  sticky h-14 bg-white w-full  flex md:hidden items-center justify-between px-5 top-0 z-40 ">
+        <Link to={"/account-settings"}>
+          <img
+            src={"/assets/svg/right.svg"}
+            alt="arrow"
+            className="w-4 rotate-180"
+          />
+        </Link>
+        <span className="font-semibold underline">Edit</span>
       </div>
       <div className="mx-5 md:mx-[12%] my-[2%] flex flex-col md:flex-row">
         <div className="flex-initial border-b md:border-b-0 flex flex-col w-full  md:w-[30%] ">
@@ -47,7 +55,7 @@ const Profile = () => {
                 <img
                   src={profile}
                   alt="user icon"
-                  className="w-24 h-24 bg-black rounded-full object-fill "
+                  className="w-24 h-24 bg-black rounded-full object-cover "
                 />
               ) : (
                 <> {user?.firstName[0].toUpperCase()}</>

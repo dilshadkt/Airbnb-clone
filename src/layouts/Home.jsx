@@ -7,6 +7,7 @@ const HomeLayout = () => {
   const { pathname } = useLocation();
   return (
     <div className="flex flex-col ">
+      {/* TOP HEADER SECTION  */}
       <div
         className={` h-[63px] ${
           pathname === "/" ? `flex` : `hidden`

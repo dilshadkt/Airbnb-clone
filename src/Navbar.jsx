@@ -13,11 +13,10 @@ import ForgetPassword from "./pages/login/ForgetPassword";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import { loginOpen } from "./store/slice/Auth";
+import { AuthContext } from "./context/AuthContext";
 const Navbar = () => {
-  const NewUser = useSelector((store) => store.user.user);
+  const { currentUser } = useContext(AuthContext);
   const login = useSelector((store) => store.user.isLogin);
-  const loginBox = useSelector((store) => store.auth.login);
-  const signBox = useSelector((store) => store.auth.signin);
   const forgetPassword = useSelector((store) => store.auth.forgetPassword);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -152,6 +151,8 @@ const Navbar = () => {
                 alt="icon"
                 className="hidden md:block"
               />
+
+              {/* MENU ICON  */}
               <div
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="border px-3 py-2 flex items-center justify-center rounded-3xl ml-2 hover:shadow-md"
@@ -159,11 +160,19 @@ const Navbar = () => {
                 <img src={"/assets/svg/threedot.svg"} alt="icons" />
 
                 <div className=" rounded-full w-7 h-7  bg-black flex items-center justify-center ml-2 relative cursor-pointer">
-                  {login ? (
+                  {currentUser ? (
                     <>
-                      <span className="text-white ">
-                        {/* {NewUser?.firstName[0]?.toUpperCase()} */}
-                      </span>
+                      {currentUser.profilePicture ? (
+                        <img
+                          src={currentUser.profilePicture}
+                          alt="profile"
+                          className="rounded-full w-7 h-7 object-cover"
+                        />
+                      ) : (
+                        <span className="text-white ">
+                          {currentUser.firstName[0].toUpperCase()}
+                        </span>
+                      )}
                       <div
                         className={`absolute  ${
                           notification === 0 && `hidden`

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { data } from "../../asset/accounts/data";
 import AccountCards from "../../components/AccountCards";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { accountSettings, supportSettings } from "../../constants";
 import { setLogin } from "../../store/slice/User";
 import { useDispatch } from "react-redux";
+import { AuthContext } from "../../context/AuthContext";
 
 const Account = () => {
   const location = useLocation();
@@ -13,10 +14,18 @@ const Account = () => {
   const [detailed, setDetailed] = useState(details || false);
   const dispatch = useDispatch();
   const naviagate = useNavigate();
+  const { currentUser, updateUser } = useContext(AuthContext);
   useEffect(() => {
     setDetailed(details || false);
   }, [details]);
 
+  const Logout = () => {
+    dispatch(setLogin(false));
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    updateUser(null);
+    naviagate("/");
+  };
   return (
     <>
       <section
@@ -65,11 +74,15 @@ const Account = () => {
         <Link to={"/account-settings/profile"}>
           <div className="flex items-center justify-between my-5 mt-9">
             <div className="flex items-center">
-              <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center text-2xl">
-                D
+              <div className="w-14 h-14 rounded-full bg-black overflow-hidden text-white flex items-center justify-center text-2xl">
+                {currentUser.profilePicture ? (
+                  <img src={currentUser.profilePicture} alt="profile" />
+                ) : (
+                  <span>{currentUser.firstName[0].toUpperCase()}</span>
+                )}
               </div>
               <div className="grid ml-3">
-                <h5 className="font-semibold">Dilshad</h5>
+                <h5 className="font-semibold">{currentUser.firstName}</h5>
                 <span className="text-sm text-gray-500 font-medium">
                   {" "}
                   Show profile
@@ -161,12 +174,7 @@ const Account = () => {
                 <span className="ml-4">INR</span>
               </div>
               <button
-                onClick={() => {
-                  dispatch(setLogin(false));
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("user");
-                  naviagate("/");
-                }}
+                onClick={() => Logout()}
                 className="w-full rounded-lg border-gray-800 p-3 border font-semibold my-5"
               >
                 Log out

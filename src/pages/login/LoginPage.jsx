@@ -1,65 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Axios from "../../config/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../store/slice/User";
+import { formatEmail } from "../../utility";
+import { AuthContext } from "../../context/AuthContext";
 const LoginPage = () => {
   const [user, setUser] = useState(
     localStorage.getItem("user_auth_data")
       ? JSON.parse(localStorage.getItem("user_auth_data"))
       : null
   );
-  console.log(user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const login = useSelector((store) => store.user.isLogin);
-
-  function formatEmail(email) {
-    // Split the email address into parts: username and domain
-    const parts = email.split("@");
-
-    // Get the first three characters of the username
-    const usernamePrefix = parts[0].slice(0, 3);
-
-    // Get the last two characters of the username
-    const usernameSuffix = parts[0].slice(-2);
-
-    // Create the SVG icon for the obscured characters
-    const dotSVG = (
-      <svg
-        viewBox="0 0 24 24"
-        role="img"
-        aria-hidden="false"
-        aria-label="Dot"
-        focusable="false"
-        style={{
-          height: "10px",
-          width: "8px",
-          display: "inline-block",
-          fill: "currentColor",
-        }}
-      >
-        <circle cx="10" cy="12" r="10" fill="currentColor" />
-      </svg>
-    );
-
-    // Combine the formatted username, SVG icon, and the domain
-    const formattedEmail = (
-      <span className="text-sm ml-2">
-        {usernamePrefix}
-        {dotSVG}
-        {dotSVG}
-        {dotSVG}
-        {dotSVG}
-        {dotSVG}
-        {usernameSuffix}@{parts[1]}
-      </span>
-    );
-
-    return formattedEmail;
-  }
+  const { updateUser } = useContext(AuthContext);
   const handleSuccess = async (credentialResponse) => {
     try {
       const res = await Axios.get(
@@ -81,10 +37,11 @@ const LoginPage = () => {
         profilePicture: res.data.picture,
       };
       const response = await Axios.post("/api/auth/login", userData);
-
       navigate("/");
+      localStorage.setItem("token", response.data.token);
+      console.log(response.data.user);
+      updateUser(response.data.user);
       dispatch(setLogin(true));
-
       setUser(res.data);
     } catch (error) {
       console.log(error);
@@ -123,7 +80,7 @@ const LoginPage = () => {
               className="border my-6 px-6 border-gray-600 rounded-lg py-3 flex items-center w-full"
             >
               <img src="/assets/svg/google.svg" alt="google" className="w-4" />
-              <span className="ml-9 font-semibold text-sm">
+              <span className="mx-2 font-semibold text-sm w-full text-center  ">
                 Continue with google
               </span>
             </button>

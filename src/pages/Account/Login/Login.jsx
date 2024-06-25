@@ -5,7 +5,7 @@ import roundedLock from "../../../asset/svg/roundedLock.svg";
 
 const Login = () => {
   return (
-    <div className="mx-[15%] my-[2%]">
+    <div className="mx-5 md:mx-[15%] my-[2%]">
       <div className="flex items-center">
         <Link to={"/account-settings"}>
           <h3 className="hover:underline">Account</h3>
@@ -14,8 +14,8 @@ const Login = () => {
         <h3>Personal info</h3>
       </div>
       <h1 className="text-3xl font-bold py-3">Login & security</h1>
-      <div className="my-7 flex">
-        <div className="flex-1 mr-[10%]">
+      <div className="my-7 flex flex-col md:flex-row">
+        <div className="flex-1 md:mr-[10%]">
           <ul className="flex text-sm font-medium">
             <li className="py-4 mr-5 cursor-pointer">LOGIN</li>
             <li className="py-4 mr-5 cursor-pointer">LOGIN REQUESTED</li>
@@ -60,7 +60,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="flex-initial w-[27%] mt-[5%] h-fit border  rounded-xl px-5 py-6">
+        <div className="flex-initial w-full md:w-[27%] mt-[5%] h-fit border  rounded-xl px-5 py-6">
           <img src={roundedLock} alt="icon" />
           <h3 className="font-medium text-lg mt-3">
             Let's make your account more secure

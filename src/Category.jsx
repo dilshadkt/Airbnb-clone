@@ -68,9 +68,9 @@ const Category = () => {
           style={{ transform: `translateX(-${currentIndex * 15}%)` }}
           className={`flex transition-transform duration-700`}
         >
-          {data.map((item, index) => (
+          {data.map((item) => (
             <div
-              key={nanoid()}
+              key={`${nanoid()}${item.title}`}
               onClick={() => filterList(item.title)}
               className="px-5   h-full group  flex items-center justify-center cursor-pointer relative"
             >

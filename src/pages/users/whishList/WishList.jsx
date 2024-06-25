@@ -1,17 +1,19 @@
 import axios from "../../../config/axiosConfig";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import WishListCard from "../../../components/WishListCard";
 import WishShimmer from "../../../components/shimmer/usreList/WishShimmer";
 import { setLike } from "../../../store/slice/InteractionSlice";
+import { AuthContext } from "../../../context/AuthContext";
 
 const WishList = () => {
   const user = useSelector((store) => store.user.user);
+  const { currentUser } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const dipatch = useDispatch();
   useEffect(() => {
     axios
-      .get(`/addWishList/${user._id}`)
+      .get(`/addWishList/${currentUser._id}`)
       .then((res) => {
         setData(res.data);
       })

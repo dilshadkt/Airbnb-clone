@@ -33,7 +33,7 @@ const MobilNav = () => {
         ["/rooms", "/account-settings/profile"].includes(location.pathname)
           ? `hidden`
           : `block`
-      } fixed bottom-0  z-50 w-full block md:hidden`}
+      } fixed bottom-0  z-[1000] w-full block md:hidden`}
     >
       <div
         className={` bg-white border-t text-gray-800 ${

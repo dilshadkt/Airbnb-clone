@@ -6,7 +6,7 @@ import roundedLock from "../../../asset/svg/roundedLock.svg";
 
 const AccountPayment = () => {
   return (
-    <div className=" mx-[15%] my-[2%] ">
+    <div className=" mx-5 md:mx-[15%] my-[2%] ">
       <div className="flex items-center">
         <Link to={"/account-settings"}>
           <h3 className="hover:underline">Account</h3>
@@ -15,8 +15,8 @@ const AccountPayment = () => {
         <h3>Payments & payouts</h3>
       </div>
       <h1 className="text-3xl font-bold py-3">Payments & payouts</h1>
-      <div className="my-7 flex">
-        <div className="flex-1 mr-[10%]">
+      <div className="my-7 flex md:flex-row flex-col">
+        <div className="flex-1 md:mr-[10%]">
           <ul className="flex text-sm font-medium">
             <li className="py-4 mr-6 cursor-pointer">Payments</li>
             <li className="py-4 mr-6 cursor-pointer">Payouts</li>
@@ -49,7 +49,7 @@ const AccountPayment = () => {
             </div>
           </div>
         </div>
-        <div className="flex-initial w-[27%] mt-[5%] h-fit border  rounded-xl px-5 py-6">
+        <div className="flex-initial w-full md:w-[27%] mt-[5%] h-fit border  rounded-xl px-5 py-6">
           <img src={roundedLock} alt="icon" />
           <h3 className="font-medium text-lg mt-3">
             Make all payments through Airbnb

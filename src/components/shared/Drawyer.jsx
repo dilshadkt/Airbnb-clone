@@ -1,7 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { profileQuestions, Whether } from "../../constants/index";
 import { nanoid } from "nanoid";
+import { AuthContext } from "../../context/AuthContext";
 const Drawyer = ({ isOpne, setIsOpen }) => {
+  const { currentUser } = useContext(AuthContext);
   return (
     <>
       <div
@@ -25,7 +27,15 @@ const Drawyer = ({ isOpne, setIsOpen }) => {
         <div className=" overflow-y-auto h-full ">
           <div className=" relative my-5 flex items-center justify-center ">
             <div className=" w-52 h-52 bg-gray-900 rounded-full text-9xl font-semibold text-white flex items-center justify-center">
-              D
+              {currentUser.profilePicture ? (
+                <img
+                  src={currentUser.profilePicture}
+                  alt="profile"
+                  className="w-52 h-52 rounded-full object-cover"
+                />
+              ) : (
+                <span>{currentUser.firstName[0].toUpperCase()}</span>
+              )}
             </div>
             <div className="absolute z-50 w-20 h-5 rounded-full bg-white shadow-lg py-4 justify-center -bottom-3 flex items-center">
               <img src={"/assets/svg/camera.svg"} alt="" className="w-4" />

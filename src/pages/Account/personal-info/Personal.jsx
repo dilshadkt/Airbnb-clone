@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import left from "../../../asset/svg/leftArrow.svg";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import lock from "../../../asset/svg/lock.svg";
 import eye from "../../../asset/svg/eye.svg";
+import left from "../../../asset/svg/leftArrow.svg";
+import lock from "../../../asset/svg/lock.svg";
 import lock2 from "../../../asset/svg/roundedLock.svg";
-import { useSelector } from "react-redux";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Personal = () => {
-  const user = useSelector((store) => store.user.user);
+  const { currentUser } = useContext(AuthContext);
   const [isMobileEdit, setIsMobileEdit] = useState(false);
 
   return (
@@ -32,7 +32,9 @@ const Personal = () => {
           <div className="py-6 flex ">
             <div className="flex-1 ">
               <div className="text-base font-semibold">Legal name</div>
-              <div className="text-gray-500 font-thin">{user?.firstName}</div>
+              <div className="text-gray-500 font-thin">
+                {currentUser?.firstName}
+              </div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">
               <span className="font-medium underline cursor-pointer">Edit</span>
@@ -43,7 +45,10 @@ const Personal = () => {
             <div className="flex-1 ">
               <div className="text-base font-semibold">Email address</div>
               <div className="text-gray-500 font-thin">
-                {`${user?.email.slice(0, 1)}*****${user?.email.slice(9)}`}
+                {`${currentUser?.email.slice(
+                  0,
+                  1
+                )}*****${currentUser?.email.slice(9)}`}
               </div>
             </div>
             <div className="flex-initial  flex items-start justify-end w-[15%] ">

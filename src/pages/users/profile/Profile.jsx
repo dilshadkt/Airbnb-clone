@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import tick from "../../../asset/svg/tick.svg";
 import Buttons from "../../../components/Buttons";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import axios from "../../../config/axiosConfig";
 import cancel from "../../../asset/svg/cancel.svg";
 import { Link } from "react-router-dom";
-import Shimmer from "./Shimmer";
+
 import Drawyer from "../../../components/shared/Drawyer";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Profile = () => {
-  const [user, setUser] = useState([]);
   const [image, setImage] = useState(null);
   const [profile, setProfile] = useState();
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
   const data = new FormData();
 
-  useEffect(() => {
-    axios
-      .post(`user/me`)
-      .then((res) => {
-        setUser(res.data);
-        setProfile(user.profilePicture);
-      })
-      .catch((err) => console.log(err));
-  }, [user.profilePicture]);
   const uploadUserImage = (e) => {
     data.append("photos", image[0]);
 
@@ -35,9 +27,7 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   };
-  return user.length === 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <>
       <div className="  sticky h-14 bg-white w-full  flex md:hidden items-center justify-between px-5 top-0 z-40 ">
         <Link to={"/account-settings"}>
@@ -57,15 +47,15 @@ const Profile = () => {
       <div className="mx-5 md:mx-[12%] my-[2%] flex flex-col md:flex-row">
         <div className="flex-initial border-b md:border-b-0 flex flex-col w-full  md:w-[30%] ">
           <div className=" shadow-xl flex flex-col items-center border rounded-xl p-6">
-            <div className="relative w-24 h-24 bg-black rounded-full text-5xl text-white font-bold flex items-center justify-center">
-              {user?.profilePicture ? (
+            <div className="relative w-24 h-24 bg-black rounded-full  text-5xl text-white font-bold flex items-center justify-center">
+              {currentUser.profilePicture ? (
                 <img
-                  src={profile}
-                  alt="user icon"
-                  className="w-24 h-24 bg-black rounded-full object-cover "
+                  src={currentUser.profilePicture}
+                  alt="profile"
+                  className="w-24 h-24 rounded-full  object-cover"
                 />
               ) : (
-                <> {user?.firstName[0].toUpperCase()}</>
+                <span>{currentUser.firstName[0].toUpperCasee()}</span>
               )}
 
               <label className="bg-white text-black border flex items-center justify-center p-1 rounded-full absolute -bottom-2 cursor-pointer right-2">
@@ -78,12 +68,12 @@ const Profile = () => {
                 <CameraAltIcon />
               </label>
             </div>
-            <h4 className="text-2xl font-bold mt-2">Dilshad</h4>
+            <h4 className="text-2xl font-bold mt-2">{currentUser.firstName}</h4>
             <span className="font-medium">Guest</span>
           </div>
           <div className="md:border p-5 my-7 rounded-xl">
             <h3 className="text-xl md:w-[60%] font-medium">
-              Dilshad's confirmed information
+              {currentUser.firstName}'s confirmed information
             </h3>
 
             <div className="flex items-center my-5">
@@ -117,10 +107,11 @@ const Profile = () => {
             />
           </div>
         </div>
+        {/* CONFIRMATION ALERT  */}
         {image && (
           <div
             onClick={() => setImage(null)}
-            className="fixed top-0 right-0 left-0 border rounded-xl bottom-0 w-[40%] bg-white shadow-2xl p-3 h-fit m-auto"
+            className="fixed top-0 right-0 left-0 border rounded-xl bottom-0 w-[95%] md:w-[40%] bg-white shadow-2xl p-3 h-fit m-auto"
           >
             <div className="rounded-full cursor-pointer hover:bg-gray-200 w-fit p-1">
               <img src={cancel} alt="cancel icon" className="w-5" />

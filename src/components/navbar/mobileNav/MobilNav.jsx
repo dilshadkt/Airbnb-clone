@@ -8,7 +8,6 @@ const MobilNav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const login = useSelector((store) => store.user.isLogin);
-  console.log(login);
   const location = useLocation();
 
   useEffect(() => {
@@ -48,6 +47,9 @@ const MobilNav = () => {
           {!login
             ? mobilNav.slice(5).map((item) => (
                 <li
+                  onClick={() =>
+                    document.getElementById("authForm")?.showModal()
+                  }
                   key={nanoid()}
                   className="flex items-center justify-center flex-col"
                 >
@@ -93,7 +95,6 @@ const MobilNav = () => {
                   </li>
                 </Link>
               ))}
-          {}
         </ul>
       </div>
     </div>

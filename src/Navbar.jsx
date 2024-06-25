@@ -29,7 +29,7 @@ const Navbar = () => {
   const input = useRef(null);
   const fullNav = useRef(null);
   const shortNav = useRef(null);
-
+  const [FilterOpen, setFilterOpen] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 65) {
       scroll.current.style.height = "0px";
@@ -116,7 +116,10 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex md:hidden w-full h-full ">
-            <button className="w-full rounded-full flex border shadow-xl items-center px-4 py-2">
+            <button
+              onClick={() => setFilterOpen(true)}
+              className="w-full rounded-full flex border shadow-xl items-center px-4 py-2"
+            >
               <SearchIcon className="scale-125" />
               <div className="grid ml-3  ">
                 <h5 className="font-semibold text-sm text-left">Where to?</h5>
@@ -130,6 +133,36 @@ const Navbar = () => {
                 </div>
               </div>
             </button>
+          </div>
+          <div
+            className={`${
+              FilterOpen ? `top-0` : `-top-[140%] `
+            } fixed w-full h-full bg-gray-200 p-4 left-0 right-0 transition-all duration-300  m-auto`}
+          >
+            <div
+              onClick={() => setFilterOpen(false)}
+              className="w-8 h-8 rounded-full cursor-pointer border border-gray-400 flex items-center justify-center"
+            >
+              <img
+                src={"/assets/nav/mobile/cancel.svg"}
+                alt="cancel"
+                className="w-3"
+              />
+            </div>
+            <div className="bg-white h-full rounded-t-3xl mt-5 p-5">
+              <h4 className="font-bold text-xl">Where to ?</h4>
+              <button className="border p-4 border-gray-300 mt-4  w-full flex items-center justify-start rounded-xl">
+                <img
+                  src="/assets/nav/mobile/search.svg"
+                  alt=""
+                  className="w-5"
+                />
+                <span className="ml-3 font-semibold text-gray-600">
+                  {" "}
+                  Search destinations
+                </span>
+              </button>
+            </div>
           </div>
 
           <div className="hidden flex-1 md:flex items-center justify-end">
@@ -177,8 +210,6 @@ const Navbar = () => {
                   )}
 
                   {isMenuOpen && <SideMenu />}
-                  <Login />
-                  <SignUp />
                 </div>
               </div>
             </div>
@@ -191,6 +222,8 @@ const Navbar = () => {
         </div>
       </header>
       <MobilNav />
+      <Login />
+      <SignUp />
     </>
   );
 };

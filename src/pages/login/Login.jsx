@@ -24,15 +24,10 @@ const Login = () => {
           dispatch(loginOpen(false));
           dispatch(setUser(res.data.user));
           dispatch(setLogin(true));
-
           dispatch(setLike(JSON.stringify(res.data.propertyId)));
-          console.log(res.data.propertyId);
-          // dispatch(setToken(res.data.toke));
           dispatch(setToken(res.data.token));
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
-
-          // window.location.reload();
         })
         .catch((err) => console.log(err));
     };

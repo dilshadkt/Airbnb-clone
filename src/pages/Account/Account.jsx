@@ -163,7 +163,8 @@ const Account = () => {
               <button
                 onClick={() => {
                   dispatch(setLogin(false));
-                  localStorage.clear();
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("user");
                   naviagate("/");
                 }}
                 className="w-full rounded-lg border-gray-800 p-3 border font-semibold my-5"

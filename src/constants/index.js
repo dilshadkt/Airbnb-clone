@@ -84,7 +84,7 @@ export const mobilNav = [
   {
     id: 8,
     title: "Log in",
-    path: "/account-settings",
+    path: "/login",
     icon: "/assets/nav/mobile/profile.svg",
   },
 ];

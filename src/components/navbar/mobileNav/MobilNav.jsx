@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { mobilNav } from "../../../constants";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 
@@ -9,6 +9,7 @@ const MobilNav = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const login = useSelector((store) => store.user.isLogin);
   const location = useLocation();
+  const navaigate = useNavigate();
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -46,31 +47,27 @@ const MobilNav = () => {
         >
           {!login
             ? mobilNav.slice(5).map((item) => (
-                <li
-                  onClick={() =>
-                    document.getElementById("authForm")?.showModal()
-                  }
-                  key={nanoid()}
-                  className="flex items-center justify-center flex-col"
-                >
-                  <img
-                    src={item.icon}
-                    alt={item.title}
-                    className={`w-6  ${
-                      location.pathname === item.path
-                        ? `filter-red`
-                        : `filter-gray `
-                    }`}
-                  />
-                  <span
-                    className={`${
-                      location.pathname === item.path && `text-red-500`
-                    } text-[10px] mt-1`}
-                  >
-                    {" "}
-                    {item.title}
-                  </span>
-                </li>
+                <Link key={nanoid()} to={`${item.path}`}>
+                  <li className="flex items-center justify-center flex-col">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      className={`w-6  ${
+                        location.pathname === item.path
+                          ? `filter-red`
+                          : `filter-gray `
+                      }`}
+                    />
+                    <span
+                      className={`${
+                        location.pathname === item.path && `text-red-500`
+                      } text-[10px] mt-1`}
+                    >
+                      {" "}
+                      {item.title}
+                    </span>
+                  </li>
+                </Link>
               ))
             : mobilNav.slice(0, 5).map((item) => (
                 <Link key={item.id} to={item.path}>

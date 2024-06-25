@@ -162,7 +162,7 @@ const Navbar = () => {
                   {login ? (
                     <>
                       <span className="text-white ">
-                        {NewUser?.firstName[0]?.toUpperCase()}
+                        {/* {NewUser?.firstName[0]?.toUpperCase()} */}
                       </span>
                       <div
                         className={`absolute  ${

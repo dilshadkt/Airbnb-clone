@@ -39,6 +39,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
 import AdminHome from "./pages/admin/Home/AdminHome";
+import LoginPage from "./pages/login/LoginPage";
 
 // axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
@@ -112,6 +113,7 @@ function App() {
             <Route path="/hoisting" element={<Hoisting />} />
             <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/trips" element={<Trips />} />
+            <Route path="/login" element={<LoginPage />} />
             {/* <Route path="/chats" element={<Chat />} /> */}
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />

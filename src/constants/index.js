@@ -216,3 +216,18 @@ export const Whether = [
     title: "Next destination",
   },
 ];
+
+export const tripDates = [
+  {
+    id: 1,
+    title: "Dates",
+  },
+  {
+    id: 2,
+    title: "Months",
+  },
+  {
+    id: 3,
+    title: "Flexible",
+  },
+];

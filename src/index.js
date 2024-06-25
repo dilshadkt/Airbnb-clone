@@ -13,9 +13,9 @@ root.render(
   <GoogleOAuthProvider clientId="919933473029-sjmhspsmdbb5pr29g1h2h0s57unqkom3.apps.googleusercontent.com">
     <AuthContextProvider>
       <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        {/* <BrowserRouter> */}
+        <App />
+        {/* </BrowserRouter> */}
       </Provider>
     </AuthContextProvider>
   </GoogleOAuthProvider>

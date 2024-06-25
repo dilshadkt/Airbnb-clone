@@ -1,5 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import HomeLayout from "./layouts/Home";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import Home from "./pages/users/Home/Home";
 import Rooms from "./pages/users/Rooms/Rooms";
 import Payment from "./pages/users/payment/Payment";
@@ -40,7 +44,7 @@ import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
 import AdminHome from "./pages/admin/Home/AdminHome";
 import LoginPage from "./pages/login/LoginPage";
-
+import { AuthHomeLayout, HomeLayout } from "./layouts/Home";
 // axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
 function App() {
@@ -103,9 +107,74 @@ function App() {
     isUserBoxOpen,
     setIsUserBox,
   };
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomeLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/rooms",
+          element: <Rooms />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <AuthHomeLayout />,
+      children: [
+        {
+          path: "/trips",
+          element: <Trips />,
+        },
+        {
+          path: "/account-settings",
+          element: <Account />,
+        },
+        {
+          path: "/account-settings/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/account-settings/personal",
+          element: <Personal />,
+        },
+        {
+          path: "/account-settings//account-settings/Payment",
+          element: <AccountPayment />,
+        },
+        {
+          path: "/whishlist",
+          element: <WishList />,
+        },
+        {
+          path: "/Manage",
+          element: <ManageLIst />,
+        },
+        {
+          path: "/hoisting",
+          element: <Hoisting />,
+        },
+        {
+          path: "/book/stay",
+          element: <Payment />,
+        },
+      ],
+    },
+  ]);
   return (
     <>
       <MyContext.Provider value={Passdata}>
+        <RouterProvider router={router} />
+      </MyContext.Provider>
+      {/* <MyContext.Provider value={Passdata}>
         <Routes>
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<Home />} />
@@ -114,7 +183,6 @@ function App() {
             <Route path="/Manage" element={<ManageLIst />} />
             <Route path="/trips" element={<Trips />} />
             <Route path="/login" element={<LoginPage />} />
-            {/* <Route path="/chats" element={<Chat />} /> */}
             <Route path="/account-settings" element={<Account />} />
             <Route path="/whishlist" element={<WishList />} />
             <Route path="/account-settings/personal" element={<Personal />} />
@@ -150,7 +218,7 @@ function App() {
             <Route path="properties/listing" element={<Listing />} />
           </Route>
         </Routes>
-      </MyContext.Provider>
+      </MyContext.Provider> */}
     </>
   );
 }

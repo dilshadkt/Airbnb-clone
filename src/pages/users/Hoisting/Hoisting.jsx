@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Buttons from "../../../components/Buttons";
 import listpad from "../../../asset/svg/listpad.svg";
 import help1 from "../../../asset/svg/help1.svg";
-import help2 from "../../../asset/stuff/Rectangle 43.png";
-import help3 from "../../../asset/stuff/Rectangle 42.png";
-import help4 from "../../../asset/stuff/Rectangle 44.png";
-import help5 from "../../../asset/stuff/Rectangle 45.png";
+
 import { useNavigate } from "react-router-dom";
 import axios from "../../../config/axiosConfig";
 import Reservation from "./reservation/Reservation";
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
 import notfound from "./not.png";
+import { AuthContext } from "../../../context/AuthContext";
+import { help, resource } from "../../../constants";
 
 const Hoisting = () => {
   const [resrvation, setReservation] = useState([]);
@@ -21,6 +20,7 @@ const Hoisting = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("NewUser"));
+  const { currentUser } = useContext(AuthContext);
 
   const checkingOut = (e) => {
     const text = e.target.textContent.split(" ")[0];
@@ -79,7 +79,7 @@ const Hoisting = () => {
     <div className="md:m-20 m-5 ">
       <div className="flex justify-between">
         <h1 className="md:text-3xl font-semibold  text-xl">
-          Welcome,{user.firstName} !{" "}
+          Welcome,{currentUser.firstName} !{" "}
         </h1>
 
         <div onClick={() => navigate("/become-a-host")}>
@@ -146,7 +146,7 @@ const Hoisting = () => {
       ) : (
         <div className="my-[5%]">
           <div className="flex w-full p-3 bg-red-400 rounded-xl text-white">
-            <ul className="flex justify-around w-full mr-[4%]">
+            <ul className="flex justify-around w-full mr-[4%] text-xs md:text-base">
               <li>Peoperty</li>
               <li>checkIn date</li>
               <li>checkOut date</li>
@@ -166,50 +166,39 @@ const Hoisting = () => {
         </div>
       )}
       <h4 className="text-xl font-medium"> We’re here to help</h4>
-      <div className="flex my-6">
-        <div className="border rounded-xl p-5 flex mr-6">
-          <div className=" flex-initial w-[15%] flex items-center justify-center">
-            <img src={help1} alt="icons" />
+      <div className="flex flex-col my-6">
+        {help.map((item) => (
+          <div
+            key={item.id}
+            className="border my-2 md:my-0 rounded-xl p-5 flex mr-6"
+          >
+            <div className=" flex-initial w-[15%] flex items-center justify-center">
+              <img src={item.icon} alt="icons" className="w-10 opacity-70" />
+            </div>
+            <div className="flex-1 ml-3   h-fit">
+              <h4 className="text-base font-medium">{item.title}</h4>
+              <p className="text-sm max-w-[350px]">{item.description}</p>
+            </div>
           </div>
-          <div className="flex-1 ml-   h-fit">
-            <h4 className="text-base font-medium">Join your local host club</h4>
-            <p className="text-sm max-w-[350px]">
-              Connect,collaborate and share with other hosts and comminity
-              member
-            </p>
-          </div>
-        </div>
-        <div className="border rounded-xl p-5 flex mr-6">
-          <div className=" flex-initial w-[15%] flex items-center justify-center">
-            <img src={help1} alt="icons" />
-          </div>
-          <div className="flex-1 ml-   h-fit">
-            <h4 className="text-base font-medium">Join your local host club</h4>
-            <p className="text-sm max-w-[350px]">
-              Connect,collaborate and share with other hosts and comminity
-              member
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
       <h4 className="text-xl font-medium">Resources and tips</h4>
-      <div className="my-6  w-full  grid grid-cols-4 gap-4 ">
-        <div className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer">
-          <img src={help2} alt="help one" className="w-full object-fill" />
-          <h4 className="py-6">How to get piad for hosting</h4>
-        </div>
-        <div className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer">
-          <img src={help3} alt="help one" className="w-full object-fill" />
-          <h4 className="py-6">How to take greate photo with your phone</h4>
-        </div>
-        <div className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer">
-          <img src={help4} alt="help one" className="w-full object-fill" />
-          <h4 className="py-6">Make your home ready for customer</h4>
-        </div>
-        <div className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer">
-          <img src={help5} alt="help one" className="w-full object-fill" />
-          <h4 className="py-6">How to write a listing description that work</h4>
-        </div>
+      <div className="my-6  w-full  grid grid-cols-2 md:grid-cols-4 gap-4 ">
+        {resource.map((item) => (
+          <div
+            key={item.id}
+            className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer"
+          >
+            <img
+              src={item.image}
+              alt="help one"
+              className="w-full object-fill"
+            />
+            <h4 className="py-6 text-sm md:text-base text-center">
+              {item.description}
+            </h4>
+          </div>
+        ))}
       </div>
     </div>
   );

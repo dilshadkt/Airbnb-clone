@@ -197,10 +197,9 @@ const Navbar = () => {
           {forgetPassword && <ForgetPassword />}
         </nav>
         <hr />
-        <div className="relative -z-10">
-          <Category />
-        </div>
+        <div className="relative -z-10"></div>
       </header>
+      <Category />
       <MobilNav />
       <Login />
       <SignUp />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cancel from "../asset/svg/cancel.svg";
 import { useForm } from "react-hook-form";
 import axios from "../config/axiosConfig";
@@ -9,6 +9,7 @@ const FilterMenu = ({ filter }) => {
   const dispatch = useDispatch();
   const [type, setType] = useState("Any Type");
   const [bedrooms, setBedrooms] = useState("any");
+  const filterBoxRef = useRef();
   const [beds, setBeds] = useState("any");
   const [bathroom, setBathroom] = useState("any");
   const roomType = ["Any Type", "a room", "A shared room"];
@@ -31,13 +32,30 @@ const FilterMenu = ({ filter }) => {
         filter(false);
       })
       .catch((err) => console.log(err));
+    filter(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (
+        filterBoxRef.current &&
+        !filterBoxRef.current.contains(event.target)
+      ) {
+        filter(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
   return (
     <>
       {(document.body.style.overflow = "hidden")}
       <div
-        className={`w-[50%]  fixed h-[85%] rounded-xl flex flex-col   left-0 right-0 m-auto  top-0 bottom-0 overflow-hidden bg-white shadow-xl border z-40 `}
+        ref={filterBoxRef}
+        className={` w-[90%] lg:w-[70%] xl:w-[50%]  fixed h-[85%] rounded-xl flex flex-col   left-0 right-0 m-auto  top-0 bottom-0 overflow-hidden bg-white shadow-xl border z-[1200] `}
       >
         <div className="flex-initial h-[10%] items-center px-5  flex">
           <div className="flex-1">
@@ -176,7 +194,7 @@ const FilterMenu = ({ filter }) => {
         </div>
       </div>
       <div
-        className={`bg-black opacity-50 fixed top-0 bottom-0 right-0 left-0  z-10`}
+        className={`bg-black opacity-50 fixed top-0 bottom-0 right-0 left-0  z-[1000]`}
       ></div>
     </>
   );

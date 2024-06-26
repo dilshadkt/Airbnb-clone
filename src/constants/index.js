@@ -231,3 +231,43 @@ export const tripDates = [
     title: "Flexible",
   },
 ];
+
+export const resource = [
+  {
+    id: 1,
+    description: "How to get piad for hosting",
+    image: "/assets/resource1.png",
+  },
+  {
+    id: 2,
+    description: "How to take greate photo with your phone",
+    image: "/assets/resource2.png",
+  },
+  {
+    id: 3,
+    description: "Make your home ready for customer",
+    image: "/assets/resource3.png",
+  },
+  {
+    id: 4,
+    description: "How to write a listing description that work",
+    image: "/assets/resource4.png",
+  },
+];
+
+export const help = [
+  {
+    id: 1,
+    icon: "/assets/svg/member.svg",
+    title: "Join your local host club",
+    description:
+      "Connect,collaborate and share with other hosts and comminity member",
+  },
+  {
+    id: 2,
+    icon: "/assets/svg/customer.svg",
+    title: "Contact specialised support",
+    description:
+      "As a new host, you get one-tap access to a specially trained support team",
+  },
+];

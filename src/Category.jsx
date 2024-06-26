@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import roundeArrow from "./asset/svg/roundeArrow.svg";
 import { data } from "./asset/host/data";
 import axios from "./config/axiosConfig";
@@ -68,21 +68,25 @@ const Category = () => {
           style={{ transform: `translateX(-${currentIndex * 15}%)` }}
           className={`flex transition-transform duration-700`}
         >
-          {data.map((item) => (
-            <div
-              key={`${nanoid()}${item.title}`}
-              onClick={() => filterList(item.title)}
-              className="px-5   h-full group  flex items-center justify-center cursor-pointer relative"
-            >
-              <div className="flex w-8 md:w-full flex-col justify-center items-center opacity-90 md:opacity-70  group-hover:opacity-100 ">
-                {item.img}
+          {data.map((item, index) => (
+            <Fragment key={index}>
+              <div
+                onClick={() => filterList(item.title)}
+                className="px-5   h-full group  flex items-center justify-center cursor-pointer relative"
+              >
+                <div
+                  key={nanoid()}
+                  className="flex w-8 md:w-full flex-col justify-center items-center opacity-90 md:opacity-70  group-hover:opacity-100 "
+                >
+                  {item.img}
 
-                <span className="whitespace-nowrap text-xs md:text-sm mt-1">
-                  {item.title}
-                </span>
+                  <span className="whitespace-nowrap text-xs md:text-sm mt-1">
+                    {item.title}
+                  </span>
+                </div>
+                <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-gray-300 h-[3px]"></div>
               </div>
-              <div className="absolute bottom-0 hidden m-auto left-0 group-hover:flex w-[60%] right-0 bg-gray-300 h-[3px]"></div>
-            </div>
+            </Fragment>
           ))}
         </div>
       </div>

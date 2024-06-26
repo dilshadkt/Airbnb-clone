@@ -11,7 +11,7 @@ import { setLike } from "../../store/slice/InteractionSlice";
 import Modal from "../../components/shared/Modal";
 const Login = () => {
   const dispatch = useDispatch();
-  const [googleUser, setGoogleUser] = useState([]);
+  const [googleUser, setGoogleUser] = useState(null);
   const [userName, setUseName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);

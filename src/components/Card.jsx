@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import rating from "../asset/svg/rating.svg";
 import arrow from "../asset/svg/Arrow.svg";
 import LikeHeart from "../asset/card/LikeHeart";
@@ -9,8 +8,10 @@ import axios from "../config/axiosConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { loginOpen } from "../store/slice/Auth";
 import { setLike } from "../store/slice/InteractionSlice";
+import { AuthContext } from "../context/AuthContext";
 const Card = ({ data }) => {
   const dispatch = useDispatch();
+  const { currentUser } = useContext(AuthContext);
   const login = useSelector((store) => store.user.isLogin);
   const { isLiked, setIsLliked } = useContext(MyContext);
   const [currentImg, setCurrentImage] = useState(0);
@@ -46,7 +47,7 @@ const Card = ({ data }) => {
       <div className="w-full h-80  items-center justify-center relative ">
         <div
           onClick={
-            login
+            currentUser
               ? (e) => {
                   e.stopPropagation();
 
@@ -54,7 +55,7 @@ const Card = ({ data }) => {
                 }
               : (e) => {
                   e.stopPropagation();
-                  dispatch(loginOpen(true));
+                  navigate("/login");
                 }
           }
           className={`absolute right-3 top-3 w-8 h-8 ${

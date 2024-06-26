@@ -42,3 +42,22 @@ export function formatEmail(email) {
 
   return formattedEmail;
 }
+
+export const fetchCountries = async () => {
+  try {
+    const response = await fetch("https://restcountries.com/v3.1/all");
+    const data = await response.json();
+    const countryOptions = data.map((country) => ({
+      value:
+        country.idd.root +
+        (country.idd.suffixes ? country.idd.suffixes[0] : ""),
+      label: `${country.name.common} (${country.idd.root}${
+        country.idd.suffixes ? country.idd.suffixes[0] : ""
+      })`,
+    }));
+    return countryOptions;
+    // setCountries(countryOptions);
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+  }
+};

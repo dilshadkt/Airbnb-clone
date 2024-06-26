@@ -24,6 +24,7 @@ const Register = ({ signIn, setGetOtp, setMobileNumber }) => {
       const res = await Axios.post("/api/otp/send-otp", { phoneNumber });
       res.status === 200 ? setGetOtp(true) : setGetOtp(false);
     } catch (error) {
+      console.log(error);
       setError(true);
     } finally {
       setLoading(false);

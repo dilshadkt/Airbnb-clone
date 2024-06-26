@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { setLogin } from "../../store/slice/User";
 import { formatEmail } from "../../utility";
 import Register from "./Register";
+import FinishUp from "./FinishUp";
 
 const LoginPage = () => {
   const [user, setUser] = useState(
@@ -17,8 +18,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [mobileNumber, setMobileNumber] = useState("");
-  const [getOtp, setGetOtp] = useState(true);
-  const [isOtpvalid, setIsOtpValid] = useState(true);
+  const [getOtp, setGetOtp] = useState(false);
+  const [isOtpvalid, setIsOtpValid] = useState(false);
   const [otp, setOtp] = useState("");
   const { updateUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -81,19 +82,37 @@ const LoginPage = () => {
       verifyOtp();
     }
   }, [otp]);
+  // COLLECTION USERS DATA
+  const handleUserData = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const inputs = Object.fromEntries(formData);
+    try {
+      const res = await Axios.post("/api/auth/login", {
+        ...inputs,
+        phone: mobileNumber,
+      });
+      console.log(res);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <section className=" h-screen flex flex-col">
+    <section className=" h-screen flex flex-col ">
       <header className="flex items-center justify-center font-semibold h-14 border-b ">
         {user
           ? `Welcome back ${user.given_name}`
           : getOtp
-          ? `Confirm your number`
+          ? isOtpvalid
+            ? `Finish sign up`
+            : `Confirm your number`
           : ` Log in or sign up`}
       </header>
       {user ? (
         // SIGN UP USER
         <div className="h-full  flex items-start mt-[20%] justify-center">
-          <div className="flex flex-col items-center justify-center w-full mx-7">
+          <div className="flex flex-col md:max-w-screen-sm md:mx-auto items-center justify-center w-full mx-7">
             <div className="w-32 h-32 bg-black  rounded-full flex items-center justify-center font-semibold text-white text-5xl">
               {user?.given_name[0]}
             </div>
@@ -116,7 +135,10 @@ const LoginPage = () => {
             </button>
             <span className="text-sm w-full flex items-center">
               Not you?{" "}
-              <Link className="font-semibold underline ml-2">
+              <Link
+                onClick={() => setUser(null)}
+                className="font-semibold underline ml-2"
+              >
                 Use another account
               </Link>
             </span>
@@ -131,83 +153,7 @@ const LoginPage = () => {
           {getOtp ? (
             <section className="h-full overflow-y-auto scrollbar-hidden">
               {isOtpvalid ? (
-                <div className="p-7 ">
-                  <form action="">
-                    <h4 className="font-semibold mt-3">Leagal name</h4>
-                    <div className="my-2 border-[1px] border-gray-300  mt-4 h-28 rounded-xl grid ">
-                      <div className="border-b border-gray-300">
-                        <input
-                          type="text"
-                          className="rounded-xl h-full w-full  px-3"
-                          placeholder="First name on ID"
-                          required
-                        />
-                      </div>
-                      <input
-                        type="text"
-                        className="rounded-xl px-3"
-                        placeholder="Last name on ID"
-                        required
-                      />
-                    </div>
-                    <p className="text-xs text-gray-500">
-                      Make sure this matches the name on your government ID. If
-                      you go by another name, you can add a{" "}
-                      <Link className="font-semibold underline">
-                        preferred first name.
-                      </Link>
-                    </p>
-                    <div className=" mt-5">
-                      <h4 className="font-semibold">Date of birth</h4>
-                      <input
-                        type="text"
-                        className="rounded-xl px-3 border border-gray-300 my-2 mt-4 h-14 w-full"
-                        placeholder="Date of birth"
-                        required
-                      />
-                      <p className="text-xs text-gray-500">
-                        To sign up, you need to be at least 18. Your birthday
-                        won’t be shared with other people who use Airbnb.
-                      </p>
-                    </div>
-                    <div className=" mt-5">
-                      <h4 className="font-semibold">Contact info</h4>
-                      <input
-                        type="email"
-                        className="rounded-xl px-3 border border-gray-300 my-2 mt-4 h-14 w-full"
-                        placeholder="Email"
-                        required
-                      />
-                      <p className="text-xs text-gray-500 ">
-                        We'll email you trip confirmations and receipts.
-                      </p>
-                      <p className="text-xs text-gray-500 my-5">
-                        By selecting{" "}
-                        <span className="font-semibold text-gray-800">
-                          Agree and continue
-                        </span>
-                        , I agree to Airbnb’s{" "}
-                        <span className="text-blue-600 font-medium underline">
-                          Terms of Service, Payments Terms of Service
-                        </span>
-                        , and Nondiscrimination Policy and acknowledge the
-                        <span className="text-blue-600 font-medium underline">
-                          Privacy Policy.
-                        </span>
-                      </p>
-                    </div>
-                    <button className="h-14 w-full flex items-center justify-center rounded-xl bg-rose-500 text-white font-semibold">
-                      Agree and continue
-                    </button>
-                    <hr className="my-7" />
-                    <p className="text-xs text-gray-500 ">
-                      Airbnb will send you members-only deals, inspiration,
-                      marketing emails, and push notifications. You can opt out
-                      of receiving these at any time in your account settings or
-                      directly from the marketing notification.
-                    </p>
-                  </form>
-                </div>
+                <FinishUp handleUserData={handleUserData} />
               ) : (
                 <>
                   <div className="p-7">

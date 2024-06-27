@@ -45,6 +45,7 @@ import { setUser } from "./store/slice/User";
 import AdminHome from "./pages/admin/Home/AdminHome";
 import LoginPage from "./pages/login/LoginPage";
 import { AuthHomeLayout, HomeLayout } from "./layouts/Home";
+import Host from "./components/Host";
 // axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
 function App() {
@@ -165,6 +166,16 @@ function App() {
         {
           path: "/book/stay",
           element: <Payment />,
+        },
+      ],
+    },
+    {
+      path: "/become-a-host",
+      element: <HostLayout />,
+      children: [
+        {
+          path: "",
+          element: <BecomeHost />,
         },
       ],
     },

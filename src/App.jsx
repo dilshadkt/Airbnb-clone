@@ -1,51 +1,26 @@
-import {
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MyContext from "./components/contex/Mycontex";
+import axios from "./config/axiosConfig";
+import HostLayout from "./layouts/HostLayout";
+import Account from "./pages/Account/Account";
+import AccountPayment from "./pages/Account/payment/Payment";
+import Personal from "./pages/Account/personal-info/Personal";
+import BecomeHost from "./pages/host/BecomeHost";
+import ManageLIst from "./pages/manage-list/ManageLIst";
+import Hoisting from "./pages/users/Hoisting/Hoisting";
 import Home from "./pages/users/Home/Home";
 import Rooms from "./pages/users/Rooms/Rooms";
 import Payment from "./pages/users/payment/Payment";
-import Hoisting from "./pages/users/Hoisting/Hoisting";
-import Account from "./pages/Account/Account";
-import MyContext from "./components/contex/Mycontex";
-import { useEffect, useState } from "react";
-import WishList from "./pages/users/whishList/WishList";
-import Personal from "./pages/Account/personal-info/Personal";
-import Login from "./pages/Account/Login/Login";
-import AccountPayment from "./pages/Account/payment/Payment";
 import Profile from "./pages/users/profile/Profile";
-import BecomeHost from "./pages/host/BecomeHost";
-import HostLayout from "./layouts/HostLayout";
-import Structure from "./pages/host/structure/Structure";
-import PrivacyType from "./pages/host/privacy-type/PrivacyType";
-import Location from "./pages/host/location/Location";
-import FloorPlan from "./pages/host/floor-plan/FloorPlan";
-import axios from "./config/axiosConfig";
-import StandOut from "./pages/host/stand-out/StandOut";
-import Amenities from "./pages/host/amenities/Amenities";
-import Photos from "./pages/host/photos/Photos";
-import Title from "./pages/host/title/Title";
-import Description from "./pages/host/description/Description";
-import FinishUp from "./pages/host/finish-setup/FinishUp";
-import PricePerNight from "./pages/host/price/PricePerNight";
-import AdminLayout from "./layouts/Admin";
-import Users from "./pages/admin/users/Users";
-import Properties from "./pages/admin/properties/Properties";
-import WhishList from "./pages/admin/Whishlist/WhishList";
-import NewProperty from "./pages/admin/newProperty/NewProperty";
-import Listing from "./pages/admin/listing/Listing";
-import ManageLIst from "./pages/manage-list/ManageLIst";
 import Trips from "./pages/users/trips/Trips";
+import WishList from "./pages/users/whishList/WishList";
 // import Chat from "./pages/chat/Chat";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthHomeLayout, HomeLayout } from "./layouts/Home";
+import LoginPage from "./pages/login/LoginPage";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
-import AdminHome from "./pages/admin/Home/AdminHome";
-import LoginPage from "./pages/login/LoginPage";
-import { AuthHomeLayout, HomeLayout } from "./layouts/Home";
-import Host from "./components/Host";
 // axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
 
 function App() {

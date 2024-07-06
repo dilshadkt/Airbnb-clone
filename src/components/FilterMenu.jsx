@@ -36,7 +36,7 @@ const FilterMenu = ({ filter }) => {
   };
 
   useEffect(() => {
-    const handleClickOutside = () => {
+    const handleClickOutside = (event) => {
       if (
         filterBoxRef.current &&
         !filterBoxRef.current.contains(event.target)

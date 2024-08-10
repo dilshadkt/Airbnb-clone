@@ -182,14 +182,16 @@ const Account = () => {
             </div>
           </div>
         </div>
-        <div className="fixed bottom-24 left-0 right-0 mx-auto bg-gray-900 flex items-center justify-between text-white w-fit px-6 py-4 rounded-full">
-          <img
-            src="/assets/svg/switch.svg"
-            alt="switch"
-            className="w-4 filter-white"
-          />{" "}
-          <span className="ml-2 font-semibold"> Switch to hosting</span>
-        </div>
+        <Link to={"/hoisting"}>
+          <div className="fixed bottom-24 left-0 right-0 mx-auto bg-gray-900 flex items-center justify-between text-white w-fit px-6 py-4 rounded-full">
+            <img
+              src="/assets/svg/switch.svg"
+              alt="switch"
+              className="w-4 filter-white"
+            />{" "}
+            <span className="ml-2 font-semibold"> Switch to hosting</span>
+          </div>
+        </Link>
       </section>
     </>
   );

@@ -34,7 +34,7 @@ const Location = () => {
 
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
-      <div className="w-[40%] sm:w-full sm:mx-5 ">
+      <div className="md:w-[40%] w-full mx-5 ">
         <h1 className="text-3xl font-medium my-4">
           Where's your place located?
         </h1>

@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../../config/axiosConfig";
-import { singInOpen } from "../../store/slice/Auth";
+import { setToken, singInOpen } from "../../store/slice/Auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { setLogin, setUser } from "../../store/slice/User";
 import { useDispatch } from "react-redux";
 import Modal from "../../components/shared/Modal";
+import InputField from "../../components/shared/inputField/InputField";
+import PrimaryButton from "../../components/shared/primaryButton";
+import { AuthContext } from "../../context/AuthContext";
+import { setLike } from "../../store/slice/InteractionSlice";
 const SignUp = () => {
   const dispatch = useDispatch();
+  const { updateUser } = useContext(AuthContext);
   const [googleUser, setGoogleUser] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confrimPass, setConfirmPass] = useState("");
+  const [error, setError] = useState(null);
 
   /////////// LOGIN WITH GOOGLE 🚀🚀 //////
   const login = useGoogleLogin({
@@ -45,25 +51,35 @@ const SignUp = () => {
   }, [googleUser]);
   const RegisterUser = (e) => {
     e.preventDefault();
-    if (confrimPass !== password) return notify("password is not match");
+    setError(null);
+    if (confrimPass !== password) return setError("password is not match");
 
     axios
-      .post("/user/login", { firstName, lastName, email, password })
+      .post("/user/login", {
+        firstName,
+        lastName,
+        email,
+        password,
+        socialType: "",
+      })
       .then((res) => {
-        document.getElementById("authForm")?.close();
+        console.log(res);
         dispatch(singInOpen(false));
+        updateUser(res.data.user);
         dispatch(setLogin(true));
         dispatch(setUser(res.data.user));
-        localStorage.setItem("NewUser", JSON.stringify(res.data.user));
-        localStorage.setItem("like", JSON.stringify(res.data.propertyId));
+        dispatch(setToken(res.data.token));
+        // localStorage.setItem("NewUser", JSON.stringify(res.data.user));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        // localStorage.setItem("like", JSON.stringify(res.data.propertyId));
         localStorage.setItem("token", res.data.token);
+        // document.getElementById("authForm")?.close();
       })
-      .catch((err) => notify(err.response.data));
+      .catch((err) => {
+        setError(err.response.data);
+      });
   };
-  const notify = (err) =>
-    toast.warning(err, {
-      position: toast.POSITION.TOP_CENTER,
-    });
+
   return (
     <>
       <Modal modal_id={"signup"}>
@@ -87,48 +103,49 @@ const SignUp = () => {
           </div>
           <div className="p-5">
             <form onSubmit={(e) => RegisterUser(e)}>
-              <input
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                type="text"
-                required
-                placeholder="first name"
-                className="w-full p-3 border rounded-lg  my-2"
-              />
-              <input
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                type="text"
-                required
-                placeholder="last name"
-                className="w-full p-3 border rounded-lg  my-2"
-              />
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                type="email"
-                required
-                placeholder="email"
-                className="w-full p-3 border rounded-lg my-2   "
-              />
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                required
-                placeholder="password"
-                className="w-full p-3 border rounded-lg my-2   "
-              />
-              <input
-                onChange={(e) => setConfirmPass(e.target.value)}
-                type="password"
-                required
-                placeholder="confirm password"
-                className="w-full p-3 border rounded-lg my-2   "
-              />
+              <div className="flex flex-col gap-2">
+                <InputField
+                  required={true}
+                  placeholder={"first name"}
+                  onchange={setFirstName}
+                />
+
+                <InputField
+                  required={true}
+                  placeholder={"last name"}
+                  onchange={setLastName}
+                />
+
+                <InputField
+                  type="email"
+                  required={true}
+                  placeholder={"email"}
+                  onchange={setEmail}
+                />
+
+                <InputField
+                  type="password"
+                  required={true}
+                  placeholder={"password"}
+                  onchange={setPassword}
+                />
+
+                <InputField
+                  type="password"
+                  required={true}
+                  placeholder={"confirm password"}
+                  onchange={setConfirmPass}
+                />
+                {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
+              </div>
+
               <ToastContainer />
-              <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
-                Login
-              </button>
+              <PrimaryButton
+                title={"Login"}
+                type="submit"
+                buttonStyle={"mt-7"}
+              />
+
               <hr className="mt-[3%]" />
             </form>
             <div>

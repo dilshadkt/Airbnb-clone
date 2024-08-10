@@ -16,10 +16,11 @@ import { loginOpen } from "./store/slice/Auth";
 import { AuthContext } from "./context/AuthContext";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
-  const login = useSelector((store) => store.user.isLogin);
-  const forgetPassword = useSelector((store) => store.auth.forgetPassword);
+  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const login = useSelector((store) => store.user.isLogin);
+  const forgetPassword = useSelector((store) => store.auth.forgetPassword);
   const { pathname } = useLocation();
   const { isMenuOpen, setIsMenuOpen, notification } = useContext(MyContext);
   const [serach, setSearch] = useState(false);
@@ -170,7 +171,7 @@ const Navbar = () => {
                         />
                       ) : (
                         <span className="text-white ">
-                          {currentUser.firstName[0].toUpperCase()}
+                          {currentUser?.firstName[0]?.toUpperCase()}
                         </span>
                       )}
                       <div

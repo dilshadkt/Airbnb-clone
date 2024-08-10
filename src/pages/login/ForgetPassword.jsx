@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgetOpen } from "../../store/slice/Auth";
 import cancel from "../../asset/svg/cancel.svg";
@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import axios from "../../config/axiosConfig";
 import LoopIcon from "@mui/icons-material/Loop";
 import { loginOpen } from "../../store/slice/Auth";
+import InputField from "../../components/shared/inputField/InputField";
+import PrimaryButton from "../../components/shared/primaryButton";
 const ForgetPassword = () => {
   const { register, watch } = useForm();
   const dispatch = useDispatch();
@@ -15,29 +17,47 @@ const ForgetPassword = () => {
   const [otpError, setOtpError] = useState(null);
   const [IsopenConfirmPassword, setIsOpenConfirmPassword] = useState(false);
   const [changeError, setChangeError] = useState(null);
-  ///// send email //////////
-  const sendEmail = (e) => {
-    e.preventDefault();
+
+  // Add this useEffect to handle body scroll
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  // SEND EMAIL
+  const sendEmail = () => {
+    setError(null);
+    if (watch().username === "") {
+      return setError("username is required");
+    }
     const valid = validator.isEmail(watch().username);
-    console.log(valid);
     if (valid) {
       setError(null);
 
       axios
-        .post("/otp/request-otp", watch())
+        .post("/otp/request-otp", watch()) // REQUSTING FOR OTP
         .then((res) => {
-          setIsOtpSend(!isOtpSend);
+          if (res.data.success) {
+            setIsOtpSend(!isOtpSend);
+          } else {
+            setOtpError("Try later 😒");
+          }
         })
         .catch((err) => console.log(err));
     } else {
       setError("enter valid email");
     }
   };
-  ///////// verify otp ////////////
-  const verifyOtp = (e) => {
-    e.preventDefault();
+  // VERIFY OTP
+  const verifyOtp = () => {
+    setOtpError(null);
+    if (watch().otp === "") {
+      return setOtpError("Enter valid Otp");
+    }
     axios
-      .post("/otp/verify", watch())
+      .post("/otp/verify", watch()) // VERIFY OTP WITH USER ENTERD ONE
       .then(() => {
         setOtpError(null);
         setIsOpenConfirmPassword(!IsopenConfirmPassword);
@@ -48,9 +68,8 @@ const ForgetPassword = () => {
       });
   };
 
-  ////////// change password ////////////
-  const changePassword = (e) => {
-    e.preventDefault();
+  //  CHANGE PASSWORD
+  const changePassword = () => {
     if (watch().password === watch().ConfirmPassword) {
       setChangeError(null);
       axios
@@ -66,8 +85,8 @@ const ForgetPassword = () => {
   };
   return (
     <>
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-30 flex items-center justify-center"></div>
-      <div className="fixed top-0 left-0 bottom-0 right-0 m-auto bg-white z-40 w-[30%] py-5 sm:w-[90%] h-fit rounded-2xl  overflow-hidden">
+      <div className="fixed top-0  bottom-0 left-0 right-0 bg-black opacity-50 z-30 flex items-center justify-center"></div>
+      <div className="fixed top-0 left-0 bottom-0 right-0 m-auto bg-white z-40 md:w-[30%] py-5 w-[90%] h-fit rounded-2xl  overflow-hidden">
         <div className="flex-intial h-[13%]  flex items-center">
           <div className="px-5 flex justify-between w-full">
             <div className=" flex-initial w-[10%]">
@@ -85,19 +104,21 @@ const ForgetPassword = () => {
           </div>
         </div>
         <div className="p-5">
-          <div className="text-[15px] my-4 font-light text-gray-500">
+          <div className="text-[14px] my-4  text-gray-500">
             Lost your password ? Please enter your email address .You will
             recieve an OTP to create new password via email
           </div>
           <form>
-            <input
-              type="text"
-              {...register("username")}
-              required
-              placeholder="username"
-              className="w-full p-3 border rounded-lg"
+            <InputField
+              required={true}
+              placeholder={"username"}
+              register={register}
+              name="username"
             />
             {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
+            {isOtpSend && (
+              <p className="text-xs text-green-500 mt-2">{"Otp sended"}</p>
+            )}
 
             {isOtpSend && (
               <div className="mt-4">
@@ -113,7 +134,6 @@ const ForgetPassword = () => {
                     <LoopIcon />
                   </div>
                 </div>
-
                 <input
                   type="password"
                   {...register("otp", { required: true, min: 7, max: 20 })}
@@ -128,20 +148,20 @@ const ForgetPassword = () => {
             )}
             {IsopenConfirmPassword && (
               <div>
-                <input
+                <InputField
                   type="password"
-                  {...register("password")}
-                  required
-                  placeholder="password"
-                  className="w-full p-3 border rounded-lg my-3    "
+                  register={register}
+                  name={"password"}
+                  placeholder={"password"}
+                  fieldStyle={"my-3"}
                 />
 
-                <input
+                <InputField
                   type="password"
-                  {...register("ConfirmPassword")}
-                  required
-                  placeholder="confirm password"
-                  className="w-full p-3 border rounded-lg my-3    "
+                  register={register}
+                  name={"ConfirmPassword"}
+                  placeholder={"confirm password"}
+                  fieldStyle={"my-3"}
                 />
                 {changeError && (
                   <p className="text-sm text-red-500 ">{changeError}</p>
@@ -149,26 +169,14 @@ const ForgetPassword = () => {
               </div>
             )}
             {isOtpSend ? (
-              <button
-                onClick={(e) => verifyOtp(e)}
-                className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl"
-              >
-                Verify
-              </button>
+              <PrimaryButton title={"Verify"} onclick={verifyOtp} />
             ) : IsopenConfirmPassword ? (
-              <button
-                onClick={(e) => changePassword(e)}
-                className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl"
-              >
-                Change passsword
-              </button>
+              <PrimaryButton
+                title={"Change passsword"}
+                onclick={changePassword}
+              />
             ) : (
-              <button
-                onClick={(e) => sendEmail(e)}
-                className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl"
-              >
-                Send
-              </button>
+              <PrimaryButton title={"Send"} onclick={sendEmail} />
             )}
           </form>
         </div>

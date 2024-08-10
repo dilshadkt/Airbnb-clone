@@ -18,7 +18,7 @@ const Description = () => {
       <h4 className="text-gray-500 text-xl mt-4">
         Share what makes your place special.
       </h4>
-      <form className=" w-[40%] sm:w-full" onSubmit={(e) => handleChanges(e)}>
+      <form className=" md:w-[40%] w-full" onSubmit={(e) => handleChanges(e)}>
         <textarea
           required
           minLength={50}

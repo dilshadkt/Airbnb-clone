@@ -4,22 +4,28 @@ import cancel from "../../../asset/svg/cancel.svg";
 import { useNavigate } from "react-router-dom";
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
 import { useSelector } from "react-redux";
+import BookTrip from "./bookTrip";
 const Trips = () => {
   const [trips, setTrips] = useState([]);
   const user = useSelector((store) => store.user.user);
   const [qrOpen, SetQrOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`/book/trip`)
       .then((res) => {
         setTrips(res.data);
-        console.log(res.data);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [user._id]);
-  return trips.length === 0 ? (
+  return isLoading ? (
     <ListShimmer />
+  ) : trips.length === 0 ? (
+    <div className="min-h-[80vh] w-full  ">
+      <BookTrip />
+    </div>
   ) : (
     <div
       onClick={() => SetQrOpen(!qrOpen)}

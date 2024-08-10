@@ -21,7 +21,18 @@ import { AuthHomeLayout, HomeLayout } from "./layouts/Home";
 import LoginPage from "./pages/login/LoginPage";
 import { setProperty } from "./store/slice/PropertySlice";
 import { setUser } from "./store/slice/User";
-// axios.defaults.baseURL = "https://airbnb-api-7y1p.onrender.com";
+import Structure from "./pages/host/structure/Structure";
+import PrivacyType from "./pages/host/privacy-type/PrivacyType";
+import Location from "./pages/host/location/Location";
+import FloorPlan from "./pages/host/floor-plan/FloorPlan";
+import StandOut from "./pages/host/stand-out/StandOut";
+import Amenities from "./pages/host/amenities/Amenities";
+import Photos from "./pages/host/photos/Photos";
+import Title from "./pages/host/title/Title";
+import Description from "./pages/host/description/Description";
+import PricePerNight from "./pages/host/price/PricePerNight";
+import FinishUp from "./pages/host/finish-setup/FinishUp";
+import Login from "./pages/Account/Login/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +61,14 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [dispatch, user._id, isLogin]);
+
+  // LOCOMOTIVE IS A LTBRARY FOR SMOOTHINING SCROLL
+  useEffect(() => {}, [
+    (async () => {
+      const LocomotiveScroll = (await import("locomotive-scroll")).default;
+      const locomotiveScroll = new LocomotiveScroll();
+    })(),
+  ]);
 
   const [whilList, setWhishList] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -115,6 +134,10 @@ function App() {
           element: <Account />,
         },
         {
+          path: "/account-settings/Login",
+          element: <Login />,
+        },
+        {
           path: "/account-settings/profile",
           element: <Profile />,
         },
@@ -123,7 +146,7 @@ function App() {
           element: <Personal />,
         },
         {
-          path: "/account-settings//account-settings/Payment",
+          path: "/account-settings/Payment",
           element: <AccountPayment />,
         },
         {
@@ -151,6 +174,50 @@ function App() {
         {
           path: "",
           element: <BecomeHost />,
+        },
+        {
+          path: "structure",
+          element: <Structure />,
+        },
+        {
+          path: "privacy-type",
+          element: <PrivacyType />,
+        },
+        {
+          path: "location",
+          element: <Location />,
+        },
+        {
+          path: "floor-plan",
+          element: <FloorPlan />,
+        },
+        {
+          path: "stand-out",
+          element: <StandOut />,
+        },
+        {
+          path: "amenities",
+          element: <Amenities />,
+        },
+        {
+          path: "photos",
+          element: <Photos />,
+        },
+        {
+          path: "title",
+          element: <Title />,
+        },
+        {
+          path: "description",
+          element: <Description />,
+        },
+        {
+          path: "price",
+          element: <PricePerNight />,
+        },
+        {
+          path: "finish-setup",
+          element: <FinishUp />,
         },
       ],
     },

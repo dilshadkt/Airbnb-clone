@@ -1,25 +1,25 @@
+import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useSearchParams } from "react-router-dom";
+import heritage from "../../../asset/svg/heritage.svg";
 import save from "../../../asset/svg/save.svg";
 import share from "../../../asset/svg/share.svg";
-import heritage from "../../../asset/svg/heritage.svg";
+import Amenties from "../../../components/Amenties";
+import Buttons from "../../../components/Buttons";
+import Gallery from "../../../components/gallery/desktop";
 import Host from "../../../components/Host";
 import Offers from "../../../components/Offers";
-import Buttons from "../../../components/Buttons";
 import PaymentCard from "../../../components/PaymentCard";
-import Amenties from "../../../components/Amenties";
-import left from "../../../asset/svg/leftArrow.svg";
-import { Link, useSearchParams } from "react-router-dom";
-import axios from "../../../config/axiosConfig";
-import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
-import { useSelector, useDispatch } from "react-redux";
-import { setImg } from "../../../store/slice/payment";
 import ImageCourosal from "../../../components/shared/ImageCourosal";
-import { nanoid } from "nanoid";
+import RoomsShimmer from "../../../components/shimmer/Rooms/Rooms";
+import axios from "../../../config/axiosConfig";
+import { setImg } from "../../../store/slice/payment";
+import ImageGallery from "../../../components/gallery";
 
 const Rooms = () => {
   const dispatch = useDispatch();
   const amenties = useSelector((store) => store.user.amenties);
-
   const [queryParams] = useSearchParams();
   const [rooms, setRooms] = useState("");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -62,7 +62,7 @@ const Rooms = () => {
     <RoomsShimmer />
   ) : (
     <>
-      <div className="md:mx-20 pb-8 ">
+      <div className="md:mx-20 pb-8  relative">
         {isTrip && (
           <div className="p-6 border flex justify-between rounded-xl bg-green-200 my-[2%]   border-lime-600">
             <h3>To cancel trip</h3>
@@ -108,57 +108,11 @@ const Rooms = () => {
         </div>
 
         {/* Gallery in desktop view */}
-        <div className="hidden w-full h-[400px] md:flex mt-7 rounded-2xl overflow-hidden  relative -z-10 ">
-          <div className=" flex-1  bg-gray-400 mr-2">
-            <img
-              src={images[0]}
-              alt="room1"
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="flex-1  h-full flex flex-col">
-            <div className="flex-1  mb-2 flex overflow-hidden">
-              <div className="flex-1 mr-2 bg-gray-400">
-                <img
-                  src={images[1]}
-                  alt="room2 "
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="flex-1  bg-gray-400 ">
-                <img
-                  src={images[2]}
-                  alt="room2 "
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            </div>
-            <div className="flex-1  flex overflow-hidden">
-              <div className="flex-1 mr-2 bg-gray-400">
-                <img
-                  src={images[3]}
-                  alt="room2 "
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="flex-1 bg-gray-400 ">
-                <img
-                  src={images[4]}
-                  alt="room2 "
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            onClick={() => setIsGalleryOpen(true)}
-            className="bg-white px-5 cursor-pointer py-2 flex items-center justify-center border absolute rounded-xl bottom-5 right-5"
-          >
-            <span className="font-medium">show all </span>
-          </div>
-        </div>
-        {/* Gallery in mobile view */}
-        <ImageCourosal images={images} />
+        <ImageGallery
+          images={images}
+          isGalleryOpen={isGalleryOpen}
+          setIsGalleryOpen={setIsGalleryOpen}
+        />
         <div className="mx-7 md:mx-0">
           <div className="flex md:flex-row flex-col mt-4 md:mt-8">
             <div className="flex-1">
@@ -238,40 +192,6 @@ const Rooms = () => {
           ) : (
             <>{(document.body.style.overflow = "")}</>
           )}
-          <div
-            className={`bg-white absolute top-0 right-0 left-0  p-5 ${
-              isGalleryOpen ? `` : `hidden`
-            }`}
-          >
-            <div className="flex justify-between">
-              <div
-                onClick={() => setIsGalleryOpen(false)}
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-300"
-              >
-                <img src={left} alt="left icon" />
-              </div>
-
-              <div className=" flex">
-                <div className="flex items-center">
-                  <img src={share} alt="share icon" />
-                  <span className="ml-2">share</span>
-                </div>
-                <div className="flex items-center ml-4">
-                  <img src={save} alt="save icon" />
-                  <span>save</span>
-                </div>
-              </div>
-            </div>
-            <div className="my-9 flex justify-center">
-              <div className="w-2/4 bg-red-500 h-fit">
-                {rooms.images.map((item, index) => (
-                  <div key={index} className="w-full">
-                    <img src={item} alt="gallery" className="w-full" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
         <div className="fixed md:hidden bottom-0 h-20 border-t bg-white  w-full px-7 grid grid-cols-2 items-center">
           <div className="grid ">
@@ -295,6 +215,13 @@ const Rooms = () => {
             path={`book/stay`}
           />
         </div>
+        {/* Gallery in mobile view */}
+        <ImageCourosal images={images} />
+        <Gallery
+          isGalleryOpen={isGalleryOpen}
+          setIsGalleryOpen={setIsGalleryOpen}
+          images={rooms.images}
+        />
       </div>
     </>
   );

@@ -17,7 +17,7 @@ const Photos = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center sm:mx-5">
+    <div className="flex-1 flex flex-col items-center mt-[5%] justify-center mx-5">
       <h1 className="text-4xl font-semibold">
         Add some photos of your casa particular
       </h1>

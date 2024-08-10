@@ -21,21 +21,21 @@ const Amenities = () => {
   return (
     <>
       <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
-        <div className="w-[40%] sm:w-full sm:mx-5">
+        <div className="md:w-[40%] w-full mx-5">
           <h1 className="text-3xl font-semibold w-[70%]">
             Tell guests what your place has to offer
           </h1>
           <h4 className="text-gray-500 text-lg">
             You can add more amenities after you publish your listing.
           </h4>
-          <div className="flex flex-wrap justify-between mt-9">
+          <div className="grid grid-cols-3 gap-3 mt-9">
             {data.map((item, index) =>
               item.items.map((item, groupIndex) => (
                 <div
                   ref={ref}
                   key={`${index}-${groupIndex}`}
                   onClick={() => handlechange(item.desc)}
-                  className={`p-5 border rounded-lg w-[31%] mb-3  hover:border-red-500 ${
+                  className={`p-5 border rounded-lg   hover:border-red-500 ${
                     itmes.includes(item.desc) ? `bg-red-400 text-white ` : ``
                   }`}
                 >

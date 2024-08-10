@@ -55,7 +55,7 @@ const Profile = () => {
                   className="w-24 h-24 rounded-full  object-cover"
                 />
               ) : (
-                <span>{currentUser.firstName[0].toUpperCasee()}</span>
+                <span>{currentUser.firstName[0].toUpperCase()}</span>
               )}
 
               <label className="bg-white text-black border flex items-center justify-center p-1 rounded-full absolute -bottom-2 cursor-pointer right-2">

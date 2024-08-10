@@ -35,13 +35,13 @@ const Account = () => {
       >
         <h1 className="text-3xl font-semibold">Accounts</h1>
         <h3 className="hidden md:block text-lg font-medium my-5">
-          Dilshad Kt,
-          <span className="font-normal"> hmydilshadkt@gmail.com </span>.
+          {currentUser?.firstName}
+          <span className="font-normal"> {currentUser?.email} </span>.
           <Link to={"profile"}>
             <span className="underline">Go to profile</span>
           </Link>
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-9">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-9">
           {data.map((item, index) => (
             <AccountCards
               key={index}

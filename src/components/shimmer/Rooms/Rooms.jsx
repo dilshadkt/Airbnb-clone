@@ -3,7 +3,7 @@ import React from "react";
 
 const RoomsShimmer = () => {
   return (
-    <div className=" animate-pulse">
+    <div className=" md:mx-20 pb-8 animate-pulse">
       <div className="p-5 flex items-center justify-between">
         <div className="skeleton h-8 w-14"></div>
         <div className="skeleton h-8 w-14"></div>

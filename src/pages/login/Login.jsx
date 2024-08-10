@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import cancel from "../../asset/svg/cancel.svg";
 import google from "../../asset/svg/google.svg";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -9,25 +9,32 @@ import { setUser, setLogin } from "../../store/slice/User";
 import { loginOpen, forgetOpen, setToken } from "../../store/slice/Auth";
 import { setLike } from "../../store/slice/InteractionSlice";
 import Modal from "../../components/shared/Modal";
+import { AuthContext } from "../../context/AuthContext";
+import InputField from "../../components/shared/inputField/InputField";
+import PrimaryButton from "../../components/shared/primaryButton";
 const Login = () => {
+  const { updateUser } = useContext(AuthContext);
   const dispatch = useDispatch();
   const [googleUser, setGoogleUser] = useState(null);
   const [userName, setUseName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
   useEffect(() => {
     //////  GOOGLE AUTH AUTHENTICATION 🚀🚀//////////
     const googleSignUp = (data) => {
       axios
         .post("/user/googleAuth", { data })
         .then((res) => {
-          dispatch(loginOpen(false));
+          // dispatch(loginOpen(false));
           dispatch(setUser(res.data.user));
+          updateUser(res.data.user);
           dispatch(setLogin(true));
           dispatch(setLike(JSON.stringify(res.data.propertyId)));
           dispatch(setToken(res.data.token));
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          document.getElementById("authForm")?.close();
         })
         .catch((err) => console.log(err));
     };
@@ -56,15 +63,16 @@ const Login = () => {
       .post("/user/signin", { userName, password })
       .then((res) => {
         document.getElementById("authForm")?.close();
-        window.location.reload();
         dispatch(loginOpen(false));
         dispatch(setUser(res.data.user));
+        updateUser(res.data.user);
         dispatch(setLogin(true));
-
         localStorage.setItem("like", JSON.stringify(res.data.propertyId));
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("NewUser", JSON.stringify(res.data.user));
         setError(null);
+        window.location.reload();
       })
       .catch((err) => {
         setError(err.response.data);
@@ -79,8 +87,9 @@ const Login = () => {
 
   ////////// Forget Password ///////////
   const forgetPassword = () => {
-    dispatch(loginOpen(false));
+    document.getElementById("authForm")?.close();
     dispatch(forgetOpen(true));
+    setError(null);
   };
   return (
     <>
@@ -105,19 +114,17 @@ const Login = () => {
           </div>
           <div className="p-5">
             <form onSubmit={(e) => SignUp(e)}>
-              <input
-                onChange={(e) => setUseName(e.target.value)}
-                type="text"
-                required
-                placeholder="username"
-                className="w-full p-3 border rounded-lg"
+              <InputField
+                required={true}
+                placeholder={"Username"}
+                onchange={setUseName}
               />
-              <input
-                onChange={(e) => setPassword(e.target.value)}
+              <InputField
                 type="password"
-                required
-                placeholder="password"
-                className="w-full p-3 border rounded-lg my-3    "
+                required={true}
+                placeholder={"Password"}
+                onchange={setPassword}
+                fieldStyle={"my-3"}
               />
               {error && (
                 <>
@@ -130,10 +137,7 @@ const Login = () => {
                   </span>
                 </>
               )}
-
-              <button className="mt-5 w-full p-3 bg-rose-500 text-white font-semibold rounded-xl">
-                Login
-              </button>
+              <PrimaryButton title={"Login"} type="submit" />
             </form>
 
             <div onClick={() => login()} className="my-5 cursor-pointer">

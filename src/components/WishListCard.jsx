@@ -7,7 +7,7 @@ const WishListCard = ({ data, remove }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="grid grid-cols-2 ">
+    <div className="grid grid-cols-2 md:gird-col-3 lg:grid-cols-4 xl:grid-cols-5 ">
       {data?.map((item, index) => (
         <div
           key={`${item}-${index}`}

@@ -29,7 +29,7 @@ const PrivacyType = () => {
   ];
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
-      <div className="w-[40%] mt-[3%] sm:w-full sm:mx-5">
+      <div className="md:w-[40%] mt-[3%] w-full mx-5">
         <h1 className="text-3xl font-semibold ">
           What type of place will guests have?
         </h1>

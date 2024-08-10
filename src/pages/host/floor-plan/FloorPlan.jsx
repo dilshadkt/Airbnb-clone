@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 const FloorPlan = () => {
   const dispatch = useDispatch();
   const form = useSelector((store) => store.formdata.form);
-  console.log(form);
   const [isNext, setNext] = useState(false);
   const [guests, setGuest] = useState(1);
   const [bedrooms, setBedroom] = useState(1);
@@ -29,7 +28,7 @@ const FloorPlan = () => {
   };
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
-      <div className="w-[40%] sm:w-full sm:mx-5">
+      <div className="md:w-[40%] w-full mx-5">
         <h1 className="text-3xl font-medium my-4">
           Let's start with the basics
         </h1>

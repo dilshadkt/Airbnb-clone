@@ -5,13 +5,13 @@ import Navigater from "../../components/host-navigater/Navigater";
 const BecomeHost = () => {
   return (
     <>
-      <div className="flex mx-[15%] mt-[5%] mb-4 flex-col-reverse  md:flex-row ">
+      <div className="flex mx-5  md:mx-[15%] mt-[5%] mb-4 flex-col-reverse  md:flex-row ">
         <div className="flex-1 flex flex-col items-start justify-center">
-          <h4 className="text-lg font-medium">Step 1</h4>
-          <h1 className="my-6 text-5xl font-medium">
+          <h4 className="text-sm md:text-lg font-medium">Step 1</h4>
+          <h1 className="my-2 md:my-6 text-2xl md:text-5xl font-medium">
             Tell us about your place
           </h1>
-          <p className="text-lg">
+          <p className="  md:text-lg">
             In this step, we'll ask you which type of property you have and if
             guests will book the entire place or just a room. Then let us know
             the location and how many guests can stay.

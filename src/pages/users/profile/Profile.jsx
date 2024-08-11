@@ -33,6 +33,15 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  // VIEW PROFILE
+  const handleViewProfile = () => {
+    if (currentUser.profilePicture) {
+      setViewProfile(true);
+
+      document.body.style.overflow = "hidden";
+    }
+  };
   return (
     <>
       <div className="  sticky h-14 bg-white w-full  flex md:hidden items-center justify-between px-5 top-0 z-40 ">
@@ -53,7 +62,10 @@ const Profile = () => {
       <div className="mx-5 md:mx-[12%] my-[2%] flex flex-col md:flex-row">
         <div className="flex-initial border-b md:border-b-0 flex flex-col w-full  md:w-[30%] ">
           <div className=" shadow-xl flex flex-col items-center border rounded-xl p-6">
-            <div className="relative w-24 h-24 bg-black rounded-full  text-5xl text-white font-bold flex items-center justify-center">
+            <div
+              onClick={() => handleViewProfile()}
+              className="relative w-24 h-24 bg-black rounded-full  text-5xl text-white font-bold flex items-center justify-center"
+            >
               {currentUser.profilePicture ? (
                 <img
                   src={currentUser.profilePicture}
@@ -145,6 +157,23 @@ const Profile = () => {
         setIsOpen={setIsEditOpen}
         uploadUserImage={uploadUserImage}
       />
+      {/* VIEW PROFILE  */}
+      <div
+        onClick={() => {
+          setViewProfile(false);
+          document.body.style.overflow = "auto";
+        }}
+        className={` ${
+          viewProfile ? "block" : "hidden"
+        } fixed top-0 bottom-0 flex items-center justify-center left-0 right-0 bg-black/50 h-screen z-50`}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="bg-white w-full min-h-[250px]"
+        >
+          <img src={currentUser?.profilePicture} alt="profile picture" />
+        </div>
+      </div>
     </>
   );
 };

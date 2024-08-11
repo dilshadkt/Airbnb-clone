@@ -30,7 +30,7 @@ const PrivacyType = () => {
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
       <div className="md:w-[40%] mt-[3%] w-full mx-5">
-        <h1 className="text-3xl font-semibold ">
+        <h1 className=" text-xl md:text-3xl font-semibold ">
           What type of place will guests have?
         </h1>
         <div className="my-7">
@@ -43,8 +43,10 @@ const PrivacyType = () => {
               } `}
             >
               <div className="flex-1  flex flex-col justify-center">
-                <h3 className="text-lg font-medium">{items.title}</h3>
-                <span className=" font-light text-gray-500">{items.desc}</span>
+                <h3 className="md:text-lg font-medium">{items.title}</h3>
+                <span className=" text-sm mt-2 md:mt-0 md:text-base font-light text-gray-500">
+                  {items.desc}
+                </span>
               </div>
               <div className="flex-initial w-[17%] flex items-center justify-center ">
                 <img src={bed} alt="icons" />

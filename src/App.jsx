@@ -139,7 +139,7 @@ function App() {
         },
         {
           path: "/account-settings/profile",
-          element: <Pro file />,
+          element: <Profile />,
         },
         {
           path: "/account-settings/personal",

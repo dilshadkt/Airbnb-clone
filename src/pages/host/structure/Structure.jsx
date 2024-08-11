@@ -13,8 +13,8 @@ const Structure = () => {
   };
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden ">
-      <div className="md:w-[40%] w-full sm:mx-5">
-        <h1 className="text-3xl font-semibold w-[70%]">
+      <div className="md:w-[40%] w-full mx-5">
+        <h1 className="text-xl md:text-3xl font-semibold w-[70%]">
           Which of these best describes your place?
         </h1>
         <div className="flex flex-wrap justify-between mt-9">
@@ -27,7 +27,9 @@ const Structure = () => {
               }`}
             >
               {item.img[0]}
-              <h1 className="font-medium">{item.title}</h1>
+              <h1 className=" text-xs md:text-base whitespace-nowrap font-medium">
+                {item.title}
+              </h1>
             </div>
           ))}
         </div>

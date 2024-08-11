@@ -6,18 +6,20 @@ const HostLayout = () => {
   return (
     <>
       <div>
-        <nav className="w-full h-20  flex items-center px-6 justify-between sticky top-0">
+        <nav className="w-full h-20  flex items-center px-4 md:px-6 justify-between sticky top-0">
           <Link to={"/hoisting"}>
             <div>
-              <img src={logo} alt="log" className="w-[120px]" />
+              <img src={logo} alt="log" className=" w-[90px] md:w-[120px]" />
             </div>
           </Link>
 
           <div className="flex">
-            <div className="px-3 py-2 rounded-full border mr-3">
+            <div className="px-3 py-2 text-xs flex items-center justify-center md:text-base  rounded-full border mr-1 md:mr-3">
               Questions ?
             </div>
-            <div className="px-3 py-2 rounded-full border">Questions ?</div>
+            <div className="px-3 py-2 rounded-full text-xs flex items-center justify-center md:text-base border">
+              Questions ?
+            </div>
           </div>
         </nav>
         <div>

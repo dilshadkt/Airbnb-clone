@@ -29,10 +29,10 @@ const FloorPlan = () => {
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
       <div className="md:w-[40%] w-full mx-5">
-        <h1 className="text-3xl font-medium my-4">
+        <h1 className="text-xl md:text-3xl font-medium my-2 md:my-4">
           Let's start with the basics
         </h1>
-        <div className="my-9">
+        <div className="md:my-9">
           <h3 className="font-medium text-lg">
             How many people can stay here?
           </h3>
@@ -48,7 +48,7 @@ const FloorPlan = () => {
             <Navigater next={"stand-out"} />
           ) : (
             <button
-              className="p-3 bg-rose-500 text-white font-semibold rounded-xl mt-4"
+              className="p-2 md:p-3 bg-rose-500 text-white text-sm md:text-base font-semibold rounded-xl mt-4"
               onClick={() => handleChange()}
             >
               Confirm

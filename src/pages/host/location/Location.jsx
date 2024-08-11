@@ -35,10 +35,10 @@ const Location = () => {
   return (
     <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
       <div className="md:w-[40%] w-full mx-5 ">
-        <h1 className="text-3xl font-medium my-4">
+        <h1 className=" text-xl md:text-3xl font-medium my-1 md:my-4">
           Where's your place located?
         </h1>
-        <span className="text-gray-500 text-lg">
+        <span className="text-gray-500 text-sm md:text-lg">
           Your address is only shared with guests after they’ve made a
           reservation.
         </span>
@@ -46,6 +46,7 @@ const Location = () => {
           onSubmit={handleSubmit(() => {
             handleChanges();
           })}
+          className="text-sm"
         >
           <div className=" justify-center my-[5%]  ">
             <select
@@ -68,21 +69,25 @@ const Location = () => {
               placeholder="House ,flate etc"
               className="border w-full p-4 mt-5"
             />
-            <p className="text-sm text-red-500 my-1">{errors.house?.message}</p>
+            <p className="text-xs md:text-sm text-red-500 my-1">
+              {errors.house?.message}
+            </p>
             <input
               {...register("area", { required: "area name is required" })}
               type="text"
               placeholder="Area village"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">{errors.area?.message}</p>
+            <p className="text-xs md:text-sm text-red-500 my-1">
+              {errors.area?.message}
+            </p>
             <input
               {...register("street", { required: "street name is erquired" })}
               type="text"
               placeholder="Street address"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">
+            <p className="text-xs md:text-sm text-red-500 my-1">
               {errors.street?.message}
             </p>
             <input
@@ -91,7 +96,7 @@ const Location = () => {
               placeholder="Near by landmark"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">
+            <p className="text-xs md:text-sm text-red-500 my-1">
               {errors.landmark?.message}
             </p>
             <input
@@ -100,14 +105,16 @@ const Location = () => {
               placeholder="city"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">{errors.city?.message}</p>
+            <p className="text-xs md:text-sm text-red-500 my-1">
+              {errors.city?.message}
+            </p>
             <input
               {...register("pincode", { required: "pincode is required" })}
               type="text"
               placeholder="Pincode"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">
+            <p className="text-xs md:text-sm text-red-500 my-1">
               {errors.pincode?.message}
             </p>
             <input
@@ -116,7 +123,7 @@ const Location = () => {
               placeholder="Province"
               className="border w-full p-4 "
             />
-            <p className="text-sm text-red-500 my-1">
+            <p className="text-xs md:text-sm text-red-500 my-1">
               {errors.province?.message}
             </p>
           </div>

@@ -1,26 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import Buttons from "../../../components/Buttons";
+import React, { useEffect, useState } from "react";
 import listpad from "../../../asset/svg/listpad.svg";
-import help1 from "../../../asset/svg/help1.svg";
-
-import { useNavigate } from "react-router-dom";
-import axios from "../../../config/axiosConfig";
-import Reservation from "./reservation/Reservation";
+import Header from "../../../components/hoisting/header-section";
+import HelpSection from "../../../components/hoisting/help-section";
+import ResourceSection from "../../../components/hoisting/resource-section";
 import ListShimmer from "../../../components/shimmer/list/ListShimmer";
+import axios from "../../../config/axiosConfig";
 import notfound from "./not.png";
-import { AuthContext } from "../../../context/AuthContext";
-import { help, resource } from "../../../constants";
+import Reservation from "./reservation/Reservation";
 
 const Hoisting = () => {
   const [resrvation, setReservation] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
   const [fileterdReservation, setFilteredReservation] = useState([]);
   const [checkout, setCheckout] = useState(0);
   const [currenlty, setCurrently] = useState(0);
   const [arrving, setArriving] = useState(0);
   const [selected, setSelected] = useState([]);
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("NewUser"));
-  const { currentUser } = useContext(AuthContext);
 
   const checkingOut = (e) => {
     const text = e.target.textContent.split(" ")[0];
@@ -47,8 +42,7 @@ const Hoisting = () => {
       .get(`/book/stay`)
       .then((res) => {
         setReservation(res.data);
-        console.log(res.data);
-
+        setIsloading(false);
         setFilteredReservation(res.data);
       })
       .catch((err) => console.log(err));
@@ -77,27 +71,18 @@ const Hoisting = () => {
 
   return (
     <div className="md:m-20 m-5 ">
-      <div className="flex justify-between">
-        <h1 className="md:text-3xl font-semibold  text-xl">
-          Welcome,{currentUser.firstName} !{" "}
-        </h1>
-
-        <div onClick={() => navigate("/become-a-host")}>
-          <Buttons width="md:w-[246px] w-fit" title="Complete your listing" />
-        </div>
-      </div>
+      <Header /> {/* header section */}
       <div className="flex justify-between my-6 mt-8">
-        <h4 className="  text-xl font-medium">Your reservations</h4>
+        <h4 className="text-base  md:text-xl font-medium">Your reservations</h4>
         <span
           onClick={() => {
             setFilteredReservation(resrvation);
           }}
-          className="underline font-medium cursor-pointer"
+          className="underline  text-xs md:text-base font-medium cursor-pointer"
         >
           All reservation ({resrvation.length})
         </span>
       </div>
-
       <div className="md:flex hidden">
         <div
           onClick={(e) => checkingOut(e)}
@@ -132,7 +117,9 @@ const Hoisting = () => {
           Pending reviews(0)
         </div>
       </div>
-      {resrvation === false ? (
+      {isLoading ? (
+        <ListShimmer />
+      ) : resrvation.length === 0 ? (
         <div className="w-full bg-gray-100 flex items-center justify-center min-h-[239px] rounded-xl my-7">
           <div className=" flex flex-col items-center">
             <img src={listpad} alt="list pad" />
@@ -141,8 +128,6 @@ const Hoisting = () => {
             </h4>
           </div>
         </div>
-      ) : resrvation.length === 0 ? (
-        <ListShimmer />
       ) : (
         <div className="my-[5%]">
           <div className="flex w-full p-3 bg-red-400 rounded-xl text-white">
@@ -165,41 +150,8 @@ const Hoisting = () => {
           )}
         </div>
       )}
-      <h4 className="text-xl font-medium"> We’re here to help</h4>
-      <div className="flex flex-col my-6">
-        {help.map((item) => (
-          <div
-            key={item.id}
-            className="border my-2 md:my-0 rounded-xl p-5 flex mr-6"
-          >
-            <div className=" flex-initial w-[15%] flex items-center justify-center">
-              <img src={item.icon} alt="icons" className="w-10 opacity-70" />
-            </div>
-            <div className="flex-1 ml-3   h-fit">
-              <h4 className="text-base font-medium">{item.title}</h4>
-              <p className="text-sm max-w-[350px]">{item.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <h4 className="text-xl font-medium">Resources and tips</h4>
-      <div className="my-6  w-full  grid grid-cols-2 md:grid-cols-4 gap-4 ">
-        {resource.map((item) => (
-          <div
-            key={item.id}
-            className=" border-2 flex flex-col items-center rounded-3xl cursor-pointer"
-          >
-            <img
-              src={item.image}
-              alt="help one"
-              className="w-full object-fill"
-            />
-            <h4 className="py-6 text-sm md:text-base text-center">
-              {item.description}
-            </h4>
-          </div>
-        ))}
-      </div>
+      <ResourceSection />
+      <HelpSection />
     </div>
   );
 };

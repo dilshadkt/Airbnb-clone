@@ -34,9 +34,9 @@ const WishList = () => {
 
   return (
     <div className=" mx-5 md:mx-20 my-3 md:my-10">
-      <h1 className="text-3xl font-semibold">Wishlists</h1>
+      <h1 className="text-xl md:text-3xl font-semibold">Wishlists</h1>
 
-      <div className="my-10 ">
+      <div className="my-5 md:my-10 ">
         {data === false ? (
           <div>
             <h3 className="text-xl font-medium">Create your first wishlist</h3>

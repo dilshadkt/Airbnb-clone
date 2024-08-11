@@ -11,12 +11,12 @@ const ListShimmer = () => {
           className="p-3 md:p-5 border my-3 rounded-xl flex justify-between items-center"
         >
           <div className="flex">
-            <div className=" w-[180px] md:w-[200px] h-[100px] md:h-[150px] bg-gray-300 rounded-xl"></div>
+            <div className=" w-[180px] md:w-[200px] h-[100px] md:h-[150px] bg-gray-300 skeleton rounded-xl"></div>
             <div className="flex flex-col justify-center">
-              <div className="w-[100px] ml-6 h-[7px] md:h-[10px]  bg-gray-300"></div>
-              <div className="w-[80px] ml-6 h-[7px] md:h-[10px] my-3  bg-gray-300"></div>
-              <div className="w-[80px] ml-6 h-[7px] md:h-[10px]  bg-gray-300"></div>
-              <div className="w-[50px] ml-6 h-[7px] md:h-[10px] mt-3 bg-gray-300"></div>
+              <div className="w-[100px] ml-6 h-[7px] md:h-[10px]  bg-gray-300 skeleton"></div>
+              <div className="w-[80px] ml-6 h-[7px] md:h-[10px] my-3  bg-gray-300 skeleton"></div>
+              <div className="w-[80px] ml-6 h-[7px] md:h-[10px]  bg-gray-300 skeleton"></div>
+              <div className="w-[50px] ml-6 h-[7px] md:h-[10px] mt-3 bg-gray-300 skeleton"></div>
             </div>
           </div>
 

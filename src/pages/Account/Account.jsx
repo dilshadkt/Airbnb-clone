@@ -63,7 +63,7 @@ const Account = () => {
         }  flex-col pb-28  h-full relative overflow-y-auto text-gray-800  mx-5 md:mx-[13%] my-[10%] `}
       >
         <div className="flex items-center justify-between w-full">
-          <h4 className="font-semibold text-3xl">Profile</h4>
+          <h4 className="font-semibold text-2xl md:text-3xl">Profile</h4>
           <img
             src="/assets/svg/notification.svg"
             alt="notification"
@@ -83,7 +83,7 @@ const Account = () => {
               </div>
               <div className="grid ml-3">
                 <h5 className="font-semibold">{currentUser.firstName}</h5>
-                <span className="text-sm text-gray-500 font-medium">
+                <span className="text-xs text-gray-500 font-medium">
                   {" "}
                   Show profile
                 </span>
@@ -107,8 +107,10 @@ const Account = () => {
         </div>
         <div className="my-10 flex items-center justify-between w-full">
           <div className="flex items-center">
-            <p className="font-semibold">2024 Summer release features</p>
-            <span className="bg-red-500 ml-2 font-semibold text-sm rounded-md flex items-center justify-center leading-[18px] text-white px-[2px]">
+            <p className="font-semibold text-sm">
+              2024 Summer release features
+            </p>
+            <span className="bg-red-500 ml-2 font-semibold text-[10px] rounded-md flex items-center justify-center leading-[18px] text-white px-[2px]">
               New
             </span>
           </div>

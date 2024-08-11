@@ -13,15 +13,21 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [profile, setProfile] = useState();
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, updateUser } = useContext(AuthContext);
+  const [viewProfile, setViewProfile] = useState(false);
   const data = new FormData();
 
-  const uploadUserImage = (e) => {
-    data.append("photos", image[0]);
+  const uploadUserImage = (e, image) => {
+    console.log("object");
+    data.append("photos", image?.[0]);
 
     axios
       .patch(`user`, data)
       .then((res) => {
+        updateUser((prev) => ({
+          ...prev,
+          profilePicture: res.data.profilePicture,
+        }));
         setProfile(res.data);
         setImage(null);
       })
@@ -58,7 +64,7 @@ const Profile = () => {
                 <span>{currentUser.firstName[0].toUpperCase()}</span>
               )}
 
-              <label className="bg-white text-black border flex items-center justify-center p-1 rounded-full absolute -bottom-2 cursor-pointer right-2">
+              <label className="bg-white hidden text-black border md:flex items-center justify-center p-1 rounded-full absolute -bottom-2 cursor-pointer right-2">
                 <input
                   type="file"
                   className="hidden"
@@ -71,17 +77,19 @@ const Profile = () => {
             <h4 className="text-2xl font-bold mt-2">{currentUser.firstName}</h4>
             <span className="font-medium">Guest</span>
           </div>
-          <div className="md:border p-5 my-7 rounded-xl">
-            <h3 className="text-xl md:w-[60%] font-medium">
+          <div className="md:border p-2 md:p-5 my-7 rounded-xl">
+            <h3 className="  md:text-xl  md:w-[60%] font-medium">
               {currentUser.firstName}'s confirmed information
             </h3>
 
             <div className="flex items-center my-5">
               <img src={tick} alt="icons" className="w-6 h-5" />
-              <span className="ml-2">Email address</span>
+              <span className="ml-2">
+                {currentUser?.email || "Email address"}
+              </span>
             </div>
             <hr className="my-5" />
-            <h3 className="text-xl md:w-[60%] font-medium">
+            <h3 className="text-lg md:text-xl md:w-[60%] font-medium">
               Verify your identity
             </h3>
             <p className="text-sm my-5">
@@ -123,7 +131,7 @@ const Profile = () => {
             </div>
             <div className="mt-5 flex justify-end">
               <div
-                onClick={() => uploadUserImage()}
+                onClick={() => uploadUserImage(image)}
                 className="cursor-pointer py-2 px-5 bg-red-500 rounded-xl text-white font-medium w-fit"
               >
                 ok
@@ -132,7 +140,11 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <Drawyer isOpne={isEditOpen} setIsOpen={setIsEditOpen} />
+      <Drawyer
+        isOpne={isEditOpen}
+        setIsOpen={setIsEditOpen}
+        uploadUserImage={uploadUserImage}
+      />
     </>
   );
 };

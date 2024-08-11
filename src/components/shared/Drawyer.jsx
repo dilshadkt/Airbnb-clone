@@ -1,9 +1,18 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { profileQuestions, Whether } from "../../constants/index";
 import { nanoid } from "nanoid";
 import { AuthContext } from "../../context/AuthContext";
-const Drawyer = ({ isOpne, setIsOpen }) => {
+const Drawyer = ({ isOpne, setIsOpen, uploadUserImage }) => {
   const { currentUser } = useContext(AuthContext);
+  const [prfilePicture, setProfilPicture] = useState(null);
+
+  const HandelUpload = (e) => {
+    console.log(e.target.files);
+    setProfilPicture(e.target.files);
+    setTimeout(() => {
+      uploadUserImage(e, prfilePicture);
+    }, 10);
+  };
   return (
     <>
       <div
@@ -37,10 +46,17 @@ const Drawyer = ({ isOpne, setIsOpen }) => {
                 <span>{currentUser.firstName[0].toUpperCase()}</span>
               )}
             </div>
-            <div className="absolute z-50 w-20 h-5 rounded-full bg-white shadow-lg py-4 justify-center -bottom-3 flex items-center">
+
+            <label className="absolute z-50 w-20 h-5 rounded-full bg-white shadow-lg py-4 justify-center -bottom-3 flex items-center">
+              <input
+                type="file"
+                className="hidden"
+                name="photos"
+                onChange={(e) => HandelUpload(e)}
+              />
               <img src={"/assets/svg/camera.svg"} alt="" className="w-4" />
               <span className="text-black font-semibold text-sm ml-2">Add</span>
-            </div>
+            </label>
           </div>
           <div className="p-4 px-5">
             <h4 className="font-bold text-2xl ">Your profile</h4>

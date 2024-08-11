@@ -133,7 +133,7 @@ const Navbar = () => {
               </div>
             </button>
           </div>
-          {/* FITLER  */}
+          {/* FITLER   [ SEARCH BAR  ] */}
           <Filter FilterOpen={FilterOpen} setFilterOpen={setFilterOpen} />
 
           <div className="hidden flex-1 md:flex items-center justify-end">

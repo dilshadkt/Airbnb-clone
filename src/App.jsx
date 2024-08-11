@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MyContext from "./components/contex/Mycontex";
 import axios from "./config/axiosConfig";
@@ -33,6 +33,7 @@ import Description from "./pages/host/description/Description";
 import PricePerNight from "./pages/host/price/PricePerNight";
 import FinishUp from "./pages/host/finish-setup/FinishUp";
 import Login from "./pages/Account/Login/Login";
+import { ListContext } from "./context/LIstContext";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function App() {
 
   const user = useSelector((store) => store.user.user);
   const isLogin = useSelector((store) => store.user.isLogin);
-
+  const { setList } = useContext(ListContext);
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("NewUser"));
     const liked = JSON.parse(localStorage.getItem("like"));
@@ -57,7 +58,7 @@ function App() {
     axios
       .get("/listings")
       .then((data) => {
-        dispatch(setProperty(data.data));
+        dispatch((setList(data.data), setProperty(data.data)));
       })
       .catch((err) => console.log(err));
   }, [dispatch, user._id, isLogin]);

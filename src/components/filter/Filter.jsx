@@ -1,17 +1,38 @@
 import { nanoid } from "nanoid";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { destination, guest, tripDates } from "../../constants";
-
+import { ListContext } from "../../context/LIstContext";
+import { Link } from "react-router-dom";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 const Filter = ({ FilterOpen, setFilterOpen }) => {
   const [desti, setDesti] = useState(false);
   const [selected, setSelected] = useState("destination");
-  const [selectedDestination, setSelectedDestination] = useState(null);
+  const [selectedDestination, setSelectedDestination] = useState("");
   const [date, setDate] = useState(null);
+  const { list } = useContext(ListContext);
+  const [filteredList, setFilteredList] = useState(list || []);
+  const handleFilter = (e) => {
+    setSelectedDestination(e.target.value);
+    const filtered = list.filter(
+      (list) =>
+        list?.place?.city
+          ?.toLowerCase()
+          .includes(selectedDestination.toLowerCase()) ||
+        list?.place?.country
+          ?.toLowerCase()
+          .includes(selectedDestination.toLowerCase()) ||
+        list?.place?.province
+          ?.toLowerCase()
+          .includes(selectedDestination.toLowerCase())
+    );
+    setFilteredList(filtered);
+  };
+
   return (
     <div
       className={`${
         FilterOpen ? `top-0` : `-top-[140%] `
-      } fixed w-full flex flex-col justify-between text-sm h-full bg-gradient-to-b from-gray-200 to-gray-50  left-0 right-0 transition-all duration-300  m-auto`}
+      } fixed w-full flex flex-col justify-between text-sm h-full   bg-gradient-to-b from-gray-200 to-gray-50  left-0 right-0 transition-all duration-300  m-auto`}
     >
       {/* HEADER  */}
       <div className="p-4">
@@ -174,9 +195,9 @@ const Filter = ({ FilterOpen, setFilterOpen }) => {
         </div>
       </div>
       {/* FOOTER  */}
-      <div className="h-20 bg-white px-5 py-3 flex items-center justify-between">
+      <div className="h-20   bg-white cursor-pointer relative px-5 py-3 flex items-center justify-between">
         <button className="underline font-semibold text-base">Clear all</button>
-        <button className="flex items-center bg-rose-500 rounded-xl justify-center py-[10px] px-5">
+        <button className="flex  items-center bg-rose-500 rounded-xl justify-center py-[10px] px-5">
           <img
             src="/assets/nav/mobile/search.svg"
             alt="search"
@@ -200,10 +221,29 @@ const Filter = ({ FilterOpen, setFilterOpen }) => {
               type="text"
               className="flex items-center px-5 pl-11 bg-gray-100 w-full py-4 rounded-xl outline-none placeholder-gray-600 "
               placeholder="Search destination"
-              onChange={() => {}}
+              onChange={(e) => handleFilter(e)}
               value={selectedDestination ? selectedDestination : null}
             />
           </div>
+          <ul
+            className={`${
+              selectedDestination?.length === 0 && "hidden"
+            } mt-5 flex flex-col gap-3`}
+          >
+            {filteredList.map((list) => (
+              <Link key={list._id} to={`/rooms?id=${list._id}`}>
+                <li className="flex items-center">
+                  <div className="min-w-[48px]  mr-5 h-12 bg-gray-300 flex items-center justify-center rounded-lg">
+                    <LocationOnIcon
+                      fontSize={"small"}
+                      className="text-gray-600"
+                    />
+                  </div>
+                  <span>{list.title}</span>
+                </li>
+              </Link>
+            ))}
+          </ul>
         </div>
       )}
     </div>

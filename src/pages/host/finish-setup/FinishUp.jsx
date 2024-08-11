@@ -50,7 +50,7 @@ const FinishUp = () => {
           questions and publish when you're ready.
         </p>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 min-h-[330px]">
         <video autoPlay muted>
           <source
             src="https://stream.media.muscache.com/KeNKUpa01dRaT5g00SSBV95FqXYkqf01DJdzn01F1aT00vCI.mp4?v_q=high"

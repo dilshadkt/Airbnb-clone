@@ -17,7 +17,7 @@ const BecomeHost = () => {
             the location and how many guests can stay.
           </p>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 min-h-[330px]">
           <video autoPlay muted>
             <source
               src="https://stream.media.muscache.com/zFaydEaihX6LP01x8TSCl76WHblb01Z01RrFELxyCXoNek.mp4?v_q=high"

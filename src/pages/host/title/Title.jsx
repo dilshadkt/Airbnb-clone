@@ -14,10 +14,10 @@ const Title = () => {
   };
   return (
     <div className="flex-1 flex flex-col items-center mt-[5%] justify-center mx-5">
-      <h1 className="text-4xl font-semibold">
+      <h1 className=" text-lg md:text-4xl font-semibold">
         Now, let's give your casa particular a title
       </h1>
-      <h4 className="text-gray-500 text-xl mt-4">
+      <h4 className="text-gray-500 text-sm md:text-xl mt-2 md:mt-4">
         Short titles work best. Have fun with it – you can always change it
         later.
       </h4>
@@ -29,7 +29,7 @@ const Title = () => {
           className="border w-full my-6 h-[200px]"
           onChange={(e) => setTitle(e.target.value)}
         ></textarea>
-        <button className="p-3 bg-rose-500 text-white font-semibold rounded-xl">
+        <button className="p-3 bg-rose-500 text-sm md:text-base text-white font-semibold rounded-xl">
           Confirm
         </button>
       </form>

@@ -18,10 +18,10 @@ const Photos = () => {
 
   return (
     <div className="flex-1 flex flex-col items-center mt-[5%] justify-center mx-5">
-      <h1 className="text-4xl font-semibold">
+      <h1 className="text-lg md:text-4xl font-semibold">
         Add some photos of your casa particular
       </h1>
-      <h4 className="text-gray-500 text-xl mt-4">
+      <h4 className="text-gray-500 text-sm md:text-xl mt-2  md:mt-4">
         You'll need 5 photos to get started. You can add more or make changes
         later.
       </h4>
@@ -39,7 +39,7 @@ const Photos = () => {
           multiple
           onChange={(e) => setSelected(e.target.files)}
         />
-        <button className="p-3 text-white font-semibold bg-rose-500 rounded-xl sm:mt-4">
+        <button className="p-3 text-sm md:text-base mt-3 text-white font-semibold bg-rose-500 rounded-xl sm:mt-4">
           Upload
         </button>
         <ToastContainer />

@@ -5,11 +5,11 @@ const ResourceSection = () => {
   return (
     <section>
       <h4 className="text-base md:text-xl font-medium"> We’re here to help</h4>
-      <div className="flex flex-col my-6">
+      <div className="flex flex-col md:flex-row my-6">
         {help.map((item) => (
           <div
             key={item.id}
-            className="border my-2 md:my-0 rounded-xl p-5 flex md:mr-6"
+            className="border my-2 w-fit rounded-xl p-5 flex md:mr-6"
           >
             <div className=" flex-initial w-[15%] flex items-center justify-center">
               <img src={item.icon} alt="icons" className="w-10 opacity-70" />

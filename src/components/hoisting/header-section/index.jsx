@@ -15,7 +15,7 @@ const Header = () => {
 
         <div onClick={() => navigate("/become-a-host")}>
           <Buttons
-            width="md:w-[246px] w-fit text-xs"
+            width="md:w-[246px] w-fit text-xs md:text-base"
             title="Complete your listing"
           />
         </div>

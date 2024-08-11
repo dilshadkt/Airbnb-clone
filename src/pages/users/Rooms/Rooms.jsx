@@ -52,6 +52,7 @@ const Rooms = () => {
     axios
       .get(`/listings?id=${type}`)
       .then((res) => {
+        console.log(res.data);
         setRooms(res.data);
         dispatch(setImg(res.data.images[0]));
       })
@@ -106,6 +107,8 @@ const Rooms = () => {
             </div>
           </div>
         </div>
+        {/* Gallery in mobile view */}
+        <ImageCourosal images={images} />
 
         {/* Gallery in desktop view */}
         <ImageGallery
@@ -215,8 +218,7 @@ const Rooms = () => {
             path={`book/stay`}
           />
         </div>
-        {/* Gallery in mobile view */}
-        <ImageCourosal images={images} />
+
         <Gallery
           isGalleryOpen={isGalleryOpen}
           setIsGalleryOpen={setIsGalleryOpen}

@@ -38,11 +38,13 @@ const FinishUp = () => {
   };
 
   return (
-    <div className="flex mx-[15%] mt-[5%] mb-4 flex-col-reverse md:flex-row pb-[10%] ">
+    <div className="flex mx-5 md:mx-[15%] mt-[5%] mb-4 flex-col-reverse md:flex-row pb-[10%] ">
       <div className="flex-1 flex flex-col items-start justify-center">
-        <h4 className="text-lg font-medium">Step 3</h4>
-        <h1 className="my-6 text-5xl font-medium">Finish up and publish</h1>
-        <p className="text-lg">
+        <h4 className="text-xs md:text-lg font-medium">Step 3</h4>
+        <h1 className="my-2 md:my-6 text-xl  md:text-5xl font-medium">
+          Finish up and publish
+        </h1>
+        <p className="md:text-lg">
           Finally, you’ll choose if you'd like to start with an experienced
           guest, then you'll set your nightly price. Answer a few quick
           questions and publish when you're ready.

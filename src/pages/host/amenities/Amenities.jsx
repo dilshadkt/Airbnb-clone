@@ -22,10 +22,10 @@ const Amenities = () => {
     <>
       <div className="w-full flex justify-center h-[78vh] overflow-scroll overflow-x-hidden">
         <div className="md:w-[40%] w-full mx-5">
-          <h1 className="text-3xl font-semibold w-[70%]">
+          <h1 className="text-lg md:text-3xl font-semibold w-[70%]">
             Tell guests what your place has to offer
           </h1>
-          <h4 className="text-gray-500 text-lg">
+          <h4 className="text-sm text-gray-500 mt-2 md:mt-0 md:text-lg">
             You can add more amenities after you publish your listing.
           </h4>
           <div className="grid grid-cols-3 gap-3 mt-9">
@@ -35,12 +35,14 @@ const Amenities = () => {
                   ref={ref}
                   key={`${index}-${groupIndex}`}
                   onClick={() => handlechange(item.desc)}
-                  className={`p-5 border rounded-lg   hover:border-red-500 ${
+                  className={` p-3 md:p-5 border rounded-lg flex flex-col items-center justify-center   hover:border-red-500 ${
                     itmes.includes(item.desc) ? `bg-red-400 text-white ` : ``
                   }`}
                 >
                   <img src={item.img} alt="icons" className="w-11" />
-                  <h1 className="font-medium">{item.desc}</h1>
+                  <h1 className="font-medium  text-[10px] text-center mt-2 md:mt-0 md:text-base">
+                    {item.desc}
+                  </h1>
                 </div>
               ))
             )}

@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Airbnb Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://ibb.co/ZcnPMsT"><img src="https://i.ibb.co/ZcnPMsT/Screenshot-2024-08-11-134744.png" alt="Screenshot-2024-08-11-134744" border="0"></a> <a href="https://ibb.co/RQ02rw6"><img src="https://i.ibb.co/RQ02rw6/Screenshot-2024-08-11-134802.png" alt="Screenshot-2024-08-11-134802" border="0"></a> <a href="https://ibb.co/RvJspq3"><img src="https://i.ibb.co/RvJspq3/Screenshot-2024-08-11-134824.png" alt="Screenshot-2024-08-11-134824" border="0"></a> <a href="https://ibb.co/WcWnrm5"><img src="https://i.ibb.co/WcWnrm5/Screenshot-2024-08-11-134901.png" alt="Screenshot-2024-08-11-134901" border="0"></a> <a href="https://ibb.co/6WQzKcM"><img src="https://i.ibb.co/6WQzKcM/Screenshot-2024-08-11-134946.png" alt="Screenshot-2024-08-11-134946" border="0"></a> <a href="https://ibb.co/sWXNFWF"><img src="https://i.ibb.co/sWXNFWF/Screenshot-2024-08-11-135007.png" alt="Screenshot-2024-08-11-135007" border="0"></a> <a href="https://ibb.co/pXt2vwq"><img src="https://i.ibb.co/pXt2vwq/Screenshot-2024-08-11-135150.png" alt="Screenshot-2024-08-11-135150" border="0"></a> <a href="https://ibb.co/V94jZFv"><img src="https://i.ibb.co/V94jZFv/Screenshot-2024-08-11-135249.png" alt="Screenshot-2024-08-11-135249" border="0"></a><a href="https://ibb.co/3kn5vSp"><img src="https://i.ibb.co/3kn5vSp/Screenshot-2024-08-11-134802.png" alt="Screenshot-2024-08-11-134802" border="0"></a> <a href="https://ibb.co/cvTLvWw"><img src="https://i.ibb.co/cvTLvWw/Screenshot-2024-08-11-135007.png" alt="Screenshot-2024-08-11-135007" border="0"></a> 
 
-## Available Scripts
+This project is an Airbnb clone built using the MERN stack with Tailwind CSS for styling and React Material Icons. The application includes three main modules: User, Host, and Admin.
 
-In the project directory, you can run:
 
-### `npm start`
+## Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This project is an Airbnb clone built using the MERN stack, with Tailwind CSS for styling and React Material Icons. The application includes three main modules: User, Host, and Admin, providing a comprehensive platform for managing short-term property rentals.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Features
+- User Authentication: Users can sign up, log in, and authenticate using Google Auth.
+  
+-   Host Management: Hosts can manage their properties, including adding new listings, editing existing ones, and viewing booking details.
+  
+-   Admin Panel: Admins have access to manage users, hosts, and listings, as well as handle overall site maintenance.
+    
+-   Communication: Integrated with Twilio for SMS notifications and Nodemailer for email communication.
+   
+-   Responsive Design: The application is fully responsive, ensuring a seamless experience across all devices.
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+### Frontend
+- Framework: React.js
+- Styling: Tailwind CSS
+- Icons: React Material Icons
+- State Management: Redux, Context API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ### Frontend
+  - Framework: Express.js
+  - Database: MongoDB
+  - Authentication: JWT (JSON Web Token)
+  - Communication: Twilio for SMS, Nodemailer for emails
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Figma Design
+You can view the Figma design for this project <a href='https://www.figma.com/design/2WkOH3nyNFXMiuhzGf9hkc/Untitled?node-id=0-1&t=YTGQE6i4QkzZi9hu-0'>here</a> .
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation and Setup
 
-### `npm run eject`
+### Prerequisites
+- Node.js (v14.x or higher)
+- MongoDB (local or Atlas)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Frontend Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/dilshadkt/Project-Mangement.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+cd timemanagementapp/frontend
+```
 
-## Learn More
+2. Install dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
 
-### Code Splitting
+3. Run the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
 
-### Analyzing the Bundle Size
+npm run dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contributing
 
-### `npm run build` fails to minify
+### Contributions are welcome! Please follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Fork the repository.
+
+1. Create a new branch (git checkout -b feature/YourFeature).
+
+2. Commit your changes (git commit -m 'Add some feature').
+
+3. Push to the branch (git push origin feature/YourFeature).
+
+4. Open a pull request.
+
+5. 
+
+## License
+
+Feel free to use, modify, and distribute this code. Contributions are welcome!

@@ -34,6 +34,13 @@ import PricePerNight from "./pages/host/price/PricePerNight";
 import FinishUp from "./pages/host/finish-setup/FinishUp";
 import Login from "./pages/Account/Login/Login";
 import { ListContext } from "./context/LIstContext";
+import AdminLayout from "./layouts/Admin";
+import Users from "./pages/admin/users/Users";
+import Properties from "./pages/admin/properties/Properties";
+import AdminHome from "./pages/admin/Home/AdminHome";
+import WhishList from "./pages/admin/Whishlist/WhishList";
+import NewProperty from "./pages/admin/newProperty/NewProperty";
+import Listing from "./pages/admin/listing/Listing";
 
 function App() {
   const dispatch = useDispatch();
@@ -219,6 +226,36 @@ function App() {
         {
           path: "finish-setup",
           element: <FinishUp />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout />,
+      children: [
+        {
+          path: "users",
+          element: <Users />,
+        },
+        {
+          path: "properties",
+          element: <Properties />,
+        },
+        {
+          path: "home",
+          element: <AdminHome />,
+        },
+        {
+          path: "whishlist",
+          element: <WhishList />,
+        },
+        {
+          path: "newProperty",
+          element: <NewProperty />,
+        },
+        {
+          path: "newProperty/listing",
+          element: <Listing />,
         },
       ],
     },

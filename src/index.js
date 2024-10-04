@@ -11,7 +11,7 @@ import { ListContextProvider } from "./context/LIstContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <GoogleOAuthProvider clientId="919933473029-sjmhspsmdbb5pr29g1h2h0s57unqkom3.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId={`${process.env.CLIENT_ID}`}>
     <ListContextProvider>
       <AuthContextProvider>
         <Provider store={store}>
